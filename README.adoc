@@ -73,6 +73,8 @@ Add argument "WIFI_FIRMWARE=y" in build instruction. Please refer to following e
 
 For more information, please check the file under `“sources/meta-edm-bsp-release/conf/machine”`.
 
+`DISTRO` is the new way to configure for any backends.
+
 `“-b”` specify the build directory.
 
 `“DISPLAY”` is the disply type. This option only works on i.mx6 (i.mx6 Solo/Dual Lite/Dual/Quad) SOMs and doesn’t work for i.mx6ul, i.mx6sx and i.mx7.
@@ -89,46 +91,13 @@ For more information, please check the file under `“sources/meta-edm-bsp-relea
 |Parameter |Available options|Description
 
 |MACHINE
-|pico-imx8m
-|Compatible with TechNexion PICO-IMX8M (i.MX8M Quad)
-
-|
-|pico-imx6
-|Compatible with TechNexion PICO-IMX6 (i.MX6 Solo/DL/Dual/Quad)
-
-|
-|pico-imx7
-|Compatible with TechNexion PICO-IMX7
-
-|
-|pico-imx6ul
-|Compatible with TechNexion PICO-IMX6UL/ULL
-
-|
-|edm-imx6
-|Compatible with TechNexion EDM-IMX6 (i.MX6 Solo/DL/Dual/Quad/Quad Plus)
-
-|
-|edm-imx7
-|Compatible with TechNexion EDM-IMX7
-
-|
-|tep1-imx7
-|Compatible with TechNexion TEP-0500-IMX7/TEP-0700-IMX7
-
-|
-|tep1-imx6ul
-|Compatible with TechNexion TEP-0500-IMX6UL/TEP-0700-IMX6UL
-
-|
-|tek-imx6
-|Compatible with TechNexion TEK3-IMX6/TEP-1010-IMX6/TEP-1560-IMX6/TWP-1010-IMX6/TWP-1560-IMX6 (i.MX6 Solo/DL/Dual/Quad/Quad Plus)
-
-|
-|tek3-imx6ul
-|Compatible with TechNexion TEK3-IMX6UL
+|pico-imx8mm
+|Compatible with TechNexion PICO-IMX8MM (i.MX8M Mini)
 
 |DISTRO
+
+(The X11 and Framebuffer distros are only supported for i.MX 6 and i.MX 7. i.MX 8 should use xwayland only.
+XWayland is the default distro for all i.MX families)
 |fsl-imx-x11
 |Only X11 graphics. X11 graphics are not supported on i.MX8.
 
@@ -254,9 +223,9 @@ Please don't add argument 'WIFI_FIRMWARE=y' if you don't put firmware files in "
 It would result in build failure. Please refer to section "Prepare WIFI/BT firmware".
 
 === For PICO-IMX8MM
-*Wayland image:*
+*Xwayland image:*
 [source,console]
-$: WIFI_FIRMWARE=y DISTRO=fsl-imx-wayland MACHINE=pico-imx8mm source edm-setup-release.sh -b build-wayland-imx8mm
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=pico-imx8mm source edm-setup-release.sh -b build-xwayland-imx8mm
 $: bitbake fsl-image-qt5-validation-imx
 
 *DISTRO: DISTRO can be replaced to "fsl-imx-wayland"*
@@ -294,21 +263,24 @@ imx/meta-sdk/conf/distro/include/fsl-imx-preferred-env.inc.
 == Image Deployment
 When build completes, the generated release image is under “${BUILD-TYPE}/tmp/deploy/images/${MACHINE}”:
 
+To decompress the .bz2:
 [source,console]
 $: bzip2 -fdk fsl-image-XXX.rootfs.sdcard.bz2 "fsl-image-XXX.rootfs.sdcard"
 
 
-If the i.mx8m module is only with eMMC (without SD card slot), please use following tool to flash image into eMMC. Please set boot jumper to boot from serial download mode, then this tool will mount eMMC as USB mass storage:
+=== For i.mx6/i.mx6ul/i.mx7:
 
-Please follow the userguide below to flash the image into your target board to deploy yocto.
+Please refer to the link below to flash the image into eMMC on the target board:
 
-https://github.com/TechNexion/u-boot-edm/wiki
+ftp://ftp.technexion.net/development_resources/development_tools/installer[ftp://ftp.technexion.net/development_resources/development_tools/installer]
+```
+pico-imx6-imx6ul-imx7_otg-installer_xxx.zip
+{platform}_generic-installer_xxx.zip
+```
 
+=== For i.mx8:
 
+Please follow the userguide below to flash the image into eMMC on the target board:
 
-MFG tool: (can be excuted under both MS Windows and Linux)
-
-PICO-IMX8M(1GB/2GB/3GB/4GB DRAM):
-
-ftp://ftp.technexion.net/development_resources/development_tools/installer/
+https://github.com/TechNexion/u-boot-edm/wiki[https://github.com/TechNexion/u-boot-edm/wiki]
 
