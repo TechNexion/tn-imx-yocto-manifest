@@ -295,13 +295,10 @@ imx/meta-sdk/conf/distro/include/fsl-imx-preferred-env.inc.
 When build completes, the generated release image is under “${BUILD-TYPE}/tmp/deploy/images/${MACHINE}”:
 
 [source,console]
-$: bzip2 -fdk fsl-image-XXX.rootfs.sdcard.bz2
-"fsl-image-XXX.rootfs.sdcard"
+$: bzip2 -fdk fsl-image-XXX.rootfs.sdcard.bz2 "fsl-image-XXX.rootfs.sdcard"
 
 
-If the i.mx8m module is only with eMMC (without SD card slot), 
-
-please use following tool to flash image into eMMC. Please set boot jumper to boot from serial download mode, then this tool will mount eMMC as USB mass storage:
+If the i.mx8m module is only with eMMC (without SD card slot), please use following tool to flash image into eMMC. Please set boot jumper to boot from serial download mode, then this tool will mount eMMC as USB mass storage:
 
 Please follow the userguide below to flash the image into your target board to deploy yocto.
 
