@@ -1,0 +1,317 @@
+= TechNexion Yocto 2.5 sumo 4.14.y GA BSP
+
+This BSP is a TechNexion release providing support NXP i.mx series processors
+
+
+[source,console]
+$: mkdir ~/bin
+$: curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+$: chmod a+x ~/bin/repo
+
+Download the BSP source:
+
+[source,console]
+$: PATH=${PATH}:~/bin
+$: mkdir edm_yocto
+$: cd edm_yocto
+$: repo init -u https://github.com/TechNexion/edm-yocto-bsp.git -b sumo_4.14.y_GA -m imx-4.14.78-1.0.0_ga.xml
+$: repo sync -j8
+
+== Create build environment
+=== Method 1:
+Set up build environment on host PC:
+
+Our build environment is under ubuntu 16.04.
+
+Install required packages:
+[source,console]
+$: sudo apt-get install gawk wget git git-core diffstat unzip texinfo gcc-multilib build-essential \
+chrpath socat cpio python python3 python3-pip python3-pexpect \
+xz-utils debianutils iputils-ping libsdl1.2-dev xterm \
+language-pack-en coreutils texi2html file docbook-utils \
+python-pysqlite2 help2man desktop-file-utils \
+libgl1-mesa-dev libglu1-mesa-dev mercurial autoconf automake \	
+groff curl lzop asciidoc u-boot-tools libreoffice-writer \
+sshpass ssh-askpass zip xz-utils kpartx vim screen
+
+=== Method 2:
+Download virtual machine with pre-installed Ubuntu 16.04 and packages.   
+
+ftp://ftp.technexion.net/development_resources/development_tools/vm   
+
+This virtual machine is validated to build Yocto 2.5.
+
+=== Method 3:
+Use the dockerfile to setup the build environment:
+
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04[Install docker on ubuntu 16.04]
+
+After fetch yocto source code, create a docker image from a dockerfile.
+[source,console]
+$: cd sources/meta-edm-bsp-release/tools/container
+$: docker build -t tn_ubuntu1604 .
+$: docker run -it -u jenkins -v ${directory_in_host_machine}:${directory_in_docker} tn_ubuntu1604 /bin/bash
+(-v: use to bind volume to the directory in host machine)
+(password: jenkins)
+
+== Prepare WIFI/BT firmware
+There are two kinds of WLAN module on TechNexion boards.
+One is Broadcom(BRCM) WLAN(includes BCM4330/BCM4339(AP6335)/BCM43438(AP6212)), the other is Qualcomm(QCA) WLAN(includes QCA9377-5/QCA6174).
+Because of the license restriction, please contact TechNexion FAE or Sales to get licensed firmware files.
+
+After getting the firmware binary:
+.. Decompress the tarball and put all the firmware files into `sources/meta-edm-bsp-release/recipes-kernel/linux-firmware/files`.
+
+The directory `sources/meta-edm-bsp-release/recipes-kernel/linux-firmware/files` is the place to put WIFI/BT firmware files.
+
+.. Add firmware package in Yocto build:
+Add argument "WIFI_FIRMWARE=y" in build instruction. Please refer to following explanation.
+
+== Configurations for setup script
+
+`“MACHINE”` is the target of build. It usually corresponds to the name of SOM or SBC.
+
+For more information, please check the file under `“sources/meta-edm-bsp-release/conf/machine”`.
+
+`“-b”` specify the build directory.
+
+`“DISPLAY”` is the disply type. This option only works on i.mx6 (i.mx6 Solo/Dual Lite/Dual/Quad) SOMs and doesn’t work for i.mx6ul, i.mx6sx and i.mx7.
+
+`“BASEBOARD”` is the baseboard type.
+
+`“WIFI_MODULE”` is to choose what kind of WLAN is on board. (qca/brcm/ath-pci)
+
+`“WIFI_FIRMWARE”` is to choose to add WLAN firmware files in target rootfs or not. (y/all)
+
+
+.Build configurations for supported hardware
+|===
+|Parameter |Available options|Description
+
+|MACHINE
+|pico-imx8m
+|Compatible with TechNexion PICO-IMX8M (i.MX8M Quad)
+
+|
+|pico-imx6
+|Compatible with TechNexion PICO-IMX6 (i.MX6 Solo/DL/Dual/Quad)
+
+|
+|pico-imx7
+|Compatible with TechNexion PICO-IMX7
+
+|
+|pico-imx6ul
+|Compatible with TechNexion PICO-IMX6UL/ULL
+
+|
+|edm-imx6
+|Compatible with TechNexion EDM-IMX6 (i.MX6 Solo/DL/Dual/Quad/Quad Plus)
+
+|
+|edm-imx7
+|Compatible with TechNexion EDM-IMX7
+
+|
+|tep1-imx7
+|Compatible with TechNexion TEP-0500-IMX7/TEP-0700-IMX7
+
+|
+|tep1-imx6ul
+|Compatible with TechNexion TEP-0500-IMX6UL/TEP-0700-IMX6UL
+
+|
+|tek-imx6
+|Compatible with TechNexion TEK3-IMX6/TEP-1010-IMX6/TEP-1560-IMX6/TWP-1010-IMX6/TWP-1560-IMX6 (i.MX6 Solo/DL/Dual/Quad/Quad Plus)
+
+|
+|tek3-imx6ul
+|Compatible with TechNexion TEK3-IMX6UL
+
+|DISTRO
+|fsl-imx-x11
+|Only X11 graphics. X11 graphics are not supported on i.MX8.
+
+|
+|fsl-imx-wayland
+|Wayland weston graphics
+
+|
+|fsl-imx-xwayland
+|Wayland graphics and X11. X11 applications using EGL are not supported
+
+|
+|fsl-imx-fb
+|Frame Buffer graphics - no X11 or Wayland. Frame Buffer is not supported on i.MX8.
+
+|BASEBOARD
+
+(It specifies the 'baseboard' variable in uEnv.txt)
+|pi, nymph, dwarf, hobbit
+|Compatible with TechNexion PICO-IMX6
+(i.MX6 Solo/DL/Quad/UL/ULL).
+
+|
+|gnome, fairy, tc0700, tc1000
+|Compatible with TechNexion EDM-IMX6
+(i.MX6 Solo/DL/Dual/Quad/Quad Plus).
+(EDM-IMX7D only support gnome)
+
+|WIFI_MODULE
+
+(It specifies the 'wifi_module' variable in uEnv.txt)
+|'qca', 'brcm', 'ath-pci'
+|Choose what kind of WLAN is on board.
+
+
+|WIFI_FIRMWARE
+|'y' or 'all'
+|'y' option depends on 'WIFI_MODULE'. If you specify 'WIFI_MODULE' as 'qca'. Then, it only add 'qca' firmware package in yocto build.
+'all' option will add both 'qca', 'brcm' and 'ath-pci' firmware package in yocto build.
+Please refer to section "Prepare WIFI/BT firmware" to ensure you already put firmware files in the right place.
+
+|DISPLAY
+
+(Parameter "DISPLAY" only works on i.mx6/i.mx8m)
+(It specifies the 'displayinfo' variable in uEnv.txt)
+|lvds7
+|(i.mx6) 7 inch 1024x600 LVDS panel
+
+|
+|lvds10
+|(i.mx6) 10 inch 1280x800 LVDS panel
+
+|
+|lvds15
+|(i.mx6) 15 inch 1366x768 LVDS panel
+
+|
+|hdmi720p
+|(i.mx6) 1280x720 HDMI
+
+|
+|hdmi1080p
+|(i.mx6) 1920x1080 HDMI
+
+|
+|lcd
+|(i.mx6) 5 inch/7 inch 800x480 TTL parallel LCD panel
+
+|
+|lvds7_hdmi720p
+|(i.mx6) Dual display output to both 7 inch LVDS and HDMI
+
+|
+|custom
+|(i.mx6) Reserved for custom panel
+
+|
+|mipi5
+|(i.mx8m) MIPI-DSI 5 inch panel(with ILI9881 controller)
+
+|
+|hdmi
+|(i.mx8m) HDMI monitor (the resolution is decided by EDID)
+
+|-b
+|<build dir>
+|Assign the name of build directory
+|===
+
+.Choosing Yocto target image
+|===
+|Image name |Target
+
+|core-image-minimal
+|A small image that only allows a device to boot
+
+|core-image-base
+|A console-only image that fully supports the target device
+hardware
+
+|core-image-sato
+|An image with Sato, a mobile environment and visual style
+for mobile devices. The image supports X11 with a Sato
+theme, Pimlico applications. It contains a terminal, an
+editor and a file manager
+
+|fsl-image-machine-test
+|An FSL Community i.MX core image with console
+environment - no GUI interface
+
+|fsl-image-validation-imx
+|Builds an i.MX image with a GUI without any Qt content.
+
+|fsl-image-qt5-validation-imx
+|Builds an opensource Qt 5 image. These images are only
+supported for i.MX SoC with hardware graphics. They are
+not supported on the i.MX 6UltraLite, i.MX 6UltraLiteLite,
+and i.MX 7Dual.
+|===
+
+== Build Yocto for TechNexion target platform
+Please don't add argument 'WIFI_FIRMWARE=y' if you don't put firmware files in "sources/meta-edm-bsp-release/recipes-kernel/linux-firmware/files" .
+It would result in build failure. Please refer to section "Prepare WIFI/BT firmware".
+
+=== For PICO-IMX8MM
+*Wayland image:*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-wayland MACHINE=pico-imx8mm source edm-setup-release.sh -b build-wayland-imx8mm
+$: bitbake fsl-image-qt5-validation-imx
+
+*DISTRO: DISTRO can be replaced to "fsl-imx-wayland"*
+
+== Chromium
+Add Chromium to your Wayland or X11-based image by adding the following lines to local.conf:
+
+```
+# Add Chromium
+IMAGE_INSTALL_append = \
+    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' chromium-ozone-wayland libexif', \
+        bb.utils.contains('DISTRO_FEATURES',     'x11', ' chromium-x11 libexif', \
+                                                        '', d), d)}"
+LICENSE_FLAGS_WHITELIST = \
+    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'commercial', \
+        bb.utils.contains('DISTRO_FEATURES',     'x11', 'commercial', \
+                                                        '', d), d)}"
+```
+
+== QTWebkit
+To start to go to /usr/share/qt5/examples/webkitwidgets/browser and run browser
+
+== Qt
+Note that Qt has both a commercial and open source license options.  Make the decision about which license
+to use before starting work on custom Qt applications.  Once custom Qt applications are started with an open source
+Qt license the work can not be used with a commercial Qt license.  Work with a legal representative to understand
+the differences between each license.
+
+Note Qt is not supported on i.MX 6UltraLite and i.MX 7Dual. It works on X11 backend only but is not a supported feature.
+
+== Systemd
+Systemd support is enabled as default but it can be disabled by commenting out the systemd settings in
+imx/meta-sdk/conf/distro/include/fsl-imx-preferred-env.inc.
+
+== Image Deployment
+When build completes, the generated release image is under “${BUILD-TYPE}/tmp/deploy/images/${MACHINE}”:
+
+[source,console]
+$: bzip2 -fdk fsl-image-XXX.rootfs.sdcard.bz2
+"fsl-image-XXX.rootfs.sdcard"
+
+
+If the i.mx8m module is only with eMMC (without SD card slot), 
+
+please use following tool to flash image into eMMC. Please set boot jumper to boot from serial download mode, then this tool will mount eMMC as USB mass storage:
+
+Please follow the userguide below to flash the image into your target board to deploy yocto.
+
+https://github.com/TechNexion/u-boot-edm/wiki
+
+
+
+MFG tool: (can be excuted under both MS Windows and Linux)
+
+PICO-IMX8M(1GB/2GB/3GB/4GB DRAM):
+
+ftp://ftp.technexion.net/development_resources/development_tools/installer/
+
