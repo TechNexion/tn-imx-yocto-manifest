@@ -91,6 +91,9 @@ For more information, please check the file under `“sources/meta-edm-bsp-relea
 |Parameter |Available options|Description
 
 |MACHINE
+|pico-imx8mq
+|Compatible with TechNexion PICO-IMX8MQ (i.MX8M)
+|
 |pico-imx8mm
 |Compatible with TechNexion PICO-IMX8MM (i.MX8M Mini)
 
@@ -221,6 +224,14 @@ and i.MX 7Dual.
 == Build Yocto for TechNexion target platform
 Please don't add argument 'WIFI_FIRMWARE=y' if you don't put firmware files in "sources/meta-edm-bsp-release/recipes-kernel/linux-firmware/files" .
 It would result in build failure. Please refer to section "Prepare WIFI/BT firmware".
+
+=== For PICO-IMX8MQ
+*Wayland image:*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-wayland MACHINE=pico-imx8mq source edm-setup-release.sh -b build-xayland-imx8mq
+$: bitbake fsl-image-qt5-validation-imx
+
+*DISTRO: DISTRO can be replaced to "fsl-imx-xwayland"*
 
 === For PICO-IMX8MM
 *Xwayland image:*
