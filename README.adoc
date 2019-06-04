@@ -14,7 +14,7 @@ Download the BSP source:
 $: PATH=${PATH}:~/bin
 $: mkdir edm_yocto
 $: cd edm_yocto
-$: repo init -u https://github.com/TechNexion/edm-yocto-bsp.git -b sumo_4.14.y_GA -m imx-4.14.78-1.0.0_ga.xml
+$: repo init -u https://github.com/TechNexion/edm-yocto-bsp.git -b sumo_4.14.y_GA -m imx-4.14.98-2.0.1_patch.xml
 $: repo sync -j8
 
 == Create build environment
@@ -93,6 +93,9 @@ For more information, please check the file under `“sources/meta-edm-bsp-relea
 |MACHINE
 |pico-imx8mq
 |Compatible with TechNexion PICO-IMX8MQ (i.MX8M)
+|
+|edm-imx8mq
+|Compatible with TechNexion EDM-IMX8MQ (i.MX8M)
 |
 |pico-imx8mm
 |Compatible with TechNexion PICO-IMX8MM (i.MX8M Mini)
@@ -229,6 +232,14 @@ It would result in build failure. Please refer to section "Prepare WIFI/BT firmw
 *Wayland image:*
 [source,console]
 $: WIFI_FIRMWARE=y DISTRO=fsl-imx-wayland MACHINE=pico-imx8mq source edm-setup-release.sh -b build-xayland-imx8mq
+$: bitbake fsl-image-qt5-validation-imx
+
+*DISTRO: DISTRO can be replaced to "fsl-imx-xwayland"*
+
+=== For EDM-IMX8MQ
+*Wayland image:*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-wayland MACHINE=edm-imx8mq source edm-setup-release.sh -b build-xayland-imx8mq
 $: bitbake fsl-image-qt5-validation-imx
 
 *DISTRO: DISTRO can be replaced to "fsl-imx-xwayland"*
