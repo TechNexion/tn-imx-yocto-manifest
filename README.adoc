@@ -252,19 +252,16 @@ $: bitbake fsl-image-qt5-validation-imx
 
 *DISTRO: DISTRO can be replaced to "fsl-imx-wayland"*
 
-== Chromium
-Add Chromium to your Wayland or X11-based image by adding the following lines to local.conf:
+== Chromium Browser
+Add Chromium package in `conf/local.conf`:
 
+* For X11 on MX6 with GPU, add Chromium into your image
 ```
-# Add Chromium
-IMAGE_INSTALL_append = \
-    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' chromium-ozone-wayland libexif', \
-        bb.utils.contains('DISTRO_FEATURES',     'x11', ' chromium-x11 libexif', \
-                                                        '', d), d)}"
-LICENSE_FLAGS_WHITELIST = \
-    "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'commercial', \
-        bb.utils.contains('DISTRO_FEATURES',     'x11', 'commercial', \
-                                                        '', d), d)}"
+CORE_IMAGE_EXTRA_INSTALL += "chromium-x11 rng-tools"
+```
+* For XWayland or Wayland, add Chromium into your image
+```
+CORE_IMAGE_EXTRA_INSTALL += "chromium-ozone-wayland rng-tools"
 ```
 
 == QTWebkit
