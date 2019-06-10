@@ -99,6 +99,9 @@ For more information, please check the file under `“sources/meta-edm-bsp-relea
 |
 |pico-imx8mm
 |Compatible with TechNexion PICO-IMX8MM (i.MX8M Mini)
+|
+|flex-imx8mm
+|Compatible with TechNexion FLEX-IMX8MM (i.MX8M Mini)
 
 |DISTRO
 
@@ -248,6 +251,14 @@ $: bitbake fsl-image-qt5-validation-imx
 *Xwayland image:*
 [source,console]
 $: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=pico-imx8mm source edm-setup-release.sh -b build-xwayland-imx8mm
+$: bitbake fsl-image-qt5-validation-imx
+
+*DISTRO: DISTRO can be replaced to "fsl-imx-wayland"*
+
+=== For FLEX-IMX8MM
+*Xwayland image:*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=flex-imx8mm source edm-setup-release.sh -b build-xwayland-flex-imx8mm
 $: bitbake fsl-image-qt5-validation-imx
 
 *DISTRO: DISTRO can be replaced to "fsl-imx-wayland"*
