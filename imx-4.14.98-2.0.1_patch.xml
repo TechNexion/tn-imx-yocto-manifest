@@ -18,7 +18,6 @@
 
   <project remote="community" revision="70535e13dd2aabbad53243518f4cc5064d284592" name="fsl-community-bsp-base" path="sources/base">
     <linkfile dest="README" src="README"/>
-    <linkfile dest="setup-environment" src="setup-environment"/>
   </project>
 
   <project remote="community" revision="82037216280a39957fb4272581637abec734ad50" name="meta-freescale-3rdparty" path="sources/meta-freescale-3rdparty"/>
@@ -31,6 +30,7 @@
 
   <project remote="tn-bsp" name="meta-edm-bsp-release" path="sources/meta-edm-bsp-release" revision="sumo_4.14.98-2.0.0_GA" >
      <linkfile src="tools/edm-setup-release.sh" dest="edm-setup-release.sh"/>
+     <linkfile src="tools/setup-environment.sh" dest="setup-environment"/>
      <linkfile src="README" dest="README-TechNexion-BSP"/>
   </project>
 
