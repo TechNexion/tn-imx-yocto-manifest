@@ -28,7 +28,7 @@
 
   <project remote="CAF" revision="52ac01eee49b9f2f3ffec4c4037b7928d968115b" name="meta-fsl-bsp-release" path="sources/meta-fsl-bsp-release" />
 
-  <project remote="tn-bsp" name="meta-edm-bsp-release" path="sources/meta-edm-bsp-release" revision="sumo_4.14.78-1.0.0_GA" >
+  <project remote="tn-bsp" name="meta-edm-bsp-release" path="sources/meta-edm-bsp-release" revision="sumo_4.14.78-1.0.0_GA-wip" >
      <linkfile src="tools/edm-setup-release.sh" dest="edm-setup-release.sh"/>
      <linkfile src="tools/setup-environment.sh" dest="setup-environment"/>
      <linkfile src="README" dest="README-TechNexion-BSP"/>
