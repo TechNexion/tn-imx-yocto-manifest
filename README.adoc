@@ -60,7 +60,7 @@ One is Broadcom(BRCM) WLAN(includes BCM4330/BCM4339(AP6335)/BCM43438(AP6212)), t
 Because of the license restriction, please contact TechNexion FAE or Sales to get licensed firmware files.
 
 After getting the firmware binary:
-.. Decompress the tarball and put all the firmware files into `sources/meta-edm-bsp-release/recipes-kernel/linux-firmware/files`.
+.. Decompress the tarball and put all the firmware files (keeping the directory structure intact) into `sources/meta-edm-bsp-release/recipes-kernel/linux-firmware/files`.
 
 The directory `sources/meta-edm-bsp-release/recipes-kernel/linux-firmware/files` is the place to put WIFI/BT firmware files.
 
