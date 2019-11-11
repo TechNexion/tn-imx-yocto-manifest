@@ -56,7 +56,7 @@ $: docker run -it -u jenkins -v ${directory_in_host_machine}:${directory_in_dock
 
 == Prepare WIFI/BT firmware
 There are two kinds of WLAN module on TechNexion boards.
-One is Broadcom(BRCM) WLAN(includes BCM4330/BCM4339(AP6335)/BCM43438(AP6212)), the other is Qualcomm(QCA) WLAN(includes QCA9377-5/QCA6174).
+One is Broadcom(BRCM) WLAN(includes BCM4330/BCM4339(AP6335)/BCM43438(AP6212)), the other is Qualcomm(QCA) WLAN(includes QCA9377-3/QCA6174).
 Because of the license restriction, please contact TechNexion FAE or Sales to get licensed firmware files.
 
 After getting the firmware binary:
@@ -102,6 +102,27 @@ For more information, please check the file under `“sources/meta-edm-bsp-relea
 |
 |flex-imx8mm
 |Compatible with TechNexion FLEX-IMX8MM (i.MX8M Mini)
+|
+|axon-imx8mm
+|Compatible with TechNexion AXON-IMX8MM (i.MX8M Mini)
+|
+|xore-imx8mm
+|Compatible with TechNexion XORE-IMX8MM (i.MX8M Mini)
+|
+|pico-imx7
+|Compatible with TechNexion PICO-IMX7 (i.MX7)
+|
+|edm-imx7
+|Compatible with TechNexion EDM-IMX7 (i.MX7)
+|
+|pico-imx6
+|Compatible with TechNexion PICO-IMX6 (i.MX6)
+|
+|edm-imx6
+|Compatible with TechNexion EDM-IMX6 (i.MX6)
+|
+|axon-imx6
+|Compatible with TechNexion AXON-IMX6 (i.MX6)
 
 |DISTRO
 
@@ -126,14 +147,18 @@ XWayland is the default distro for all i.MX families)
 
 (It specifies the 'baseboard' variable in uEnv.txt)
 |pi, nymph, dwarf, hobbit
-|Compatible with TechNexion PICO-IMX6
-(i.MX6 Solo/DL/Quad/UL/ULL).
+|Compatible with TechNexion PICO-IMX6/PICO-IMX7
+(i.MX6 Solo/DL/Quad/UL/ULL)(i.MX7).
 
 |
 |gnome, fairy, tc0700, tc1000
-|Compatible with TechNexion EDM-IMX6
-(i.MX6 Solo/DL/Dual/Quad/Quad Plus).
-(EDM-IMX7D only support gnome)
+|Compatible with TechNexion EDM-IMX6/EDM-IMX7/EDM-IMX8MQ
+(i.MX6 Solo/DL/Dual/Quad/Quad Plus)(EDM-IMX7 only support gnome)(EDM-IMX8MQ only support fairy).
+
+|
+|wizard
+|Compatible with TechNexion EDM-IMX8MQ
+(i.MX8M Quad).
 
 |WIFI_MODULE
 
@@ -234,17 +259,17 @@ It would result in build failure. Please refer to section "Prepare WIFI/BT firmw
 === For PICO-IMX8MQ
 *Wayland image:*
 [source,console]
-$: WIFI_FIRMWARE=y DISTRO=fsl-imx-wayland MACHINE=pico-imx8mq source edm-setup-release.sh -b build-xayland-imx8mq
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-wayland MACHINE=pico-imx8mq source edm-setup-release.sh -b build-wayland-imx8mq
 $: bitbake fsl-image-qt5-validation-imx
 
 *DISTRO: DISTRO can be replaced to "fsl-imx-xwayland"*
 
 === For EDM-IMX8MQ
-*Wayland image:*
+*WIZARD baseboard, Wayland image:*
 [source,console]
-$: WIFI_FIRMWARE=y DISTRO=fsl-imx-wayland MACHINE=edm-imx8mq source edm-setup-release.sh -b build-xayland-imx8mq
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-wayland MACHINE=edm-imx8mq BASEBOARD=wizard source edm-setup-release.sh -b build-wayland-imx8mq
 $: bitbake fsl-image-qt5-validation-imx
-
++
 *DISTRO: DISTRO can be replaced to "fsl-imx-xwayland"*
 
 === For PICO-IMX8MM
@@ -261,7 +286,80 @@ $: bitbake fsl-image-qt5-validation-imx
 $: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=flex-imx8mm source edm-setup-release.sh -b build-xwayland-flex-imx8mm
 $: bitbake fsl-image-qt5-validation-imx
 
+=== For AXON-IMX8MM
+*Xwayland image:*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=axon-imx8mm source edm-setup-release.sh -b build-xwayland-axon-imx8mm
+$: bitbake fsl-image-qt5-validation-imx
+
 *DISTRO: DISTRO can be replaced to "fsl-imx-wayland"*
+
+=== For XORE-IMX8MM
+*Xwayland image:*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=xore-imx8mm source edm-setup-release.sh -b build-xwayland-xore-imx8mm
+$: bitbake fsl-image-qt5-validation-imx
+
+*DISTRO: DISTRO can be replaced to "fsl-imx-wayland"*
+
+=== For PICO-IMX7
+*PI baseboard, QT5 with X11 image for 7 inch/5 inch TTL-LCD panel:*
+[source,console]
+For PICO-IMX7 with QCA WLAN:
+$: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=pico-imx7 BASEBOARD=pi source edm-setup-release.sh -b build-x11-pico-imx7
+$: bitbake fsl-image-qt5-validation-imx
+
+=== For EDM-IMX7
+*GNOME baseboard, QT5 with X11 image for 7 inch/5 inch TTL-LCD panel:*
+[source,console]
+For EDM-IMX7 with QCA WLAN:
+$: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=edm-imx7 BASEBOARD=gnome source edm-setup-release.sh -b build-x11-edm-imx7
+$: bitbake fsl-image-qt5-validation-imx
+
+=== For PICO-IMX6
+*PI baseboard, QT5 with X11 image for HDMI output:*
+[source,console]
+For PICO-IMX6 with QCA WLAN:
+$: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=pico-imx6 BASEBOARD=pi source edm-setup-release.sh -b build-x11-pico-imx6
+$: bitbake fsl-image-qt5-validation-imx
+
+*NYMPH baseboard, QT5 with X11 image for 7 inch LVDS panel::*
+[source,console]
+For PICO-IMX6 with QCA WLAN:
+$: DISPLAY=lvds7 WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=pico-imx6 BASEBOARD=nymph source edm-setup-release.sh -b build-x11-pico-imx6
+$: bitbake fsl-image-qt5-validation-imx
+
+=== For EDM-IMX6
+*GNOME baseboard, QT5 with X11 image for 7 inch/5 inch TTL-LCD panel:*
+[source,console]
+For EDM-IMX6 with QCA WLAN:
+$: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=edm-imx6 BASEBOARD=gnome source edm-setup-release.sh -b build-x11-edm-imx6
+$: bitbake fsl-image-qt5-validation-imx
+
+*FAIRY baseboard, QT5 with X11 image for 7 inch LVDS panel:*
+[source,console]
+For EDM-IMX6 with QCA WLAN:
+$: DISPLAY=lvds7 WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=edm-imx6 BASEBOARD=fairy source edm-setup-release.sh -b build-x11-edm-imx6
+$: bitbake fsl-image-qt5-validation-imx
+
+*TC0700 baseboard, QT5 with X11 image for 7 inch LVDS panel:*
+[source,console]
+For EDM-IMX6 with QCA WLAN:
+$: DISPLAY=lvds7 WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=edm-imx6 BASEBOARD=tc0700 source edm-setup-release.sh -b build-x11-edm-imx6
+$: bitbake fsl-image-qt5-validation-imx
+
+*TC1000 baseboard, QT5 with X11 image for 10 inch LVDS panel:*
+[source,console]
+For EDM-IMX6 with QCA WLAN:
+$: DISPLAY=lvds10 WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=edm-imx6 BASEBOARD=tc1000 source edm-setup-release.sh -b build-x11-edm-imx6
+$: bitbake fsl-image-qt5-validation-imx
+
+=== For AXON-IMX6
+*PI baseboard, QT5 with X11 image for HDMI output:*
+[source,console]
+For AXON-IMX6 with QCA WLAN:
+$: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=axon-imx6 source edm-setup-release.sh -b build-x11-pico-imx6
+$: bitbake fsl-image-qt5-validation-imx
 
 == Chromium Browser
 Add Chromium package in `conf/local.conf`:
