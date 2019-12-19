@@ -14,7 +14,7 @@ Download the BSP source:
 $: PATH=${PATH}:~/bin
 $: mkdir edm_yocto
 $: cd edm_yocto
-$: repo init -u https://github.com/TechNexion/edm-yocto-bsp.git -b sumo_4.14.y_GA -m imx-4.14.98-2.0.1_patch.xml
+$: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b sumo_4.14.y_GA-next -m imx-4.14.98-2.0.1_patch.xml
 $: repo sync -j8
 
 == Create build environment
