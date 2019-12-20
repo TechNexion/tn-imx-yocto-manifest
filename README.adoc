@@ -48,7 +48,7 @@ https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-o
 
 After fetch yocto source code, create a docker image from a dockerfile.
 [source,console]
-$: cd sources/meta-edm-bsp-release/tools/container
+$: cd sources/meta-tn-imx-bsp/tools/container
 $: docker build -t tn_ubuntu1604 .
 $: docker run -it -u jenkins -v ${directory_in_host_machine}:${directory_in_docker} tn_ubuntu1604 /bin/bash
 (-v: use to bind volume to the directory in host machine)
@@ -60,9 +60,9 @@ One is Broadcom(BRCM) WLAN(includes BCM4330/BCM4339(AP6335)/BCM43438(AP6212)), t
 Because of the license restriction, please contact TechNexion FAE or Sales to get licensed firmware files.
 
 After getting the firmware binary:
-.. Decompress the tarball and put all the firmware files into `sources/meta-edm-bsp-release/recipes-kernel/linux-firmware/files`.
+.. Decompress the tarball and put all the firmware files into `sources/meta-tn-imx-bsp/recipes-kernel/linux-firmware/files`.
 
-The directory `sources/meta-edm-bsp-release/recipes-kernel/linux-firmware/files` is the place to put WIFI/BT firmware files.
+The directory `sources/meta-tn-imx-bsp/recipes-kernel/linux-firmware/files` is the place to put WIFI/BT firmware files.
 
 .. Add firmware package in Yocto build:
 Add argument "WIFI_FIRMWARE=y" in build instruction. Please refer to following explanation.
@@ -71,7 +71,7 @@ Add argument "WIFI_FIRMWARE=y" in build instruction. Please refer to following e
 
 `“MACHINE”` is the target of build. It usually corresponds to the name of SOM or SBC.
 
-For more information, please check the file under `“sources/meta-edm-bsp-release/conf/machine”`.
+For more information, please check the file under `“sources/meta-tn-imx-bsp/conf/machine”`.
 
 `DISTRO` is the new way to configure for any backends.
 
@@ -253,7 +253,7 @@ and i.MX 7Dual.
 |===
 
 == Build Yocto for TechNexion target platform
-Please don't add argument 'WIFI_FIRMWARE=y' if you don't put firmware files in "sources/meta-edm-bsp-release/recipes-kernel/linux-firmware/files" .
+Please don't add argument 'WIFI_FIRMWARE=y' if you don't put firmware files in "sources/meta-tn-imx-bsp/recipes-kernel/linux-firmware/files" .
 It would result in build failure. Please refer to section "Prepare WIFI/BT firmware".
 
 === For PICO-IMX8MQ
