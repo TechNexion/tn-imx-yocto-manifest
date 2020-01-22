@@ -115,6 +115,9 @@ For more information, please check the file under `“sources/meta-tn-imx-bsp/co
 |edm-imx7
 |Compatible with TechNexion EDM-IMX7 (i.MX7)
 |
+|tep1-imx7
+|Compatible with TechNexion TEP-0500-IMX7/TEP-0700-IMX7
+|
 |pico-imx6
 |Compatible with TechNexion PICO-IMX6 (i.MX6)
 |
@@ -314,6 +317,13 @@ $: bitbake fsl-image-qt5-validation-imx
 [source,console]
 For EDM-IMX7 with QCA WLAN:
 $: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=edm-imx7 BASEBOARD=gnome source edm-setup-release.sh -b build-x11-edm-imx7
+$: bitbake fsl-image-qt5-validation-imx
+
+=== For TEP-0500-IMX7/TEP-0700-IMX7
+*TEP-0500-IMX7/TEP-0700-IMX7, QT5 with X11 image:*
+[source,console]
+For TEP1-IMX7 with PCIE WLAN:
+$: WIFI_FIRMWARE=y WIFI_MODULE=ath-pci DISTRO=fsl-imx-x11 MACHINE=tep1-imx7 source edm-setup-release.sh -b build-x11-tep1-imx7
 $: bitbake fsl-image-qt5-validation-imx
 
 === For PICO-IMX6
