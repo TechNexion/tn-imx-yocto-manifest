@@ -126,6 +126,9 @@ For more information, please check the file under `“sources/meta-tn-imx-bsp/co
 |
 |axon-imx6
 |Compatible with TechNexion AXON-IMX6 (i.MX6)
+|
+|pico-imx6ul
+|Compatible with TechNexion PICO-IMX6UL (i.MX6)
 
 |DISTRO
 
@@ -369,6 +372,13 @@ $: bitbake fsl-image-qt5-validation-imx
 [source,console]
 For AXON-IMX6 with QCA WLAN:
 $: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=axon-imx6 source edm-setup-release.sh -b build-x11-pico-imx6
+$: bitbake fsl-image-qt5-validation-imx
+
+=== For PICO-IMX6UL
+*PI baseboard, QT5 with X11 image for 5" and 7" TFT-LCD output:*
+[source,console]
+For PICO-IMX6UL with QCA WLAN:
+$: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=pico-imx6ul source edm-setup-release.sh -b build-x11-pico-imx6ul
 $: bitbake fsl-image-qt5-validation-imx
 
 == Chromium Browser
