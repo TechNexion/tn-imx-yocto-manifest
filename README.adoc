@@ -128,7 +128,7 @@ For more information, please check the file under `“sources/meta-tn-imx-bsp/co
 |Compatible with TechNexion AXON-IMX6 (i.MX6)
 |
 |pico-imx6ul
-|Compatible with TechNexion PICO-IMX6UL (i.MX6)
+|Compatible with TechNexion PICO-IMX6ULL (i.MX6)
 
 |DISTRO
 
@@ -425,6 +425,11 @@ ftp://ftp.technexion.net/development_resources/development_tools/installer[ftp:/
 pico-imx6-imx6ul-imx7_otg-installer_xxx.zip
 {platform}_generic-installer_xxx.zip
 ```
+=== For i.MX6UL/i.MX6ULL/i.MX6DL/i.MX6Q/i.MX7D/i.MX8MM/i.MX8MQ image deploy by "UUU"
+
+Please refer to the link as below to get more detail informations
+
+https://github.com/TechNexion/u-boot-tn-imx/wiki/Use-mfgtool-%22uuu%22-to-flash-eMMC
 
 === For i.mx8:
 
