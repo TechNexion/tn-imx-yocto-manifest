@@ -31,7 +31,7 @@
 
   <project remote="CAF" revision="238a429e4eedd2f4b26876c2e2a6a9b3ec4e434c" name="meta-fsl-bsp-release" path="sources/meta-fsl-bsp-release" />
 
-  <project remote="tn-bsp" name="meta-tn-imx-bsp" path="sources/meta-tn-imx-bsp" revision="sumo_4.14.98-2.0.0_GA-virtualization" >
+  <project remote="tn-bsp" name="meta-tn-imx-bsp" path="sources/meta-tn-imx-bsp" revision="sumo_4.14.98-2.0.0_GA-stable-virtualization" >
      <linkfile src="tools/edm-setup-release.sh" dest="edm-setup-release.sh"/>
      <linkfile src="tools/setup-environment.sh" dest="setup-environment"/>
      <linkfile src="README" dest="README-TechNexion-BSP"/>
