@@ -187,9 +187,21 @@ imx/meta-sdk/conf/distro/include/fsl-imx-preferred-env.inc.
 == Image Deployment
 When build completes, the generated release image is under “${BUILD-TYPE}/tmp/deploy/images/${MACHINE}”:
 
-To decompress the .bz2:
+Image Flashing to the pico-imx8mm:
+
+1. UUU way
+
 [source,console]
-$: bzip2 -fdk fsl-image-XXX.rootfs.sdcard.bz2 "fsl-image-XXX.rootfs.sdcard"
+$: sudo uuu -b emmc_all imx-boot-pico-imx8mm-sd.bin tn-image-docker-os-pico-imx8mm.wic
+
+2. UMS way
+
+Another modular way is use ums command on your currect u-boot inside the eMMC, connect the USB OTG cable to host PC, then ums will auto mounting a storage on host PC, ums command as following in u-boot:
+[source,console]
+$: ums 0 mmc 1
+
+[source,console]
+$: sudo dd if=tn-image-docker-os-pico-imx8mm.wic of=/dev/sdx bs=1M
 
 == Test Docker Container
 Technexion provide different kind of custom docker container using Debian base OS from DockerHub, the users can use it after netowk connection success.
