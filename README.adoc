@@ -160,10 +160,6 @@ $: bitbake tn-image-docker-os
 == Chromium Browser
 Add Chromium package in `conf/local.conf`:
 
-* For X11 on MX6 with GPU, add Chromium into your image
-```
-CORE_IMAGE_EXTRA_INSTALL += "chromium-x11 rng-tools"
-```
 * For XWayland or Wayland, add Chromium into your image
 ```
 CORE_IMAGE_EXTRA_INSTALL += "chromium-ozone-wayland rng-tools"
@@ -177,8 +173,6 @@ Note that Qt has both a commercial and open source license options.  Make the de
 to use before starting work on custom Qt applications.  Once custom Qt applications are started with an open source
 Qt license the work can not be used with a commercial Qt license.  Work with a legal representative to understand
 the differences between each license.
-
-Note Qt is not supported on i.MX 6UltraLite and i.MX 7Dual. It works on X11 backend only but is not a supported feature.
 
 == Systemd
 Systemd support is enabled as default but it can be disabled by commenting out the systemd settings in
@@ -219,8 +213,15 @@ root@yocto:/# docker run --privileged=true  -e XDG_RUNTIME_DIR=/tmp -e WAYLAND_D
 * Remote Debian with VIVANTE hardware acceleration Terminal Command-Line
 
 Step 1. Create a container with partition mounting
+
+Create container at the first time, it will link to bash terminal automaticially.
 [source,console]
 root@yocto:/# docker run  --privileged=true --name debian-test -e XDG_RUNTIME_DIR=/tmp -e WAYLAND_DISPLAY=wayland-0 -v $XDG_RUNTIME_DIR/wayland-0:/tmp/wayland-0 -v /home/root:/home/mnt --user=$(id -u):$(id -g) -t -i technexion/debian-buster-wayland-hw bash
+
+If not first time, the user already created the container, please issue the command to login the container again.
+[source,console]
+root@yocto:/# docker start <your conatiner hash id>
+root@yocto:/# docker exec -it debian-test bash
 
 Step 2. Install Weston package in Debian container
 [source,console]
