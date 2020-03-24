@@ -37,4 +37,7 @@
      <linkfile src="README" dest="README-TechNexion-BSP"/>
   </project>
 
+  <!-- Virtualization layers -->
+  <project remote="yocto" name="meta-virtualization" path="sources/meta-virtualization" revision="ed2038c935777d1336c17989d454f4e9c95fea7f" upstream="sumo"/>
+
 </manifest>
