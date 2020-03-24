@@ -1,6 +1,6 @@
-= TechNexion Yocto 2.5 sumo 4.14.y GA Container OS BSP
+= TechNexion Yocto 2.5 sumo 4.14.y GA BSP
 
-This BSP is a TechNexion release providing support PICO-IMX8M-Mini System-on-Module
+This BSP is a TechNexion release providing support NXP i.mx series processors
 
 Host OS: Yocto Sumo 2.5
 
@@ -97,15 +97,63 @@ For more information, please check the file under `“sources/meta-tn-imx-bsp/co
 |Parameter |Available options|Description
 
 |MACHINE
+|pico-imx8mq
+|Compatible with TechNexion PICO-IMX8MQ (i.MX8M)
+|
+|edm-imx8mq
+|Compatible with TechNexion EDM-IMX8MQ (i.MX8M)
+|
 |pico-imx8mm
 |Compatible with TechNexion PICO-IMX8MM (i.MX8M Mini)
+|
+|flex-imx8mm
+|Compatible with TechNexion FLEX-IMX8MM (i.MX8M Mini)
+|
+|axon-imx8mm
+|Compatible with TechNexion AXON-IMX8MM (i.MX8M Mini)
+|
+|xore-imx8mm
+|Compatible with TechNexion XORE-IMX8MM (i.MX8M Mini)
+|
+|pico-imx7
+|Compatible with TechNexion PICO-IMX7 (i.MX7)
+|
+|edm-imx7
+|Compatible with TechNexion EDM-IMX7 (i.MX7)
+|
+|tep1-imx7
+|Compatible with TechNexion TEP-0500-IMX7/TEP-0700-IMX7
+|
+|pico-imx6
+|Compatible with TechNexion PICO-IMX6 (i.MX6)
+|
+|edm-imx6
+|Compatible with TechNexion EDM-IMX6 (i.MX6)
+|
+|axon-imx6
+|Compatible with TechNexion AXON-IMX6 (i.MX6)
+|
+|pico-imx6ul
+|Compatible with TechNexion PICO-IMX6ULL (i.MX6)
 
 |DISTRO
 
 (The X11 and Framebuffer distros are only supported for i.MX 6 and i.MX 7. i.MX 8 should use xwayland only.
 XWayland is the default distro for all i.MX families)
+|fsl-imx-x11
+|Only X11 graphics. X11 graphics are not supported on i.MX8.
+
+|
 |fsl-imx-wayland
 |Wayland weston graphics
+
+|
+|fsl-imx-xwayland
+|Wayland graphics and X11. X11 applications using EGL are not supported
+
+|
+|fsl-imx-fb
+|Frame Buffer graphics - no X11 or Wayland. Frame Buffer is not supported on i.MX8.
 
 |BASEBOARD
 
@@ -113,6 +161,16 @@ XWayland is the default distro for all i.MX families)
 |pi, nymph, dwarf, hobbit
 |Compatible with TechNexion PICO-IMX6/PICO-IMX7
 (i.MX6 Solo/DL/Quad/UL/ULL)(i.MX7).
+
+|
+|gnome, fairy, tc0700, tc1000
+|Compatible with TechNexion EDM-IMX6/EDM-IMX7/EDM-IMX8MQ
+(i.MX6 Solo/DL/Dual/Quad/Quad Plus)(EDM-IMX7 only support gnome)(EDM-IMX8MQ only support fairy).
+
+|
+|wizard
+|Compatible with TechNexion EDM-IMX8MQ
+(i.MX8M Quad).
 
 |WIFI_MODULE
 
@@ -131,17 +189,83 @@ Please refer to section "Prepare WIFI/BT firmware" to ensure you already put fir
 
 (Parameter "DISPLAY" only works on i.mx6/i.mx8m)
 (It specifies the 'displayinfo' variable in uEnv.txt)
+|lvds7
+|(i.mx6) 7 inch 1024x600 LVDS panel
+
+|
+|lvds10
+|(i.mx6) 10 inch 1280x800 LVDS panel
+
+|
+|lvds15
+|(i.mx6) 15 inch 1366x768 LVDS panel
+
+|
+|hdmi720p
+|(i.mx6) 1280x720 HDMI
+
+|
+|hdmi1080p
+|(i.mx6) 1920x1080 HDMI
+
+|
+|lcd
+|(i.mx6) 5 inch/7 inch 800x480 TTL parallel LCD panel
+
+|
+|lvds7_hdmi720p
+|(i.mx6) Dual display output to both 7 inch LVDS and HDMI
+
+|
+|custom
+|(i.mx6) Reserved for custom panel
+
+|
 |mipi5
 |(i.mx8m) MIPI-DSI 5 inch panel(with ILI9881 controller)
+
+|
+|hdmi
+|(i.mx8m) HDMI monitor (the resolution is decided by EDID)
 
 |-b
 |<build dir>
 |Assign the name of build directory
 |===
 
-.Choosing Yocto target container image
+.Choosing Yocto target image
 |===
 |Image name |Target
+
+|core-image-minimal
+|A small image that only allows a device to boot
+
+|core-image-base
+|A console-only image that fully supports the target device
+hardware
+
+|core-image-sato
+|An image with Sato, a mobile environment and visual style
+for mobile devices. The image supports X11 with a Sato
+theme, Pimlico applications. It contains a terminal, an
+editor and a file manager
+
+|fsl-image-machine-test
+|An FSL Community i.MX core image with console
+environment - no GUI interface
+
+|fsl-image-validation-imx
+|Builds an i.MX image with a GUI without any Qt content.
+
+|fsl-image-qt5-validation-imx
+|Builds an opensource Qt 5 image. These images are only
+supported for i.MX SoC with hardware graphics. They are
+not supported on the i.MX 6UltraLite, i.MX 6UltraLiteLite,
+and i.MX 7Dual.
+
+|===
+
+.Choosing TechNexion target container image
 
 |tn-image-docker-os
 |Technexion custom container os image
@@ -152,7 +276,28 @@ Please refer to section "Prepare WIFI/BT firmware" to ensure you already put fir
 Please don't add argument 'WIFI_FIRMWARE=y' if you don't put firmware files in "sources/meta-tn-imx-bsp/recipes-kernel/linux-firmware/files" .
 It would result in build failure. Please refer to section "Prepare WIFI/BT firmware".
 
+=== For PICO-IMX8MQ
+*Wayland image:*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-wayland MACHINE=pico-imx8mq source edm-setup-release.sh -b build-wayland-imx8mq
+$: bitbake fsl-image-qt5-validation-imx
+
+*DISTRO: DISTRO can be replaced to "fsl-imx-xwayland"*
+
+=== For EDM-IMX8MQ
+*WIZARD baseboard, Wayland image:*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-wayland MACHINE=edm-imx8mq BASEBOARD=wizard source edm-setup-release.sh -b build-wayland-imx8mq
+$: bitbake fsl-image-qt5-validation-imx
++
+*DISTRO: DISTRO can be replaced to "fsl-imx-xwayland"*
+
 === For PICO-IMX8MM
+*Xwayland image:*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=pico-imx8mm source edm-setup-release.sh -b build-xwayland-imx8mm
+$: bitbake fsl-image-qt5-validation-imx
+
 *Container OS with Xwayland image:*
 [source,console]
 $: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=pico-imx8mm source edm-setup-release.sh -b build-xwayland-imx8mm
@@ -160,9 +305,108 @@ $: bitbake tn-image-docker-os
 
 *DISTRO: DISTRO can be replaced to "fsl-imx-wayland"*
 
+=== For FLEX-IMX8MM
+*Xwayland image:*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=flex-imx8mm source edm-setup-release.sh -b build-xwayland-flex-imx8mm
+$: bitbake fsl-image-qt5-validation-imx
+
+=== For AXON-IMX8MM
+*Xwayland image:*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=axon-imx8mm source edm-setup-release.sh -b build-xwayland-axon-imx8mm
+$: bitbake fsl-image-qt5-validation-imx
+
+*DISTRO: DISTRO can be replaced to "fsl-imx-wayland"*
+
+=== For XORE-IMX8MM
+*Xwayland image:*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=xore-imx8mm source edm-setup-release.sh -b build-xwayland-xore-imx8mm
+$: bitbake fsl-image-qt5-validation-imx
+
+*DISTRO: DISTRO can be replaced to "fsl-imx-wayland"*
+
+=== For PICO-IMX7
+*PI baseboard, QT5 with X11 image for 7 inch/5 inch TTL-LCD panel:*
+[source,console]
+For PICO-IMX7 with QCA WLAN:
+$: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=pico-imx7 BASEBOARD=pi source edm-setup-release.sh -b build-x11-pico-imx7
+$: bitbake fsl-image-qt5-validation-imx
+
+=== For EDM-IMX7
+*GNOME baseboard, QT5 with X11 image for 7 inch/5 inch TTL-LCD panel:*
+[source,console]
+For EDM-IMX7 with QCA WLAN:
+$: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=edm-imx7 BASEBOARD=gnome source edm-setup-release.sh -b build-x11-edm-imx7
+$: bitbake fsl-image-qt5-validation-imx
+
+=== For TEP-0500-IMX7/TEP-0700-IMX7
+*TEP-0500-IMX7/TEP-0700-IMX7, QT5 with X11 image:*
+[source,console]
+For TEP1-IMX7 with PCIE WLAN:
+$: WIFI_FIRMWARE=y WIFI_MODULE=ath-pci DISTRO=fsl-imx-x11 MACHINE=tep1-imx7 source edm-setup-release.sh -b build-x11-tep1-imx7
+$: bitbake fsl-image-qt5-validation-imx
+
+=== For PICO-IMX6
+*PI baseboard, QT5 with X11 image for HDMI output:*
+[source,console]
+For PICO-IMX6 with QCA WLAN:
+$: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=pico-imx6 BASEBOARD=pi source edm-setup-release.sh -b build-x11-pico-imx6
+$: bitbake fsl-image-qt5-validation-imx
+
+*NYMPH baseboard, QT5 with X11 image for 7 inch LVDS panel::*
+[source,console]
+For PICO-IMX6 with QCA WLAN:
+$: DISPLAY=lvds7 WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=pico-imx6 BASEBOARD=nymph source edm-setup-release.sh -b build-x11-pico-imx6
+$: bitbake fsl-image-qt5-validation-imx
+
+=== For EDM-IMX6
+*GNOME baseboard, QT5 with X11 image for 7 inch/5 inch TTL-LCD panel:*
+[source,console]
+For EDM-IMX6 with QCA WLAN:
+$: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=edm-imx6 BASEBOARD=gnome source edm-setup-release.sh -b build-x11-edm-imx6
+$: bitbake fsl-image-qt5-validation-imx
+
+*FAIRY baseboard, QT5 with X11 image for 7 inch LVDS panel:*
+[source,console]
+For EDM-IMX6 with QCA WLAN:
+$: DISPLAY=lvds7 WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=edm-imx6 BASEBOARD=fairy source edm-setup-release.sh -b build-x11-edm-imx6
+$: bitbake fsl-image-qt5-validation-imx
+
+*TC0700 baseboard, QT5 with X11 image for 7 inch LVDS panel:*
+[source,console]
+For EDM-IMX6 with QCA WLAN:
+$: DISPLAY=lvds7 WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=edm-imx6 BASEBOARD=tc0700 source edm-setup-release.sh -b build-x11-edm-imx6
+$: bitbake fsl-image-qt5-validation-imx
+
+*TC1000 baseboard, QT5 with X11 image for 10 inch LVDS panel:*
+[source,console]
+For EDM-IMX6 with QCA WLAN:
+$: DISPLAY=lvds10 WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=edm-imx6 BASEBOARD=tc1000 source edm-setup-release.sh -b build-x11-edm-imx6
+$: bitbake fsl-image-qt5-validation-imx
+
+=== For AXON-IMX6
+*PI baseboard, QT5 with X11 image for HDMI output:*
+[source,console]
+For AXON-IMX6 with QCA WLAN:
+$: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=axon-imx6 source edm-setup-release.sh -b build-x11-pico-imx6
+$: bitbake fsl-image-qt5-validation-imx
+
+=== For PICO-IMX6UL
+*PI baseboard, QT5 with X11 image for 5" and 7" TFT-LCD output:*
+[source,console]
+For PICO-IMX6UL with QCA WLAN:
+$: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=pico-imx6ul source edm-setup-release.sh -b build-x11-pico-imx6ul
+$: bitbake fsl-image-qt5-validation-imx
+
 == Chromium Browser
 Add Chromium package in `conf/local.conf`:
 
+* For X11 on MX6 with GPU, add Chromium into your image
+```
+CORE_IMAGE_EXTRA_INSTALL += "chromium-x11 rng-tools"
+```
 * For XWayland or Wayland, add Chromium into your image
 ```
 CORE_IMAGE_EXTRA_INSTALL += "chromium-ozone-wayland rng-tools"
@@ -177,6 +421,8 @@ to use before starting work on custom Qt applications.  Once custom Qt applicati
 Qt license the work can not be used with a commercial Qt license.  Work with a legal representative to understand
 the differences between each license.
 
+Note Qt is not supported on i.MX 6UltraLite and i.MX 7Dual. It works on X11 backend only but is not a supported feature.
+
 == Systemd
 Systemd support is enabled as default but it can be disabled by commenting out the systemd settings in
 imx/meta-sdk/conf/distro/include/fsl-imx-preferred-env.inc.
@@ -184,7 +430,28 @@ imx/meta-sdk/conf/distro/include/fsl-imx-preferred-env.inc.
 == Image Deployment
 When build completes, the generated release image is under “${BUILD-TYPE}/tmp/deploy/images/${MACHINE}”:
 
-Image Flashing to the pico-imx8mm:
+To decompress the .bz2:
+[source,console]
+$: bzip2 -fdk fsl-image-XXX.rootfs.sdcard.bz2 "fsl-image-XXX.rootfs.sdcard"
+
+
+=== For i.mx6/i.mx6ul/i.mx7:
+
+Please refer to the link below to flash the image into eMMC on the target board:
+
+ftp://ftp.technexion.net/development_resources/development_tools/installer[ftp://ftp.technexion.net/development_resources/development_tools/installer]
+```
+pico-imx6-imx6ul-imx7_otg-installer_xxx.zip
+{platform}_generic-installer_xxx.zip
+```
+=== For i.MX6UL/i.MX6ULL/i.MX6DL/i.MX6Q/i.MX7D/i.MX8MM/i.MX8MQ image deploy by "UUU"
+
+Please refer to the link as below to get more detail informations
+
+https://github.com/TechNexion/u-boot-tn-imx/wiki/Use-mfgtool-%22uuu%22-to-flash-eMMC
+
+
+=== For pico-imx8mm:
 
 1. UUU way
 
