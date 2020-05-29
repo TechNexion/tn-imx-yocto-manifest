@@ -135,6 +135,10 @@ For more information, please check the file under `“sources/meta-tn-imx-bsp/co
 |
 |pico-imx6ul
 |Compatible with TechNexion PICO-IMX6ULL (i.MX6)
+|
+|tek-imx6
+|Compatible with TechNexion TEK3-IMX6/TEP-1010-IMX6/TEP-1560-IMX6/TWP-1010-IMX6/TWP-1560-IMX6 (i.MX6 Solo/DL/Dual/Quad/Quad Plus)
+
 
 |DISTRO
 
@@ -266,6 +270,8 @@ and i.MX 7Dual.
 |===
 
 .Choosing TechNexion target container image
+|===
+|Image name |Target
 
 |tn-image-docker-os
 |Technexion custom container os image
@@ -289,7 +295,7 @@ $: bitbake fsl-image-qt5-validation-imx
 [source,console]
 $: WIFI_FIRMWARE=y DISTRO=fsl-imx-wayland MACHINE=edm-imx8mq BASEBOARD=wizard source edm-setup-release.sh -b build-wayland-imx8mq
 $: bitbake fsl-image-qt5-validation-imx
-+
+
 *DISTRO: DISTRO can be replaced to "fsl-imx-xwayland"*
 
 === For PICO-IMX8MM
@@ -398,6 +404,26 @@ $: bitbake fsl-image-qt5-validation-imx
 [source,console]
 For PICO-IMX6UL with QCA WLAN:
 $: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=pico-imx6ul source edm-setup-release.sh -b build-x11-pico-imx6ul
+$: bitbake fsl-image-qt5-validation-imx
+
+=== For TEK3-IMX6
+*TEK3-IMX6 BOX PC, QT5 with X11 image for HDMI output:*
+[source,console]
+For TEK3-IMX6 with PCIE WLAN:
+$:  WIFI_FIRMWARE=y WIFI_MODULE=ath-pci DISTRO=fsl-imx-x11 MACHINE=tek-imx6 source edm-setup-release.sh -b build-x11-tek-imx6
+$: bitbake fsl-image-qt5-validation-imx
+
+=== For TEP-1010-IMX6/TEP-1560-IMX6/TWP-1010-IMX6/TWP-1560-IMX6
+*TEP-1010-IMX6/TWP-1010-IMX6, QT5 with X11 image:*
+[source,console]
+For TEP-1010-IMX6/TWP-1010-IMX6 with PCIE WLAN:
+$:  DISPLAY=lvds10 WIFI_FIRMWARE=y WIFI_MODULE=ath-pci DISTRO=fsl-imx-x11 MACHINE=tek-imx6 source edm-setup-release.sh -b build-x11-tek-imx6
+$: bitbake fsl-image-qt5-validation-imx
+
+*TEP-1560-IMX6/TWP-1560-IMX6, QT5 with X11 image:*
+[source,console]
+For TEP-1560-IMX6/TWP-1560-IMX6 with PCIE WLAN:
+$:  DISPLAY=lvds15 WIFI_FIRMWARE=y WIFI_MODULE=ath-pci DISTRO=fsl-imx-x11 MACHINE=tek-imx6 source edm-setup-release.sh -b build-x11-tek-imx6
 $: bitbake fsl-image-qt5-validation-imx
 
 == Chromium Browser
