@@ -8,6 +8,7 @@
   <remote fetch="git://github.com/openembedded" name="oe"/>
   <remote fetch="git://github.com/OSSystems" name="OSSystems"/>
   <remote fetch="git://github.com/meta-qt5"  name="QT5"/>
+  <remote fetch="https://git.yoctoproject.org/git"  name="QT4"/>
   <remote fetch="https://github.com/NXPNFCLinux" name="nfc"/>
   <remote fetch="https://source.codeaurora.org/external/imx" name="CAF"/>
   <remote fetch="https://github.com/TechNexion" name="tn-bsp" />
@@ -26,6 +27,7 @@
 
   <project remote="OSSystems" revision="75640e14e325479c076b6272b646be7a239c18aa" name="meta-browser" path="sources/meta-browser" />
   <project remote="QT5" revision="d4e7f73d04e8448d326b6f89908701e304e37d65" name="meta-qt5" path="sources/meta-qt5" />
+  <project remote="QT4" revision="8e791c40140460825956430ba86b6266fdec0a93" name="meta-qt4" path="sources/meta-qt4" />
 
   <project remote="nfc" revision="5d05c57fc8faf3f1bc95c1702e1a6aa78d83412f" name="meta-nxp-nfc" path="sources/meta-nxp-nfc" />
 
