@@ -12,7 +12,7 @@
   <remote fetch="https://source.codeaurora.org/external/imx" name="CAF"/>
   <remote fetch="https://github.com/TechNexion" name="tn-bsp" />
 
-  <project remote="yocto" revision="c9bd4984f8f471ca2c43052714f4413ba99cf171" name="poky" path="sources/poky"/>
+  <project remote="yocto" revision="d8707c6919cd638be0efb810bb37ff1ec682a435" name="poky" path="sources/poky"/>
   <project remote="yocto" revision="27ca94f8a4336790ba117b4298566f6820e7e74c" name="meta-freescale" path="sources/meta-freescale"/>
 
   <project remote="oe" revision="8760facba1bceb299b3613b8955621ddaa3d4c3f" name="meta-openembedded" path="sources/meta-openembedded"/>
