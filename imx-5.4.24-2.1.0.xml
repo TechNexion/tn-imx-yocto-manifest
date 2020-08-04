@@ -8,6 +8,7 @@
   <remote fetch="git://github.com/openembedded" name="oe"/>
   <remote fetch="git://github.com/OSSystems" name="OSSystems"/>
   <remote fetch="git://github.com/meta-qt5"  name="QT5"/>
+  <remote fetch="https://github.com/NXPNFCLinux" name="nfc"/>
   <remote fetch="git://github.com/TimesysGit"  name="Timesys"/>
   <remote fetch="git://github.com/meta-rust"  name="rust"/>
   <remote fetch="git://git.openembedded.org"  name="python2"/>
@@ -26,11 +27,13 @@
   <project name="meta-freescale-distro" path="sources/meta-freescale-distro" remote="community" revision="ca27d12e4964d1336e662bcc60184bbff526c857"/>
 
   <project name="meta-imx" path="sources/meta-imx" remote="CAF" revision="a083ffbbc3f4d1c02b1542746784d7f641a75b60" upstream="zeus-5.4.24-2.1.0" />
-  
+
   <project remote="tn-bsp" name="meta-tn-imx-bsp" path="sources/meta-tn-imx-bsp" revision="zeus_5.4.24-2.1.0-next" >
     <linkfile dest="tn-setup-release.sh" src="tools/tn-setup-release.sh"/>
     <linkfile dest="README-TechNexion-BSP" src="README"/>
   </project>
+
+  <project remote="nfc" revision="5d05c57fc8faf3f1bc95c1702e1a6aa78d83412f" name="meta-nxp-nfc" path="sources/meta-nxp-nfc" />
 
   <project name="meta-openembedded" path="sources/meta-openembedded" remote="oe" revision="9e60d30669a2ad0598e9abf0cd15ee06b523986b"/>
   <project name="meta-python2" path="sources/meta-python2" remote="python2" revision="231c3d74cfcf734c3415e86ea8dd97f73ddced9d"/>
