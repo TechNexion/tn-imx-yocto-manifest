@@ -1,0 +1,377 @@
+= TechNexion Yocto 3.0 Zeus 5.4.y GA BSP
+
+This BSP is a TechNexion release providing support NXP i.mx series processors
+
+[source,console]
+$: mkdir ~/bin
+$: curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+$: chmod a+x ~/bin/repo
+
+Download the BSP source:
+
+[source,console]
+$: PATH=${PATH}:~/bin
+$: mkdir edm_yocto
+$: cd edm_yocto
+For Yocto Zeus 3.0:
+$: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b zeus_5.4.y-next -m imx-5.4.24-2.1.0.xml
+For Container OS:
+$: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b zeus_5.4.y-next -m imx-5.4.24-2.1.0-virtualization.xml
+$: repo sync -j8
+
+== Create build environment
+=== Method 1:
+Set up build environment on host PC:
+
+Our build environment is under ubuntu 18.04.
+
+Install required packages:
+[source,console]
+$: sudo apt-get install gawk wget git git-core diffstat unzip texinfo gcc-multilib build-essential \
+chrpath socat cpio python python3 python3-pip python3-pexpect \
+python3-git python3-jinja2 libegl1-mesa pylint3 rsync bc bison\
+xz-utils debianutils iputils-ping libsdl1.2-dev xterm \
+language-pack-en coreutils texi2html file docbook-utils \
+python-pysqlite2 help2man desktop-file-utils \
+libgl1-mesa-dev libglu1-mesa-dev mercurial autoconf automake \
+groff curl lzop asciidoc u-boot-tools libreoffice-writer \
+sshpass ssh-askpass zip xz-utils kpartx vim screen
+
+== Prepare WIFI/BT firmware
+There are two kinds of WLAN module on TechNexion boards.
+One is Broadcom(BRCM) WLAN(includes BCM4330/BCM4339(AP6335)/BCM43438(AP6212)), the other is Qualcomm(QCA) WLAN(includes QCA9377-3/QCA6174).
+Because of the license restriction, please contact TechNexion FAE or Sales to get licensed firmware files.
+
+After getting the firmware binary:
+.. Decompress the tarball and put all the firmware files (keeping the directory structure intact) into `sources/meta-tn-imx-bsp/recipes-kernel/linux-firmware/files`.
+
+The directory `sources/meta-tn-imx-bsp/recipes-kernel/linux-firmware/files` is the place to put WIFI/BT firmware files.
+
+.. Add firmware package in Yocto build:
+Add argument "WIFI_FIRMWARE=y" in build instruction. Please refer to following explanation.
+
+== Configurations for setup script
+
+`“MACHINE”` is the target of build. It usually corresponds to the name of SOM or SBC.
+
+For more information, please check the file under `“sources/meta-tn-imx-bsp/conf/machine”`.
+
+`DISTRO` is the new way to configure for any backends.
+
+`“-b”` specify the build directory.
+
+`“DISPLAY”` is the disply type. This option only works on i.mx6 (i.mx6 Solo/Dual Lite/Dual/Quad) SOMs and doesn’t work for i.mx6ul, i.mx6sx and i.mx7.
+
+`“BASEBOARD”` is the baseboard type.
+
+`“WIFI_MODULE”` is to choose what kind of WLAN is on board. (qca/brcm/ath-pci)
+
+`“WIFI_FIRMWARE”` is to choose to add WLAN firmware files in target rootfs or not. (y/all)
+
+
+.Build configurations for supported hardware
+|===
+|Parameter |Available options|Description
+
+|MACHINE
+|pico-imx8mm
+|Compatible with TechNexion PICO-IMX8MM (i.MX8M Mini)
+|
+|axon-imx8mp
+|Compatible with TechNexion AXON-IMX8MP (i.MX8M Plus)
+
+
+|DISTRO
+
+(The X11 and Framebuffer distros are only supported for i.MX 6 and i.MX 7. i.MX 8 should use xwayland only.
+XWayland is the default distro for all i.MX families)
+|fsl-imx-x11
+|Only X11 graphics. X11 graphics are not supported on i.MX8.
+
+|
+|fsl-imx-wayland
+|Wayland weston graphics
+
+|
+|fsl-imx-xwayland
+|Wayland graphics and X11. X11 applications using EGL are not supported
+
+|
+|fsl-imx-fb
+|Frame Buffer graphics - no X11 or Wayland. Frame Buffer is not supported on i.MX8.
+
+|BASEBOARD
+
+(It specifies the 'baseboard' variable in uEnv.txt)
+|pi, nymph, dwarf, hobbit
+|Compatible with TechNexion PICO-IMX6/PICO-IMX7
+(i.MX6 Solo/DL/Quad/UL/ULL)(i.MX7).
+
+|
+|gnome, fairy, tc0700, tc1000
+|Compatible with TechNexion EDM-IMX6/EDM-IMX7/EDM-IMX8MQ
+(i.MX6 Solo/DL/Dual/Quad/Quad Plus)(EDM-IMX7 only support gnome)(EDM-IMX8MQ only support fairy).
+
+|
+|wizard
+|Compatible with TechNexion EDM-IMX8MQ
+(i.MX8M Quad).
+
+|WIFI_MODULE
+
+(It specifies the 'wifi_module' variable in uEnv.txt)
+|'qca', 'brcm', 'ath-pci'
+|Choose what kind of WLAN is on board.
+
+
+|WIFI_FIRMWARE
+|'y' or 'all'
+|'y' option depends on 'WIFI_MODULE'. If you specify 'WIFI_MODULE' as 'qca'. Then, it only add 'qca' firmware package in yocto build.
+'all' option will add both 'qca', 'brcm' and 'ath-pci' firmware package in yocto build.
+Please refer to section "Prepare WIFI/BT firmware" to ensure you already put firmware files in the right place.
+
+|DISPLAY
+
+(Parameter "DISPLAY" only works on i.mx6/i.mx8m)
+(It specifies the 'displayinfo' variable in uEnv.txt)
+|lvds7
+|(i.mx6) 7 inch 1024x600 LVDS panel
+
+|
+|lvds10
+|(i.mx6) 10 inch 1280x800 LVDS panel
+
+|
+|lvds15
+|(i.mx6) 15 inch 1366x768 LVDS panel
+
+|
+|hdmi720p
+|(i.mx6) 1280x720 HDMI
+
+|
+|hdmi1080p
+|(i.mx6) 1920x1080 HDMI
+
+|
+|lcd
+|(i.mx6) 5 inch/7 inch 800x480 TTL parallel LCD panel
+
+|
+|lvds7_hdmi720p
+|(i.mx6) Dual display output to both 7 inch LVDS and HDMI
+
+|
+|custom
+|(i.mx6) Reserved for custom panel
+
+|
+|mipi5
+|(i.mx8m) MIPI-DSI 5 inch panel(with ILI9881 controller)
+
+|
+|hdmi
+|(i.mx8m) HDMI monitor (the resolution is decided by EDID)
+
+|-b
+|<build dir>
+|Assign the name of build directory
+|===
+
+.Choosing Yocto target image
+|===
+|Image name |Target
+
+|core-image-minimal
+|A small image that only allows a device to boot
+
+|core-image-base
+|A console-only image that fully supports the target device
+hardware
+
+|core-image-sato
+|An image with Sato, a mobile environment and visual style
+for mobile devices. The image supports X11 with a Sato
+theme, Pimlico applications. It contains a terminal, an
+editor and a file manager
+
+|imx-image-core
+|An i.MX image with i.MX test applications to be used for
+Wayland backends
+
+|fsl-image-machine-test
+|An FSL Community i.MX core image with console
+environment - no GUI interface
+
+|imx-image-multimedia
+|Builds an i.MX image with a GUI without any Qt content
+
+|imx-image-full
+|Builds an opensource Qt 5 image with Machine Learning
+features. These images are only supported for i.MX SoC
+with hardware graphics. They are not supported on the
+i.MX 6UltraLite, i.MX 6UltraLiteLite, i.MX 6SLL, and i.MX
+7Dual.
+
+|===
+
+.Choosing TechNexion target container image
+|===
+|Image name |Target
+
+|tn-image-docker-os
+|Technexion custom container os image
+
+|===
+
+== Build Yocto for TechNexion target platform
+Please don't add argument 'WIFI_FIRMWARE=y' if you don't put firmware files in "sources/meta-tn-imx-bsp/recipes-kernel/linux-firmware/files" .
+It would result in build failure. Please refer to section "Prepare WIFI/BT firmware".
+
+=== For PICO-IMX8MM
+*Xwayland image:*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=pico-imx8mm source tn-setup-release.sh -b build-xwayland-imx8mm
+$: bitbake fsl-image-qt5-validation-imx
+
+*Container OS with Xwayland image:*
+Host OS: Yocto Zeus 3.0
+Container OS: Debian Buster 10 with SW/HW Acceleration
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=pico-imx8mm source tn-setup-release.sh -b build-xwayland-imx8mm
+$: bitbake tn-image-docker-os
+
+*DISTRO: DISTRO can be replaced to "fsl-imx-wayland"*
+
+== Chromium Browser
+Add Chromium package in `conf/local.conf`:
+
+* For X11 on MX6 with GPU, add Chromium into your image
+```
+CORE_IMAGE_EXTRA_INSTALL += "chromium-x11 rng-tools"
+```
+* For XWayland or Wayland, add Chromium into your image
+```
+CORE_IMAGE_EXTRA_INSTALL += "chromium-ozone-wayland rng-tools"
+```
+
+== QTWebkit
+There are four Qt 5 browsers available. QtWebEngine browsers can be found in:
+```
+ /usr/share/qt5/examples/webenginewidgets/StyleSheetbrowser
+ /usr/share/qt5/examples/webenginewidgets/Simplebrowser
+ /usr/share/qt5/examples/webenginewidgets/Cookiebrowser
+ /usr/share/qt5/examples/webengine/quicknanobrowser
+```
+All three browsers can be run by going to the directory above and running the executable found there. Touchscreen can be
+enabled by adding the parameters `-plugin evdevtouch:/dev/input/event0` to the executable.
+
+`./quicknanobrowser -plugin evdevtouch:/dev/input/event0`
+
+QtWebengine will only work on SoC with GPU graphics hardware on i.MX 6, i.MX 7 and i.MX 8.
+To include Qtwebengine in the image put the following in local.conf or in the image recipe.
+```
+IMAGE_INSTALL_append = "packagegroup-qt5-webengine"
+```
+
+== Qt 5
+Note that Qt has both a commercial and open source license options.  Make the decision about which license
+to use before starting work on custom Qt applications.  Once custom Qt applications are started with an open source
+Qt license the work can not be used with a commercial Qt license.  Work with a legal representative to understand
+the differences between each license.
+
+Note Qt is not supported on i.MX 6UltraLite and i.MX 7Dual. It works on X11 backend only but is not a supported feature.
+
+== NXP eIQ machine learning
+The meta-ml layer is the integration of NXP eIQ machine learning, which was formerly released as a separate meta-imx-machinelearning layer and is now integrated into the standard BSP image (imx-image-full). 
+Note that many of the features
+require Qt 5. In case of using other configuration than imx-image-full, put the following in local.conf:
+```
+IMAGE_INSTALL_append = "packagegroup-imx-ml"
+```
+
+== Systemd
+Systemd support is enabled as default but it can be disabled by commenting out the systemd settings in
+imx/meta-sdk/conf/distro/include/fsl-imx-preferred-env.inc.
+
+== Image Deployment
+When build completes, the generated release image is under “${BUILD-TYPE}/tmp/deploy/images/${MACHINE}”:
+
+To decompress the .bz2:
+[source,console]
+$: bzip2 -fdk fsl-image-XXX.rootfs.sdcard.bz2 "fsl-image-XXX.rootfs.sdcard"
+
+
+=== For i.mx6/i.mx6ul/i.mx7:
+
+Please refer to the link below to flash the image into eMMC on the target board:
+
+ftp://ftp.technexion.net/development_resources/development_tools/installer[ftp://ftp.technexion.net/development_resources/development_tools/installer]
+```
+pico-imx6-imx6ul-imx7_otg-installer_xxx.zip
+{platform}_generic-installer_xxx.zip
+```
+=== For i.MX6UL/i.MX6ULL/i.MX6DL/i.MX6Q/i.MX7D/i.MX8MM/i.MX8MQ image deploy by "UUU"
+
+Please refer to the link as below to get more detail informations
+
+https://github.com/TechNexion/u-boot-tn-imx/wiki/Use-mfgtool-%22uuu%22-to-flash-eMMC
+
+
+=== For pico-imx8mm:
+
+1. UUU way
+
+[source,console]
+$: sudo uuu -b emmc_all imx-boot-pico-imx8mm-sd.bin tn-image-docker-os-pico-imx8mm.wic
+
+2. UMS way
+
+Another modular way is use ums command on your currect u-boot inside the eMMC, connect the USB OTG cable to host PC, then ums will auto mounting a storage on host PC, ums command as following in u-boot:
+[source,console]
+$: ums 0 mmc 1
+
+[source,console]
+$: sudo dd if=tn-image-docker-os-pico-imx8mm.wic of=/dev/sdx bs=1M
+
+== Test Docker Container
+Technexion provide different kind of custom docker container using Debian base OS from DockerHub, the users can use it after netowk connection success.
+
+* Remote Debian with MESA software acceleration GLMARK2 demo
+
+[source,console]
+root@yocto:/# docker run -e XDG_RUNTIME_DIR=/tmp -e WAYLAND_DISPLAY=wayland-0 -v $XDG_RUNTIME_DIR/wayland-0:/tmp/wayland-0 --user=$(id -u):$(id -g) -t -i technexion/debian-buster-wayland glmark2-es2-wayland
+
+* Remote Debian with VIVANTE hardware acceleration GLMARK2 demo
+
+[source,console]
+root@yocto:/# docker run --privileged=true  -e XDG_RUNTIME_DIR=/tmp -e WAYLAND_DISPLAY=wayland-0 -v $XDG_RUNTIME_DIR/wayland-0:/tmp/wayland-0 --user=$(id -u):$(id -g) -t -i technexion/debian-buster-wayland-hw glmark2-es2-wayland
+
+* Remote Debian with VIVANTE hardware acceleration Terminal Command-Line
+
+Step 1. Create a container with partition mounting
+
+Create container at the first time, it will link to bash terminal automaticially.
+[source,console]
+root@yocto:/# docker run  --privileged=true --name debian-test -e XDG_RUNTIME_DIR=/tmp -e WAYLAND_DISPLAY=wayland-0 -v $XDG_RUNTIME_DIR/wayland-0:/tmp/wayland-0 -v /home/root:/home/mnt --user=$(id -u):$(id -g) -t -i technexion/debian-buster-wayland-hw bash
+
+If not first time, the user already created the container, please issue the command to login the container again.
+[source,console]
+root@yocto:/# docker start <your conatiner hash id>
+root@yocto:/# docker exec -it debian-test bash
+
+Step 2. Install Weston package in Debian container
+[source,console]
+root@docker:/# apt-get update
+root@docker:/# apt-get install weston
+
+Step 3. Run weston-terminal in Debian container, and the user can start remote terminal directly from Yocto host
+[source,console]
+root@docker:/# weston-terminal
+
+=== For i.mx8:
+
+Please follow the userguide below to flash the image into eMMC on the target board:
+
+https://github.com/TechNexion/u-boot-edm/wiki[https://github.com/TechNexion/u-boot-edm/wiki]
+
