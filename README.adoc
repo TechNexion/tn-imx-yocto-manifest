@@ -4,8 +4,6 @@ This BSP is a TechNexion release providing support NXP i.mx series processors
 
 Host OS: Yocto Sumo 2.5
 
-Container OS: Debian Buster 10 with SW/HW Acceleration
-
 [source,console]
 $: mkdir ~/bin
 $: curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
@@ -19,8 +17,6 @@ $: mkdir edm_yocto
 $: cd edm_yocto
 For Yocto Sumo 2.5:
 $: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b sumo_4.14.y_GA-stable -m imx-4.14.98-2.0.1_patch.xml
-For Container OS:
-$: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b sumo_4.14.y_GA-stable -m imx-4.14.98-2.0.1_patch-virtualization.xml
 $: repo sync -j8
 
 == Create build environment
@@ -36,7 +32,7 @@ chrpath socat cpio python python3 python3-pip python3-pexpect \
 xz-utils debianutils iputils-ping libsdl1.2-dev xterm \
 language-pack-en coreutils texi2html file docbook-utils \
 python-pysqlite2 help2man desktop-file-utils \
-libgl1-mesa-dev libglu1-mesa-dev mercurial autoconf automake \	
+libgl1-mesa-dev libglu1-mesa-dev mercurial autoconf automake \
 groff curl lzop asciidoc u-boot-tools libreoffice-writer \
 sshpass ssh-askpass zip xz-utils kpartx vim screen
 
@@ -269,15 +265,6 @@ and i.MX 7Dual.
 
 |===
 
-.Choosing TechNexion target container image
-|===
-|Image name |Target
-
-|tn-image-docker-os
-|Technexion custom container os image
-
-|===
-
 == Build Yocto for TechNexion target platform
 Please don't add argument 'WIFI_FIRMWARE=y' if you don't put firmware files in "sources/meta-tn-imx-bsp/recipes-kernel/linux-firmware/files" .
 It would result in build failure. Please refer to section "Prepare WIFI/BT firmware".
@@ -303,13 +290,6 @@ $: bitbake fsl-image-qt5-validation-imx
 [source,console]
 $: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=pico-imx8mm source edm-setup-release.sh -b build-xwayland-imx8mm
 $: bitbake fsl-image-qt5-validation-imx
-
-*Container OS with Xwayland image:*
-[source,console]
-$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=pico-imx8mm source edm-setup-release.sh -b build-xwayland-imx8mm
-$: bitbake tn-image-docker-os
-
-*DISTRO: DISTRO can be replaced to "fsl-imx-wayland"*
 
 === For FLEX-IMX8MM
 *Xwayland image:*
@@ -493,8 +473,93 @@ $: ums 0 mmc 1
 [source,console]
 $: sudo dd if=tn-image-docker-os-pico-imx8mm.wic of=/dev/sdx bs=1M
 
+=== For i.mx8:
+
+Please follow the userguide below to flash the image into eMMC on the target board:
+
+https://github.com/TechNexion/u-boot-edm/wiki[https://github.com/TechNexion/u-boot-edm/wiki]
+
+
+
+= For Container OS (based on yocto sumo 2.5):
+
+Container OS: Debian Buster 10 with SW/HW Acceleration
+
+== Download the BSP Source from virtualization manifest file
+
+[source,console]
+$: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b sumo_4.14.y_GA-next -m imx-4.14.98-2.0.1_patch-virtualization.xml
+$: repo sync -j8
+
+== Modify Build Environment
+
+Base on the existing build environment in ubuntu 16.04.
+Install additional packages:
+
+=== Method 1 - Build environment on host PC:
+
+[source,console]
+$: sudo apt install docker.io
+
+=== Method 2 - Download Virtual Machine with pre-installed Ubuntu 20.04 and packages
+
+The virtual machine is validated and able to build Yocto 2.5 virtualization.
+
+=== Method 3 - Using a docker container
+
+Modify the dockerfile to include the following
+
+[source,console]
+ARG DOCKER_VERSION="18.09.0"
+RUN curl -L https://download.docker.com/linux/static/stable/$(uname -m)/docker-${DOCKER_VERSION}.tgz -o /root/docker.tgz && tar -C /root -xvf /root/docker.tgz && mv /root/docker/docker /usr/local/bin/docker && rm -rf /root/docker*
+NOTE: This only gets docker (client) binary, there is no need for dockerd daemon within the docker container
+
+[source,console]
+ARG USERNAME="jenkins"
+ARG DOCKER_GROUP_ID="145"
+RUN groupadd -g ${DOCKER_GROUP_ID} docker && gpasswd -a ${USERNAME} docker
+NOTE: Must allow user, e.g. ${USERNAME}, in docker container to access /run/var/docker.sock by adding DOCKER_GROUP_ID from host-PC
+
+Then, build the docker container again.
+
+[source,console]
+$: docker build -t tn_ubuntu1604 .
+$: docker run -it -u jenkins -v /var/run/docker.sock:/var/run/docker.sock -v ${directory_in_host_machine}:${directory_in_docker} tn_ubuntu1604 /bin/bash
+(-v: use to bind volume to the directory in host machine to a directory in docker)
+(password: jenkins)
+NOTE: /var/run/docker.sock must be passed from host-pc to docker container.
+      (docker container uses docker.sock to create a sibling container to
+       handle packaging of docker image files)
+NOTE: host-pc must also have docker daemon installed, e.g. sudo apt install docker.io
+
+
+== Configurations for setup script
+
+Currently, the only MACHINE configuration supports virtualization build is pico-imx8mm
+
+Please follow the same procedure as describe in Yocto 2.5 above
+
+=== Additional Settings for local.conf
+[source,console]
+TN_CONTAINER_IMAGE_TYPE = "tar.gz"
+BBMULTICONFIG = "container"
+TN_CONTAINER_IMAGE = "tn-container-image-lighttpd"
+JENKINS_HOMEDIR = "/home/technexion/zeus"
+NOTE: JENKINS_HOMEDIR is the shared folder path common to both the yocto build environment and the sibling docker container used to generate separate partition which stores docker image files.
+
+== Build TechNexion target container image
+
+=== For PICO-IMX8MM only
+*Docker OS with Xwayland image:*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=pico-imx8mm source edm-setup-release.sh -b build-xwayland-imx8mm
+$: bitbake multiconfig:container:tn-container-image-lighttpd
+NOTE: this lighttpd docker container image is to be packaged into docker-os, and if not build from yocto automatically, one can manually build it.
+$: bitbake tn-image-docker-os
+
 == Test Docker Container
-Technexion provide different kind of custom docker container using Debian base OS from DockerHub, the users can use it after netowk connection success.
+Technexion provides various customized docker containers using Debian base OS from DockerHub. The users can use it after booting docker-os with successful network connection.
+The following tests are done with console terminal after successfully booted the Docker-OS image.
 
 * Remote Debian with MESA software acceleration GLMARK2 demo
 
@@ -504,19 +569,19 @@ root@yocto:/# docker run -e XDG_RUNTIME_DIR=/tmp -e WAYLAND_DISPLAY=wayland-0 -v
 * Remote Debian with VIVANTE hardware acceleration GLMARK2 demo
 
 [source,console]
-root@yocto:/# docker run --privileged=true  -e XDG_RUNTIME_DIR=/tmp -e WAYLAND_DISPLAY=wayland-0 -v $XDG_RUNTIME_DIR/wayland-0:/tmp/wayland-0 --user=$(id -u):$(id -g) -t -i technexion/debian-buster-wayland-hw glmark2-es2-wayland
+root@yocto:/# docker run --privileged=true -e XDG_RUNTIME_DIR=/tmp -e WAYLAND_DISPLAY=wayland-0 -v $XDG_RUNTIME_DIR/wayland-0:/tmp/wayland-0 --user=$(id -u):$(id -g) -t -i technexion/debian-buster-wayland-hw glmark2-es2-wayland
 
 * Remote Debian with VIVANTE hardware acceleration Terminal Command-Line
 
 Step 1. Create a container with partition mounting
 
-Create container at the first time, it will link to bash terminal automaticially.
+Create container first, and it will link to bash terminal automatically.
 [source,console]
 root@yocto:/# docker run  --privileged=true --name debian-test -e XDG_RUNTIME_DIR=/tmp -e WAYLAND_DISPLAY=wayland-0 -v $XDG_RUNTIME_DIR/wayland-0:/tmp/wayland-0 -v /home/root:/home/mnt --user=$(id -u):$(id -g) -t -i technexion/debian-buster-wayland-hw bash
 
-If not first time, the user already created the container, please issue the command to login the container again.
+If not created first, and the user has already created the container, please issue the command to login the container again.
 [source,console]
-root@yocto:/# docker start <your conatiner hash id>
+root@yocto:/# docker start <your container hash id>
 root@yocto:/# docker exec -it debian-test bash
 
 Step 2. Install Weston package in Debian container
@@ -527,10 +592,3 @@ root@docker:/# apt-get install weston
 Step 3. Run weston-terminal in Debian container, and the user can start remote terminal directly from Yocto host
 [source,console]
 root@docker:/# weston-terminal
-
-=== For i.mx8:
-
-Please follow the userguide below to flash the image into eMMC on the target board:
-
-https://github.com/TechNexion/u-boot-edm/wiki[https://github.com/TechNexion/u-boot-edm/wiki]
-
