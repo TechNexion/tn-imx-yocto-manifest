@@ -6,6 +6,7 @@
   <remote fetch="https://source.codeaurora.org/external/imx" name="CAF"/>
   <remote fetch="https://github.com/OSSystems" name="OSSystems"/>
   <remote fetch="https://github.com/meta-qt5"  name="QT5"/>
+  <remote fetch="https://github.com/NXPNFCLinux" name="nfc"/>
   <remote fetch="https://github.com/TimesysGit"  name="Timesys"/>
   <remote fetch="https://github.com/kraj" name="clang"/>
   <remote fetch="https://github.com/Freescale" name="community"/>
@@ -34,6 +35,8 @@
     <linkfile dest="tn-setup-release.sh" src="tools/tn-setup-release.sh"/>
     <linkfile dest="README-TechNexion-BSP" src="README"/>
   </project>
+
+  <project remote="nfc" revision="5d05c57fc8faf3f1bc95c1702e1a6aa78d83412f" name="meta-nxp-nfc" path="sources/meta-nxp-nfc" />
 
   <project name="meta-nxp-demo-experience" path="sources/meta-nxp-demo-experience" remote="imx-support" revision="c7263d9f3cc7bbf44e7164ffeda494cf283d3dec" upstream="zeus-5.4.24-2.1.0"/>
   <project name="meta-openembedded" path="sources/meta-openembedded" remote="oe" revision="2b5dd1eb81cd08bc065bc76125f2856e9383e98b"/>
