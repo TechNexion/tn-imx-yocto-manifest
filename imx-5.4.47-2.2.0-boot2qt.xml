@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <!-- Yocto -->
+  <remote name="yocto"
+          fetch="git://git.yoctoproject.org"/>
+  <project name="poky"
+           remote="yocto"
+           revision="eac84e73e8d94610173c3bb3b6c6d74b58e44f60"
+           path="sources/poky"/>
+  <project name="meta-mingw"
+           remote="yocto"
+           revision="756963cc28ebc163df7d7f4b4ee004c18d3d3260"
+           path="sources/meta-mingw"/>
+
+  <!-- OpenEmbedded -->
+  <remote name="oe"
+          fetch="git://git.openembedded.org"/>
+  <remote name="oe-mirror"
+          fetch="git://github.com/openembedded"/>
+  <project name="meta-openembedded"
+           remote="oe"
+           revision="9e60d30669a2ad0598e9abf0cd15ee06b523986b"
+           path="sources/meta-openembedded"/>
+  <project name="meta-python2"
+           remote="oe"
+           revision="4400f9155ec193d028208cf0c66aeed2ba2b00ab"
+           path="sources/meta-python2"/>
+
+  <!-- Qt -->
+  <remote name="qt"
+          fetch="git://code.qt.io/yocto"
+          pushurl="ssh://codereview.qt-project.org/yocto"/>
+  <remote name="gerrit"
+          fetch="ssh://codereview.qt-project.org/yocto"/>
+  <project name="meta-boot2qt"
+           remote="qt"
+           revision="a995d61ce21e666feb2ec42d3f5d11ccf2312e07"
+           path="sources/meta-boot2qt">
+    <linkfile dest="setup-environment.sh" src="scripts/setup-environment.sh"/>
+    <linkfile dest="sources/templates" src="meta-boot2qt-distro/conf"/>
+  </project>
+  <project name="meta-qt5"
+           remote="qt"
+           revision="0108285c3fb4f246fc73e33afd6a34ba1eb76356"
+           path="sources/meta-qt5"/>
+
+  <!-- NXP -->
+  <remote name="freescale"
+          fetch="git://github.com/Freescale"/>
+  <project name="meta-freescale"
+           remote="freescale"
+           revision="14f1a630a47375432f93c556927b879b51d84c4e"
+           path="sources/meta-freescale"/>
+  <project name="meta-freescale-3rdparty"
+           remote="freescale"
+           revision="dbcc686f52c3c84db8cb86aa8973a4e373651b98"
+           path="sources/meta-freescale-3rdparty"/>
+
+  <!-- NXP non-community -->
+  <remote name="CAF"
+          fetch="https://source.codeaurora.org/external/imx"/>
+  <project name="meta-imx" path="sources/meta-imx" remote="CAF" revision="refs/tags/rel_imx_5.4.47_2.2.0" upstream="zeus-5.4.47-2.2.0"/>
+
+  <!-- Raspberry Pi -->
+  <project name="meta-raspberrypi"
+           remote="yocto"
+           revision="0e05098853eea77032bff9cf81955679edd2f35d"
+           path="sources/meta-raspberrypi"/>
+
+  <!-- Intel -->
+  <remote name="intel"
+          fetch="git://git.yoctoproject.org"/>
+  <project name="meta-intel"
+           remote="intel"
+           revision="55b53335c1bf5e120e8038f86ab69d5417bf3e73"
+           path="sources/meta-intel"/>
+
+  <!-- NVIDIA -->
+  <remote name="madisongh"
+          fetch="git://github.com/madisongh"/>
+  <project name="meta-tegra"
+           remote="madisongh"
+           revision="b97c15cbb87323a56e73873efd825ef1901e6172"
+           path="sources/meta-tegra"/>
+  <!-- internal layer for the nvidia devnet downloads -->
+  <remote name="playground"
+          fetch="ssh://git@git.qt.io/boot2qt"/>
+  <project name="nvidia-devnet-mirror"
+           remote="playground"
+           revision="8ee9cd3c025cf8b36343fddc77545e597c0d874d"
+           path="sources/nvidia-devnet-mirror"
+           groups="notdefault"/>
+
+  <!-- Toradex -->
+  <remote name="toradex"
+          fetch="git://git.toradex.com"/>
+  <project name="meta-toradex-bsp-common"
+           remote="toradex"
+           revision="7ed9958daea91fa3116132b5788495caa18db51d"
+           path="sources/meta-toradex-bsp-common"/>
+  <project name="meta-toradex-nxp"
+           remote="toradex"
+           revision="ac5028651745ea2b541dbc0a847ffd737fc5ef76"
+           path="sources/meta-toradex-nxp"/>
+
+  <!-- BoundaryDevices -->
+  <remote name="boundary"
+          fetch="git://github.com/boundarydevices"/>
+  <project name="meta-boundary"
+           remote="boundary"
+           revision="317c4f037b8b82811be56a271266fb31cdd1fc7a"
+           path="sources/meta-boundary"/>
+
+  <!-- TechNexion -->
+  <remote name="technexion"
+          fetch="https://github.com/TechNexion"/>
+  <project name="meta-tn-imx-bsp"
+           remote="technexion"
+           revision="fb0c06ec10d79e3d323b4a6a20f0b8d4c8ea1799"
+           path="sources/meta-tn-imx-bsp"/>
+
+</manifest>
