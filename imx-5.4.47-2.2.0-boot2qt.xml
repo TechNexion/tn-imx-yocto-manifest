@@ -30,11 +30,11 @@
   <remote name="qt"
           fetch="git://code.qt.io/yocto"
           pushurl="ssh://codereview.qt-project.org/yocto"/>
-  <remote name="gerrit"
-          fetch="ssh://codereview.qt-project.org/yocto"/>
+  <remote name="tncustom"
+          fetch="https://github.com/TechNexion-customization"/>
   <project name="meta-boot2qt"
-           remote="qt"
-           revision="a995d61ce21e666feb2ec42d3f5d11ccf2312e07"
+           remote="tncustom"
+           revision="refs/heads/zeus-tn-boot2qt-5.15.1-next"
            path="sources/meta-boot2qt">
     <linkfile dest="setup-environment.sh" src="scripts/setup-environment.sh"/>
     <linkfile dest="sources/templates" src="meta-boot2qt-distro/conf"/>
@@ -56,61 +56,6 @@
            revision="dbcc686f52c3c84db8cb86aa8973a4e373651b98"
            path="sources/meta-freescale-3rdparty"/>
 
-  <!-- NXP non-community -->
-  <remote name="CAF"
-          fetch="https://source.codeaurora.org/external/imx"/>
-  <project name="meta-imx" path="sources/meta-imx" remote="CAF" revision="refs/tags/rel_imx_5.4.47_2.2.0" upstream="zeus-5.4.47-2.2.0"/>
-
-  <!-- Raspberry Pi -->
-  <project name="meta-raspberrypi"
-           remote="yocto"
-           revision="0e05098853eea77032bff9cf81955679edd2f35d"
-           path="sources/meta-raspberrypi"/>
-
-  <!-- Intel -->
-  <remote name="intel"
-          fetch="git://git.yoctoproject.org"/>
-  <project name="meta-intel"
-           remote="intel"
-           revision="55b53335c1bf5e120e8038f86ab69d5417bf3e73"
-           path="sources/meta-intel"/>
-
-  <!-- NVIDIA -->
-  <remote name="madisongh"
-          fetch="git://github.com/madisongh"/>
-  <project name="meta-tegra"
-           remote="madisongh"
-           revision="b97c15cbb87323a56e73873efd825ef1901e6172"
-           path="sources/meta-tegra"/>
-  <!-- internal layer for the nvidia devnet downloads -->
-  <remote name="playground"
-          fetch="ssh://git@git.qt.io/boot2qt"/>
-  <project name="nvidia-devnet-mirror"
-           remote="playground"
-           revision="8ee9cd3c025cf8b36343fddc77545e597c0d874d"
-           path="sources/nvidia-devnet-mirror"
-           groups="notdefault"/>
-
-  <!-- Toradex -->
-  <remote name="toradex"
-          fetch="git://git.toradex.com"/>
-  <project name="meta-toradex-bsp-common"
-           remote="toradex"
-           revision="7ed9958daea91fa3116132b5788495caa18db51d"
-           path="sources/meta-toradex-bsp-common"/>
-  <project name="meta-toradex-nxp"
-           remote="toradex"
-           revision="ac5028651745ea2b541dbc0a847ffd737fc5ef76"
-           path="sources/meta-toradex-nxp"/>
-
-  <!-- BoundaryDevices -->
-  <remote name="boundary"
-          fetch="git://github.com/boundarydevices"/>
-  <project name="meta-boundary"
-           remote="boundary"
-           revision="317c4f037b8b82811be56a271266fb31cdd1fc7a"
-           path="sources/meta-boundary"/>
-
   <!-- TechNexion -->
   <remote name="technexion"
           fetch="https://github.com/TechNexion"/>
@@ -118,5 +63,14 @@
            remote="technexion"
            revision="fb0c06ec10d79e3d323b4a6a20f0b8d4c8ea1799"
            path="sources/meta-tn-imx-bsp"/>
+
+  <!-- yocto related (meta-imx) -->
+  <remote name="CAF"
+          fetch="https://source.codeaurora.org/external/imx"/>
+  <project name="meta-imx"
+           remote="CAF"
+           revision="refs/tags/rel_imx_5.4.47_2.2.0"
+           upstream="zeus-5.4.47-2.2.0"
+           path="sources/meta-imx"/>
 
 </manifest>
