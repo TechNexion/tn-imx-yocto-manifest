@@ -331,7 +331,7 @@ Container OS: Debian Buster 10 with SW/HW Acceleration
 == Download the BSP Source from virtualization manifest file
 
 [source,console]
-$: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b zeus_5.4.y-next -m imx-5.4.24-2.1.0-virtualization.xml
+$: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b zeus_5.4.y-next -m imx-5.4.70-2.3.0-virtualization.xml
 $: repo sync -j8
 
 == Modify Build Environment
@@ -387,15 +387,15 @@ Please follow the same procedure as describe in Yocto 3.0 above
 TN_CONTAINER_IMAGE_TYPE = "tar.gz"
 BBMULTICONFIG = "container"
 TN_CONTAINER_IMAGE = "tn-container-image-lighttpd"
-JENKINS_HOMEDIR = "/home/technexion/zeus"
-NOTE: JENKINS_HOMEDIR is the shared folder path common to both the yocto build environment and the sibling docker container used to generate separate partition which stores docker image files.
+DOCKER_SHAREDIR = "/home/technexion/zeus"
+NOTE: DOCKER_SHAREDIR is the shared folder path common to both the yocto build environment and the sibling docker container used to generate separate partition which stores docker image files.
 
 == Build TechNexion target container image
 
 === For PICO-IMX8MM only
 *Docker OS with Xwayland image:*
 [source,console]
-$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=pico-imx8mm source edm-setup-release.sh -b build-xwayland-imx8mm
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=pico-imx8mm source tn-setup-release.sh -b build-xwayland-imx8mm
 $: bitbake multiconfig:container:tn-container-image-lighttpd
 NOTE: this lighttpd docker container image is to be packaged into docker-os, and if not build from yocto automatically, one can manually build it.
 $: bitbake tn-image-docker-os
