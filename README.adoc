@@ -76,7 +76,7 @@ For more information, please check the file under `“sources/meta-tn-imx-bsp/co
 |Compatible with TechNexion AXON-IMX8MM (i.MX8M Mini)
 |
 |axon-imx8mp
-|Compatible with TechNexion AXON-IMX8MP (i.MX8M Plus)
+|Compatible with TechNexion AXON-E-IMX8MP (i.MX8M Plus)
 |
 |edm-g-imx8mm
 |Compatible with TechNexion EDM-G-IMX8MM (i.MX8M Mini)
@@ -88,16 +88,28 @@ For more information, please check the file under `“sources/meta-tn-imx-bsp/co
 |Compatible with TechNexion EDM-G-IMX8MP (i.MX8M Plus)
 |
 |edm-imx8mq
-|Compatible with TechNexion EDM-IMX8MQ (i.MX8M)
+|Compatible with TechNexion EDM-IMX8M (i.MX8M Quad)
 |
 |pico-imx8mm
 |Compatible with TechNexion PICO-IMX8MM (i.MX8M Mini)
 |
 |pico-imx8mq
-|Compatible with TechNexion PICO-IMX8MQ (i.MX8M)
+|Compatible with TechNexion PICO-IMX8M (i.MX8M Quad)
+|
+|flex-imx8mm
+|Compatible with TechNexion FLEX-IMX8MM (i.MX8M Mini)
+|
+|pico-imx7
+|Compatible with TechNexion PICO-IMX7 (i.MX7 Dual)
+|
+|edm-imx6
+|Compatible with TechNexion EDM-IMX6 (i.MX6 Solo/Duallite/Quad/QuadPlus)
 |
 |pico-imx6
-|Compatible with TechNexion PICO-IMX6 (i.MX6)
+|Compatible with TechNexion PICO-IMX6 (i.MX6 Solo/Duallite/Quad)
+|
+|pico-imx6ul
+|Compatible with TechNexion PICO-IMX6UL/PICO-IMX6ULL (i.MX6 UltraLite/ULL)
 
 |DISTRO
 
@@ -123,17 +135,27 @@ XWayland is the default distro for all i.MX families)
 (It specifies the 'baseboard' variable in uEnv.txt)
 |pi, nymph, dwarf, hobbit
 |Compatible with TechNexion PICO-IMX6/PICO-IMX7
-(i.MX6 Solo/DL/Quad/UL/ULL)(i.MX7).
+(i.MX6 Solo/DL/Quad/UL/ULL)(i.MX7 Dual).
 
 |
 |gnome, fairy, tc0700, tc1000
-|Compatible with TechNexion EDM-IMX6/EDM-IMX7/EDM-IMX8MQ
-(i.MX6 Solo/DL/Dual/Quad/Quad Plus)(EDM-IMX7 only support gnome)(EDM-IMX8MQ only support fairy).
+|Compatible with TechNexion EDM-IMX6
+(i.MX6 Solo/DL/Quad/Quad Plus).
+
+|
+|pi
+|Compatible with TechNexion PICO-IMX8MQ/PICO-IMX8MM/FLEX-IMX8MM
+(i.MX8M Quad)(i.MX8M Mini).
 
 |
 |wizard
 |Compatible with TechNexion EDM-IMX8MQ/PICO-IMX8MQ/PICO-IMX8MM/FLEX-IMX8MM
 (i.MX8M Quad)(i.MX8M Mini).
+
+|
+|wandboard
+|Compatible with TechNexion EDM-G-IMX8MP/EDM-G-IMX8MM/EDM-G-IMX8MN
+(i.MX8M Plus)(i.MX8M Mini)(i.MX8M Nano).
 
 |WIFI_MODULE
 
@@ -252,7 +274,7 @@ It would result in build failure. Please refer to section "Prepare WIFI/BT firmw
 $: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=axon-imx8mm source edm-setup-release.sh -b build-xwayland-axon-imx8mm
 $: bitbake fsl-image-qt5-validation-imx
 
-=== For AXON-IMX8MP
+=== For AXON-E-IMX8MP
 *Xwayland image:*
 [source,console]
 $: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=axon-imx8mp source edm-setup-release.sh -b build-xwayland-axon-imx8mp
@@ -294,14 +316,59 @@ $: bitbake fsl-image-qt5-validation-imx
 $: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=pico-imx8mq source tn-setup-release.sh -b build-xwayland-pico-imx8mq
 $: bitbake fsl-image-qt5-validation-imx
 
+=== For FLEX-IMX8MM
+*Xwayland image:*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=flex-imx8mm source tn-setup-release.sh -b build-xwayland-flex-imx8mm
+$: bitbake fsl-image-qt5-validation-imx
+
+**DISTRO: DISTRO can be replaced to "fsl-imx-wayland"**
+
+=== For PICO-IMX7
+*PI baseboard, QT5 with X11 image for 7 inch/5 inch TTL-LCD panel:*
+[source,console]
+For PICO-IMX7 with QCA WLAN:
+$: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=pico-imx7 BASEBOARD=pi source tn-setup-release.sh -b build-x11-pico-imx7
+$: bitbake fsl-image-qt5-validation-imx
+
+=== For EDM-IMX6
+*FAIRY baseboard, QT5 with X11 image for 7 inch LVDS panel:*
+[source,console]
+For EDM-IMX6 with QCA WLAN:
+$: DISPLAY=lvds7 WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=edm-imx6 BASEBOARD=fairy source tn-setup-release.sh -b build-x11-edm-imx6
+$: bitbake fsl-image-qt5-validation-imx
+
+*GNOME baseboard, QT5 with X11 image for 7 inch/5 inch TTL-LCD panel:*
+[source,console]
+For EDM-IMX6 with QCA WLAN:
+$: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=edm-imx6 BASEBOARD=gnome source tn-setup-release.sh -b build-x11-edm-imx6
+$: bitbake fsl-image-qt5-validation-imx
+
+*TC-0700/TC0710 baseboard, QT5 with X11 image for 7 inch LVDS panel:*
+[source,console]
+For EDM-IMX6 with QCA WLAN:
+$: DISPLAY=lvds7 WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=edm-imx6 BASEBOARD=tc0700 source tn-setup-release.sh -b build-x11-edm-imx6
+$: bitbake fsl-image-qt5-validation-imx
+
+*TC-1000 baseboard, QT5 with X11 image for 10 inch LVDS panel:*
+[source,console]
+For EDM-IMX6 with QCA WLAN:
+$: DISPLAY=lvds10 WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=edm-imx6 BASEBOARD=tc1000 source tn-setup-release.sh -b build-x11-edm-imx6
+$: bitbake fsl-image-qt5-validation-imx
+
 === For PICO-IMX6
 *PI baseboard, QT5 with X11 image for HDMI output:*
 [source,console]
 For PICO-IMX6 with QCA WLAN:
-$: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=pico-imx6 BASEBOARD=pi source edm-setup-release.sh -b build-x11-pico-imx6
+$: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=pico-imx6 BASEBOARD=pi source tn-setup-release.sh -b build-x11-pico-imx6
 $: bitbake fsl-image-qt5-validation-imx
 
-*DISTRO: DISTRO can be replaced to "fsl-imx-wayland"*
+=== For PICO-IMX6UL/PICO-IMX6ULL
+*PI baseboard, QT5 with X11 image for 5" and 7" TFT-LCD output:*
+[source,console]
+For PICO-IMX6UL/ULL with QCA WLAN:
+$: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=pico-imx6ul BASEBOARD=pi source tn-setup-release.sh -b build-x11-pico-imx6ul
+$: bitbake fsl-image-qt5-validation-imx
 
 == Chromium Browser
 Add Chromium package in `conf/local.conf`:
