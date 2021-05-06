@@ -18,10 +18,12 @@ $: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b zeus_
 $: repo sync -j8
 
 == Create build environment
-=== Method 1:
+
 Set up build environment on host PC:
 
-Our build environment is under ubuntu 18.04.
+The build environment is tested under ubuntu 18.04/20.04.
+
+Please ensure there is at least 8~16GB memory or 16GB SWAP space in ubuntu.
 
 Install required packages:
 [source,console]
@@ -36,16 +38,8 @@ groff curl lzop asciidoc u-boot-tools libreoffice-writer \
 sshpass ssh-askpass zip xz-utils kpartx vim screen
 
 == Prepare WIFI/BT firmware
-There are two kinds of WLAN module on TechNexion boards.
-One is Broadcom(BRCM) WLAN(includes BCM4330/BCM4339(AP6335)/BCM43438(AP6212)), the other is Qualcomm(QCA) WLAN(includes QCA9377-3/QCA6174).
-Because of the license restriction, please contact TechNexion FAE or Sales to get licensed firmware files.
 
-After getting the firmware binary:
-.. Decompress the tarball and put all the firmware files (keeping the directory structure intact) into `sources/meta-tn-imx-bsp/recipes-kernel/linux-firmware/files`.
-
-The directory `sources/meta-tn-imx-bsp/recipes-kernel/linux-firmware/files` is the place to put WIFI/BT firmware files.
-
-.. Add firmware package in Yocto build:
+Add firmware package in Yocto build:
 Add argument "WIFI_FIRMWARE=y" in build instruction. Please refer to following explanation.
 
 == Configurations for setup script
@@ -426,7 +420,11 @@ When build completes, the generated release image is under “${BUILD-TYPE}/tmp/
 
 To decompress the .bz2:
 [source,console]
-$: bzip2 -fdk fsl-image-XXX.rootfs.sdcard.bz2 "fsl-image-XXX.rootfs.sdcard"
+$: bzip2 -fdk fsl-image-XXX.rootfs.wic.bz2 "fsl-image-XXX.rootfs.wic"
+
+or
+
+Use `bmaptool` to flash fsl-image-XXX.rootfs.wic.bz2 directly.
 
 
 === For i.mx6/i.mx6ul/i.mx7:
@@ -469,7 +467,7 @@ https://github.com/TechNexion/u-boot-edm/wiki[https://github.com/TechNexion/u-bo
 
 
 
-= For Container OS (based on yocto sumo 3.0):
+= For Container OS (based on yocto Zeus 3.0):
 
 Container OS: Debian Buster 10 with SW/HW Acceleration
 
@@ -481,7 +479,7 @@ $: repo sync -j8
 
 == Modify Build Environment
 
-Base on the existing build environment in ubuntu 16.04.
+Base on the existing build environment in ubuntu 18.04.
 Install additional packages:
 
 === Method 1 - Build environment on host PC:
