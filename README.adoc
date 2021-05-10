@@ -265,13 +265,13 @@ It would result in build failure. Please refer to section "Prepare WIFI/BT firmw
 === For AXON-IMX8MM
 *Xwayland image:*
 [source,console]
-$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=axon-imx8mm source edm-setup-release.sh -b build-xwayland-axon-imx8mm
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=axon-imx8mm source tn-setup-release.sh -b build-xwayland-axon-imx8mm
 $: bitbake fsl-image-qt5-validation-imx
 
 === For AXON-E-IMX8MP
 *Xwayland image:*
 [source,console]
-$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=axon-imx8mp source edm-setup-release.sh -b build-xwayland-axon-imx8mp
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=axon-imx8mp source tn-setup-release.sh -b build-xwayland-axon-imx8mp
 $: bitbake fsl-image-qt5-validation-imx
 
 === For EDM-G-IMX8MM
