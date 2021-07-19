@@ -14,7 +14,7 @@ $: PATH=${PATH}:~/bin
 $: mkdir edm_yocto
 $: cd edm_yocto
 For Yocto Zeus 3.0:
-$: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b zeus_5.4.y-next -m imx-5.4.70-2.3.2.xml
+$: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b zeus_5.4.y-next -m imx-5.4.70-2.3.0.xml
 $: repo sync -j8
 
 == Create build environment
