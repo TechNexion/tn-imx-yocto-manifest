@@ -3,6 +3,7 @@
   <remote name="CAF" fetch="https://source.codeaurora.org/external/imx"/>
   <remote name="OSSystems" fetch="https://github.com/OSSystems"/>
   <remote name="QT5" fetch="https://github.com/meta-qt5"/>
+  <remote name="nfc" fetch="https://github.com/NXPNFCLinux"/>
   <remote name="Timesys" fetch="https://github.com/TimesysGit"/>
   <remote name="clang" fetch="https://github.com/kraj"/>
   <remote name="community" fetch="https://github.com/Freescale"/>
@@ -32,6 +33,7 @@
     <linkfile src="README" dest="README-TechNexion-BSP"/>
   </project>
 
+  <project name="meta-nxp-nfc" path="sources/meta-nxp-nfc" remote="nfc" revision="5d05c57fc8faf3f1bc95c1702e1a6aa78d83412f"/>
   <project name="meta-nxp-demo-experience" path="sources/meta-nxp-demo-experience" remote="imx-support" revision="46107357abd2d2da9ffd702c87fce3984a422435" upstream="imx_5.10.y" dest-branch="imx_5.10.y"/>
   <project name="meta-openembedded" path="sources/meta-openembedded" remote="oe" revision="c3a36263f91e42302ad7c347e051cf1cd83e39f6"/>
   <project name="meta-python2" path="sources/meta-python2" remote="python2" revision="810d6d842f103eb59f18b06426106462b15de7e2"/>
