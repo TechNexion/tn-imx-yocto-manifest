@@ -1,0 +1,18 @@
+= TechNexion Yocto 3.3 Hardknott 5.10.y GA BSP
+
+This BSP is a TechNexion release providing support NXP i.mx series processors
+
+[source,console]
+$: mkdir ~/bin
+$: curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+$: chmod a+x ~/bin/repo
+
+Download the BSP source:
+
+[source,console]
+$: PATH=${PATH}:~/bin
+$: mkdir edm_yocto
+$: cd edm_yocto
+For Yocto Zeus 3.0:
+$: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b hardknott_5.10.y-next -m imx-5.10.35-2.0.0.xml
+$: repo sync -j8
