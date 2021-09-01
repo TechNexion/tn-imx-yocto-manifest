@@ -27,6 +27,7 @@
   <project name="meta-freescale-3rdparty" path="sources/meta-freescale-3rdparty" remote="community" revision="7f23af99cb97a12134a46b5b9d497f05b758bf0c"/>
   <project name="meta-freescale-distro" path="sources/meta-freescale-distro" remote="community" revision="916df6d24c0a33a3b1533bde70b6a2724ec77af4"/>
   <project name="meta-imx" path="sources/meta-imx" remote="CAF" revision="refs/tags/rel_imx_5.10.35_2.0.0" upstream="hardknott-5.10.35-2.0.0"/>
+  <project name="meta-nxp-desktop" path="sources/meta-nxp-desktop" remote="CAF" revision="refs/tags/rel_imx_5.10.35_2.0.0_desktop" upstream="imx-5.10.35-hardknott"/>
 
   <project name="meta-tn-imx-bsp" path="sources/meta-tn-imx-bsp" remote="tn-bsp" revision="hardknott_5.10.35-2.0.0-next">
     <linkfile src="tools/tn-setup-release.sh" dest="tn-setup-release.sh"/>
