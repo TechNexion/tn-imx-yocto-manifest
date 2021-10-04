@@ -13,12 +13,17 @@ Download the BSP source:
 $: PATH=${PATH}:~/bin
 $: mkdir edm_yocto
 $: cd edm_yocto
-For Yocto Zeus 3.0 TN2021Q1 release:
-$: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b zeus_5.4.y-stable -m imx-5.4.70-2.3.0_2021Q1
 
-For Yocto Zeus 3.0 TN2021Q4 release:
-$: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b zeus_5.4.y-stable -m imx-5.4.70-2.3.0_2021Q4
+===== For Yocto Zeus 3.0 TN2021Q4 release:
+[source,console]
+$: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b zeus_5.4.y-stable -m imx-5.4.70-2.3.0_2021Q4.xml
 
+===== For Yocto Zeus 3.0 TN2021Q1 release:
+[source,console]
+$: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b zeus_5.4.y-stable -m imx-5.4.70-2.3.0_2021Q1.xml
+
+Start to fetch source code:
+[source,console]
 $: repo sync -j8
 
 
