@@ -13,9 +13,15 @@ Download the BSP source:
 $: PATH=${PATH}:~/bin
 $: mkdir edm_yocto
 $: cd edm_yocto
-For Yocto Zeus 3.0:
-$: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b zeus_5.4.y-stable -m imx-5.4.70-2.3.0.xml
+For Yocto Zeus 3.0 TN2021Q1 release:
+$: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b zeus_5.4.y-stable -m imx-5.4.70-2.3.0_2021Q1
+
+For Yocto Zeus 3.0 TN2021Q4 release:
+$: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b zeus_5.4.y-stable -m imx-5.4.70-2.3.0_2021Q4
+
 $: repo sync -j8
+
+
 
 == Create build environment
 
@@ -66,12 +72,6 @@ For more information, please check the file under `“sources/meta-tn-imx-bsp/co
 |Parameter |Available options|Description
 
 |MACHINE
-|axon-imx8mm
-|Compatible with TechNexion AXON-IMX8MM (i.MX8M Mini)
-|
-|axon-imx8mp
-|Compatible with TechNexion AXON-E-IMX8MP (i.MX8M Plus)
-|
 |edm-g-imx8mm
 |Compatible with TechNexion EDM-G-IMX8MM (i.MX8M Mini)
 |
@@ -96,15 +96,23 @@ For more information, please check the file under `“sources/meta-tn-imx-bsp/co
 |pico-imx7
 |Compatible with TechNexion PICO-IMX7 (i.MX7 Dual)
 |
+|tep1-imx7
+|Compatible with TechNexion TEP-0500-IMX7/TEP-0700-IMX7
+|
 |edm-imx6
 |Compatible with TechNexion EDM-IMX6 (i.MX6 Solo/Duallite/Quad/QuadPlus)
+|
+|wandboard-imx6
+|Compatible with TechNexion WANDBOARD-IMX6 (i.MX6 Solo/Duallite/Quad/QuadPlus)
 |
 |pico-imx6
 |Compatible with TechNexion PICO-IMX6 (i.MX6 Solo/Duallite/Quad)
 |
 |pico-imx6ul
 |Compatible with TechNexion PICO-IMX6UL/PICO-IMX6ULL (i.MX6 UltraLite/ULL)
-
+|
+|tek-imx6
+|Compatible with TechNexion TEK3-IMX6/TEP-1010-IMX6/TEP-1560-IMX6/TWP-1010-IMX6/TWP-1560-IMX6 (i.MX6 Solo/DL/Dual/Quad/Quad Plus)
 |DISTRO
 
 (The X11 and Framebuffer distros are only supported for i.MX 6 and i.MX 7. i.MX 8 should use xwayland only.
@@ -132,7 +140,7 @@ XWayland is the default distro for all i.MX families)
 (i.MX6 Solo/DL/Quad/UL/ULL)(i.MX7 Dual).
 
 |
-|gnome, fairy, tc0700, tc1000
+|fairy, tc0700, tc1000
 |Compatible with TechNexion EDM-IMX6
 (i.MX6 Solo/DL/Quad/Quad Plus).
 
@@ -147,7 +155,7 @@ XWayland is the default distro for all i.MX families)
 (i.MX8M Quad)(i.MX8M Mini).
 
 |
-|wandboard
+|wb
 |Compatible with TechNexion EDM-G-IMX8MP/EDM-G-IMX8MM/EDM-G-IMX8MN
 (i.MX8M Plus)(i.MX8M Mini)(i.MX8M Nano).
 
@@ -243,12 +251,6 @@ environment - no GUI interface
 |tn-image-multimedia-full
 |Builds an i.MX image with test tools and a GUI without any Qt content
 
-|fsl-image-qt5-validation-imx
-|Builds an opensource Qt 5 image. These images are only
-supported for i.MX SoC with hardware graphics. They are
-not supported on the i.MX 6UltraLite, i.MX 6UltraLiteLite,
-and i.MX 7Dual.
-
 |imx-image-full
 |Builds an opensource Qt 5 image with Machine Learning
 features. These images are only supported for i.MX SoC
@@ -262,59 +264,47 @@ i.MX 6UltraLite, i.MX 6UltraLiteLite, i.MX 6SLL, and i.MX
 Please don't add argument 'WIFI_FIRMWARE=y' if you don't put firmware files in "sources/meta-tn-imx-bsp/recipes-kernel/linux-firmware/files" .
 It would result in build failure. Please refer to section "Prepare WIFI/BT firmware".
 
-=== For AXON-IMX8MM
-*Xwayland image:*
-[source,console]
-$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=axon-imx8mm source tn-setup-release.sh -b build-xwayland-axon-imx8mm
-$: bitbake fsl-image-qt5-validation-imx
-
-=== For AXON-E-IMX8MP
-*Xwayland image:*
-[source,console]
-$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=axon-imx8mp source tn-setup-release.sh -b build-xwayland-axon-imx8mp
-$: bitbake fsl-image-qt5-validation-imx
-
 === For EDM-G-IMX8MM
 *Xwayland image:*
 [source,console]
 $: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=edm-g-imx8mm source tn-setup-release.sh -b build-xwayland-edm-g-imx8mm
-$: bitbake fsl-image-qt5-validation-imx
+$: bitbake imx-image-full
 
 === For EDM-G-IMX8MN
 *Xwayland image:*
 [source,console]
 $: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=edm-g-imx8mn source tn-setup-release.sh -b build-xwayland-edm-g-imx8mn
-$: bitbake fsl-image-qt5-validation-imx
+$: bitbake fimx-image-full
 
 === For EDM-G-IMX8MP
 *Xwayland image:*
 [source,console]
 $: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=edm-g-imx8mp source tn-setup-release.sh -b build-xwayland-edm-g-imx8mp
-$: bitbake fsl-image-qt5-validation-imx
+$: bitbake imx-image-full
 
 === For EDM-IMX8MQ
 *Xwayland image:*
 [source,console]
 $: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=edm-imx8mq source tn-setup-release.sh -b build-xwayland-edm-imx8mq
-$: bitbake fsl-image-qt5-validation-imx
+$: bitbake imx-image-full
 
 === For PICO-IMX8MM
 *Xwayland image:*
 [source,console]
 $: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=pico-imx8mm source tn-setup-release.sh -b build-xwayland-pico-imx8mm
-$: bitbake fsl-image-qt5-validation-imx
+$: bitbake imx-image-full
 
 === For PICO-IMX8MQ
 *Xwayland image:*
 [source,console]
 $: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=pico-imx8mq source tn-setup-release.sh -b build-xwayland-pico-imx8mq
-$: bitbake fsl-image-qt5-validation-imx
+$: bitbake imx-image-full
 
 === For FLEX-IMX8MM
 *Xwayland image:*
 [source,console]
 $: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=flex-imx8mm source tn-setup-release.sh -b build-xwayland-flex-imx8mm
-$: bitbake fsl-image-qt5-validation-imx
+$: bitbake imx-image-full
 
 **DISTRO: DISTRO can be replaced to "fsl-imx-wayland"**
 
@@ -323,46 +313,48 @@ $: bitbake fsl-image-qt5-validation-imx
 [source,console]
 For PICO-IMX7 with QCA WLAN:
 $: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=pico-imx7 BASEBOARD=pi source tn-setup-release.sh -b build-x11-pico-imx7
-$: bitbake fsl-image-qt5-validation-imx
+$: bitbake imx-image-full
+
+=== For TEP1-IMX7
+*PI baseboard, QT5 with X11 image for 7 inch/5 inch TTL-LCD panel:*
+[source,console]
+For TEP1-IMX7 with QCA WLAN:
+$: WIFI_FIRMWARE=y WIFI_MODULE=ath-pci DISTRO=fsl-imx-x11 MACHINE=tep1-imx7 source tn-setup-release.sh -b build-x11-pico-imx7
+$: bitbake imx-image-full
 
 === For EDM-IMX6
 *FAIRY baseboard, QT5 with X11 image for 7 inch LVDS panel:*
 [source,console]
 For EDM-IMX6 with QCA WLAN:
 $: DISPLAY=lvds7 WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=edm-imx6 BASEBOARD=fairy source tn-setup-release.sh -b build-x11-edm-imx6
-$: bitbake fsl-image-qt5-validation-imx
-
-*GNOME baseboard, QT5 with X11 image for 7 inch/5 inch TTL-LCD panel:*
-[source,console]
-For EDM-IMX6 with QCA WLAN:
-$: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=edm-imx6 BASEBOARD=gnome source tn-setup-release.sh -b build-x11-edm-imx6
-$: bitbake fsl-image-qt5-validation-imx
+$: bitbake imx-image-full
 
 *TC-0700/TC0710 baseboard, QT5 with X11 image for 7 inch LVDS panel:*
 [source,console]
 For EDM-IMX6 with QCA WLAN:
 $: DISPLAY=lvds7 WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=edm-imx6 BASEBOARD=tc0700 source tn-setup-release.sh -b build-x11-edm-imx6
-$: bitbake fsl-image-qt5-validation-imx
+$: bitbake imx-image-full
 
-*TC-1000 baseboard, QT5 with X11 image for 10 inch LVDS panel:*
+=== For WANDBOARD-IMX6
+*QT5 with X11 image for HDMI:*
 [source,console]
-For EDM-IMX6 with QCA WLAN:
-$: DISPLAY=lvds10 WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=edm-imx6 BASEBOARD=tc1000 source tn-setup-release.sh -b build-x11-edm-imx6
-$: bitbake fsl-image-qt5-validation-imx
+For WANDBOARD-IMX6 with QCA WLAN:
+$: DISPLAY=hdmi WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=wandboard-imx6 source tn-setup-release.sh -b build-x11-wandboard-imx6
+$: bitbake imx-image-full
 
 === For PICO-IMX6
 *PI baseboard, QT5 with X11 image for HDMI output:*
 [source,console]
 For PICO-IMX6 with QCA WLAN:
 $: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=pico-imx6 BASEBOARD=pi source tn-setup-release.sh -b build-x11-pico-imx6
-$: bitbake fsl-image-qt5-validation-imx
+$: bitbake imx-image-full
 
 === For PICO-IMX6UL/PICO-IMX6ULL
 *PI baseboard, QT5 with X11 image for 5" and 7" TFT-LCD output:*
 [source,console]
 For PICO-IMX6UL/ULL with QCA WLAN:
 $: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-x11 MACHINE=pico-imx6ul BASEBOARD=pi source tn-setup-release.sh -b build-x11-pico-imx6ul
-$: bitbake fsl-image-qt5-validation-imx
+$: bitbake imx-image-full
 
 == Chromium Browser
 Add Chromium package in `conf/local.conf`:
@@ -465,116 +457,3 @@ Please follow the userguide below to flash the image into eMMC on the target boa
 
 https://github.com/TechNexion/u-boot-edm/wiki[https://github.com/TechNexion/u-boot-edm/wiki]
 
-
-
-= For Container OS (based on yocto Zeus 3.0):
-
-Container OS: Debian Buster 10 with SW/HW Acceleration
-
-== Download the BSP Source from virtualization manifest file
-
-[source,console]
-$: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b zeus_5.4.y-next -m imx-5.4.70-2.3.0-virtualization.xml
-$: repo sync -j8
-
-== Modify Build Environment
-
-Base on the existing build environment in ubuntu 18.04.
-Install additional packages:
-
-=== Method 1 - Build environment on host PC:
-
-[source,console]
-$: sudo apt install docker.io
-
-=== Method 2 - Download Virtual Machine with pre-installed Ubuntu 20.04 and packages
-
-The virtual machine is validated and able to build Yocto 3.0 virtualization.
-
-=== Method 3 - Using a docker container
-
-Modify the dockerfile to include the following
-
-[source,console]
-ARG DOCKER_VERSION="18.09.0"
-RUN curl -L https://download.docker.com/linux/static/stable/$(uname -m)/docker-${DOCKER_VERSION}.tgz -o /root/docker.tgz && tar -C /root -xvf /root/docker.tgz && mv /root/docker/docker /usr/local/bin/docker && rm -rf /root/docker*
-NOTE: This only gets docker (client) binary, there is no need for dockerd daemon within the docker container
-
-[source,console]
-ARG USERNAME="jenkins"
-ARG DOCKER_GROUP_ID="145"
-RUN groupadd -g ${DOCKER_GROUP_ID} docker && gpasswd -a ${USERNAME} docker
-NOTE: Must allow user, e.g. ${USERNAME}, in docker container to access /run/var/docker.sock by adding DOCKER_GROUP_ID from host-PC
-
-Then, build the docker container again.
-
-[source,console]
-$: docker build -t tn_ubuntu1604 .
-$: docker run -it -u jenkins -v /var/run/docker.sock:/var/run/docker.sock -v ${directory_in_host_machine}:${directory_in_docker} tn_ubuntu1604 /bin/bash
-(-v: use to bind volume to the directory in host machine to a directory in docker)
-(password: jenkins)
-NOTE: /var/run/docker.sock must be passed from host-pc to docker container.
-      (docker container uses docker.sock to create a sibling container to
-       handle packaging of docker image files)
-NOTE: host-pc must also have docker daemon installed, e.g. sudo apt install docker.io
-
-
-== Configurations for setup script
-
-Currently, the only MACHINE configuration supports virtualization build is pico-imx8mm
-
-Please follow the same procedure as describe in Yocto 3.0 above
-
-=== Additional Settings for local.conf
-[source,console]
-TN_CONTAINER_IMAGE_TYPE = "tar.gz"
-BBMULTICONFIG = "container"
-TN_CONTAINER_IMAGE = "tn-container-image-lighttpd"
-DOCKER_SHAREDIR = "/home/technexion/zeus"
-NOTE: DOCKER_SHAREDIR is the shared folder path common to both the yocto build environment and the sibling docker container used to generate separate partition which stores docker image files.
-
-== Build TechNexion target container image
-
-=== For PICO-IMX8MM only
-*Docker OS with Xwayland image:*
-[source,console]
-$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=pico-imx8mm source tn-setup-release.sh -b build-xwayland-imx8mm
-$: bitbake multiconfig:container:tn-container-image-lighttpd
-NOTE: this lighttpd docker container image is to be packaged into docker-os, and if not build from yocto automatically, one can manually build it.
-$: bitbake tn-image-docker-os
-
-== Test Docker Container
-Technexion provides various customized docker containers using Debian base OS from DockerHub. The users can use it after booting docker-os with successful network connection.
-The following tests are done with console terminal after successfully booted the Docker-OS image.
-
-* Remote Debian with MESA software acceleration GLMARK2 demo
-
-[source,console]
-root@yocto:/# docker run -e XDG_RUNTIME_DIR=/tmp -e WAYLAND_DISPLAY=wayland-0 -v $XDG_RUNTIME_DIR/wayland-0:/tmp/wayland-0 --user=$(id -u):$(id -g) -t -i technexion/debian-buster-wayland glmark2-es2-wayland
-
-* Remote Debian with VIVANTE hardware acceleration GLMARK2 demo
-
-[source,console]
-root@yocto:/# docker run --privileged=true -e XDG_RUNTIME_DIR=/tmp -e WAYLAND_DISPLAY=wayland-0 -v $XDG_RUNTIME_DIR/wayland-0:/tmp/wayland-0 --user=$(id -u):$(id -g) -t -i technexion/debian-buster-wayland-hw glmark2-es2-wayland
-
-* Remote Debian with VIVANTE hardware acceleration Terminal Command-Line
-
-Step 1. Create a container with partition mounting
-
-Create container first, and it will link to bash terminal automatically.
-[source,console]
-root@yocto:/# docker run  --privileged=true --name debian-test -e XDG_RUNTIME_DIR=/tmp -e WAYLAND_DISPLAY=wayland-0 -v $XDG_RUNTIME_DIR/wayland-0:/tmp/wayland-0 -v /home/root:/home/mnt --user=$(id -u):$(id -g) -t -i technexion/debian-buster-wayland-hw bash
-
-If not created first, and the user has already created the container, please issue the command to login the container again.
-[source,console]
-root@yocto:/# docker start <your container hash id>
-root@yocto:/# docker exec -it debian-test bash
-
-Step 2. Install Weston package in Debian container
-[source,console]
-root@docker:/# apt-get update
-root@docker:/# apt-get install weston
-
-Step 3. Run weston-terminal in Debian container, and the user can start remote terminal directly from Yocto host
-[source,console]
-root@docker:/# weston-terminal
