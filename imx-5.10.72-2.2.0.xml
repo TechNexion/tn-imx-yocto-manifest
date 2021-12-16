@@ -30,7 +30,7 @@
   <project name="meta-freescale-distro" path="sources/meta-freescale-distro" remote="community" revision="e6daa26ba1f748326546063d63a085ae671827d9" upstream="hardknott"/>
   <project name="meta-imx" path="sources/meta-imx" remote="CAF" revision="refs/tags/rel_imx_5.10.72_2.2.0" upstream="hardknott-5.10.72-2.2.0"/>
 
-  <project name="meta-nxp-desktop" path="sources/meta-nxp-desktop" remote="tn-customization" revision="tn-imx-5.10.52-hardknott"/>
+  <project name="meta-nxp-desktop" path="sources/meta-nxp-desktop" remote="tn-customization" revision="tn-imx-5.10.72-hardknott"/>
   <project name="meta-tn-imx-bsp" path="sources/meta-tn-imx-bsp" remote="tn-bsp" revision="hardknott_5.10.72-2.2.0-next">
     <linkfile src="tools/tn-setup-release.sh" dest="tn-setup-release.sh"/>
     <linkfile src="README" dest="README-TechNexion-BSP"/>
