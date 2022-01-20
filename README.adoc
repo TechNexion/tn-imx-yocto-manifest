@@ -42,6 +42,167 @@ libgl1-mesa-dev libglu1-mesa-dev mercurial autoconf automake \
 groff curl lzop asciidoc u-boot-tools libreoffice-writer \
 sshpass ssh-askpass zip xz-utils kpartx vim screen
 
+== Prepare WIFI/BT firmware
+
+Add firmware package in Yocto build:
+Add argument "WIFI_FIRMWARE=y" in build instruction. Please refer to following explanation.
+
+== Configurations for setup script
+
+`“MACHINE”` is the target of build. It usually corresponds to the name of SOM or SBC.
+
+For more information, please check the file under `“sources/meta-tn-imx-bsp/conf/machine”`.
+
+`DISTRO` is the new way to configure for any backends.
+
+`“-b”` specify the build directory.
+
+`“DISPLAY”` is the disply type. This option only works on i.mx6 (i.mx6 Solo/Dual Lite/Dual/Quad) SOMs and doesn’t work for i.mx6ul, i.mx6sx and i.mx7.
+
+`“BASEBOARD”` is the baseboard type.
+
+`“WIFI_MODULE”` is to choose what kind of WLAN is on board. (qca/brcm/ath-pci)
+
+`“WIFI_FIRMWARE”` is to choose to add WLAN firmware files in target rootfs or not. (y/all)
+
+
+.Build configurations for supported hardware
+|===
+|Parameter |Available options|Description
+
+|MACHINE
+|edm-g-imx8mm
+|Compatible with TechNexion EDM-G-IMX8MM (i.MX8M Mini)
+|
+|edm-g-imx8mn
+|Compatible with TechNexion EDM-G-IMX8MN (i.MX8M Nano)
+|
+|edm-g-imx8mp
+|Compatible with TechNexion EDM-G-IMX8MP (i.MX8M Plus)
+|
+|pico-imx8mm
+|Compatible with TechNexion PICO-IMX8MM (i.MX8M Mini)
+|
+|pico-imx8mq
+|Compatible with TechNexion PICO-IMX8M (i.MX8M Quad)
+|
+|axon-imx8mp
+|Compatible with TechNexion AXON-IMX8MP (i.MX8M Plus)
+|
+|pico-imx7
+|Compatible with TechNexion PICO-IMX7 (i.MX7 Dual)
+|
+|tep1-imx7
+|Compatible with TechNexion TEP-0500-IMX7/TEP-0700-IMX7
+|
+|edm-imx6
+|Compatible with TechNexion EDM-IMX6 (i.MX6 Solo/Duallite/Quad/QuadPlus)
+|
+|pico-imx6
+|Compatible with TechNexion PICO-IMX6 (i.MX6 Solo/Duallite/Quad)
+|
+|pico-imx6ul
+|Compatible with TechNexion PICO-IMX6UL/PICO-IMX6ULL (i.MX6 UltraLite/ULL)
+|DISTRO
+
+(i.MX 8 should use xwayland only.
+wayland is the default distro for all i.MX families)
+(NXP is no longer support x11 and framebuffer)
+|fsl-imx-wayland
+|Wayland weston graphics
+
+|
+|fsl-imx-xwayland
+|Wayland graphics and X11. X11 applications using EGL are not supported
+
+|BASEBOARD
+
+(It specifies the 'baseboard' variable in uEnv.txt)
+|pi, nymph, dwarf, hobbit
+|Compatible with TechNexion PICO-IMX6/PICO-IMX7
+(i.MX6 Solo/DL/Quad/UL/ULL)(i.MX7 Dual).
+
+|
+|fairy
+|Compatible with TechNexion EDM-IMX6
+(i.MX6 Solo/DL/Quad/Quad Plus).
+
+|
+|pi
+|Compatible with TechNexion PICO-IMX8MQ/PICO-IMX8MM
+(i.MX8M Quad)(i.MX8M Mini).
+
+|
+|wizard
+|Compatible with TechNexion PICO-IMX8MQ/PICO-IMX8MM/EDM-G-IMX8MP/EDM-G-IMX8MM/EDM-G-IMX8MN
+(i.MX8M Quad)(i.MX8M Mini)(i.MX8M Plus)(i.MX8M Mini)(i.MX8M Nano).
+
+|
+|wb
+|Compatible with TechNexion EDM-G-IMX8MP/EDM-G-IMX8MM/EDM-G-IMX8MN
+(i.MX8M Plus)(i.MX8M Mini)(i.MX8M Nano).
+
+|WIFI_MODULE
+
+(It specifies the 'wifi_module' variable in uEnv.txt)
+|'qca', 'brcm', 'ath-pci'
+|Choose what kind of WLAN is on board.
+
+
+|WIFI_FIRMWARE
+|'y' or 'all'
+|'y' option depends on 'WIFI_MODULE'. If you specify 'WIFI_MODULE' as 'qca'. Then, it only add 'qca' firmware package in yocto build.
+'all' option will add both 'qca', 'brcm' and 'ath-pci' firmware package in yocto build.
+Please refer to section "Prepare WIFI/BT firmware" to ensure you already put firmware files in the right place.
+
+|DISPLAY
+
+(Parameter "DISPLAY" only works on i.mx6/i.mx8m)
+(It specifies the 'displayinfo' variable in uEnv.txt)
+|lvds7
+|(i.mx6) 7 inch 1024x600 LVDS panel
+
+|
+|lvds10
+|(i.mx6) 10 inch 1280x800 LVDS panel
+
+|
+|lvds15
+|(i.mx6) 15 inch 1366x768 LVDS panel
+
+|
+|hdmi720p
+|(i.mx6) 1280x720 HDMI
+
+|
+|hdmi1080p
+|(i.mx6) 1920x1080 HDMI
+
+|
+|lcd
+|(i.mx6) 5 inch/7 inch 800x480 TTL parallel LCD panel
+
+|
+|lvds7_hdmi720p
+|(i.mx6) Dual display output to both 7 inch LVDS and HDMI
+
+|
+|custom
+|(i.mx6) Reserved for custom panel
+
+|
+|mipi5
+|(i.mx8m) MIPI-DSI 5 inch panel(with ILI9881 controller)
+
+|
+|hdmi
+|(i.mx8m) HDMI monitor (the resolution is decided by EDID)
+
+|-b
+|<build dir>
+|Assign the name of build directory
+|===
+
 == Build Yocto for TechNexion target platform
 Please don't add argument 'WIFI_FIRMWARE=y' if you don't put firmware files in "sources/meta-tn-imx-bsp/recipes-kernel/linux-firmware/files" .
 It would result in build failure. Please refer to section "Prepare WIFI/BT firmware".
@@ -67,3 +228,64 @@ $: bitbake imx-image-full
 [source,console]
 $: WIFI_FIRMWARE=all DISTRO=imx-desktop-xwayland MACHINE=edm-g-imx8mm source tn-setup-release.sh -b build-desktop-edm-g-imx8mm
 $: bitbake imx-image-desktop
+
+=== For EDM-G-IMX8MN
+*Xwayland image:*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=edm-g-imx8mn source tn-setup-release.sh -b build-xwayland-edm-g-imx8mn
+$: bitbake fimx-image-full
+
+=== For PICO-IMX8MM
+*Xwayland image:*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=pico-imx8mm source tn-setup-release.sh -b build-xwayland-pico-imx8mm
+$: bitbake imx-image-full
+
+=== For PICO-IMX8MQ
+*Xwayland image:*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=pico-imx8mq source tn-setup-release.sh -b build-xwayland-pico-imx8mq
+$: bitbake imx-image-full
+
+=== For AXON-IMX8MP
+*Xwayland image:*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=axon-imx8mp source tn-setup-release.sh -b build-xwayland-axon-imx8mp
+$: bitbake imx-image-full
+
+**DISTRO: DISTRO can be replaced to "fsl-imx-wayland"**
+
+=== For PICO-IMX7
+*PI baseboard, wayland image for 7 inch/5 inch TTL-LCD panel:*
+[source,console]
+For PICO-IMX7 with QCA WLAN:
+$: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=pico-imx7 BASEBOARD=pi source tn-setup-release.sh -b build-wayland-pico-imx7
+$: bitbake imx-image-full
+
+=== For TEP1-IMX7
+*PI baseboard, wayland image for 7 inch/5 inch TTL-LCD panel:*
+[source,console]
+For TEP1-IMX7 with ATHEROS-PCI WLAN:
+$: WIFI_FIRMWARE=y WIFI_MODULE=ath-pci DISTRO=fsl-imx-wayland MACHINE=tep1-imx7 source tn-setup-release.sh -b build-wayland-pico-imx7
+$: bitbake imx-image-full
+
+=== For EDM-IMX6
+*FAIRY baseboard, wayland image for 7 inch LVDS panel:*
+[source,console]
+For EDM-IMX6 with QCA WLAN:
+$: DISPLAY=lvds7 WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=edm-imx6 BASEBOARD=fairy source tn-setup-release.sh -b build-wayland-edm-imx6
+$: bitbake imx-image-full
+
+=== For PICO-IMX6
+*NYMPH baseboard, wayland image for HDMI output:*
+[source,console]
+For PICO-IMX6 with QCA WLAN:
+$: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=pico-imx6 BASEBOARD=nymph source tn-setup-release.sh -b build-wayland-pico-imx6
+$: bitbake imx-image-full
+
+=== For PICO-IMX6UL/PICO-IMX6ULL
+*PI baseboard, wayland image for 5" and 7" TFT-LCD output:*
+[source,console]
+For PICO-IMX6UL/ULL with QCA WLAN:
+$: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=pico-imx6ul BASEBOARD=pi source tn-setup-release.sh -b build-wayland-pico-imx6ul
+$: bitbake imx-image-full
