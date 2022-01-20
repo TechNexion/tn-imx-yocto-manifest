@@ -46,6 +46,6 @@
 
   <project name="meta-timesys" path="sources/meta-timesys" remote="Timesys" revision="147c2f5c4702ee9bd95a9bf7f6e7e4a2a730c382"/>
 
-  <project name="poky" path="sources/poky" remote="yocto" revision="d88d62c20d7d8da85f02edb170dae0280624ad7e"/>
+  <project name="poky" path="sources/poky" remote="yocto" revision="daf096e295121ea49ebf21f8070e9a6e28f5d46c"/>
 
 </manifest>

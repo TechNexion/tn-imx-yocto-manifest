@@ -46,7 +46,7 @@
 
   <project name="meta-timesys" path="sources/meta-timesys" remote="Timesys" revision="3533d0b4b356ba6845f30d3d9b3143bc54ae254e"/>
 
-  <project name="poky" path="sources/poky" remote="yocto" revision="5408e48d374fc741fa46b57ddfd8a537843bda6f"/>
+  <project name="poky" path="sources/poky" remote="yocto" revision="daf096e295121ea49ebf21f8070e9a6e28f5d46c"/>
 
   <!-- Virtualization layers -->
   <project remote="yocto" name="meta-virtualization" path="sources/meta-virtualization" revision="zeus" upstream="zeus"/>
