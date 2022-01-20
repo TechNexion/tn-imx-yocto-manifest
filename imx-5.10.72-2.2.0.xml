@@ -43,5 +43,5 @@
   <project name="meta-qt5" path="sources/meta-qt5" remote="QT5" revision="43f8f539d40070a70fe89136db89bf5bb1dfe7ed" upstream="hardknott"/>
   <project name="meta-timesys" path="sources/meta-timesys" remote="Timesys" revision="93bf122d77e77aac1a917865538df84f148a8fcc" upstream="gatesgarth"/>
   <project name="meta-virtualization" path="sources/meta-virtualization" remote="yocto" revision="7f719ef40896b6c78893add8485fda995b00d51d" upstream="hardknott"/>
-  <project name="poky" path="sources/poky" remote="yocto" revision="269265c00091fa65f93de6cad32bf24f1e7f72a3" upstream="hardknott"/>
+  <project name="poky" path="sources/poky" remote="yocto" revision="c64df461cb63c4a2801a8c8c55ac095732748a27" upstream="hardknott"/>
 </manifest>
