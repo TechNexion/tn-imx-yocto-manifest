@@ -14,6 +14,7 @@
   <remote fetch="https://git.yoctoproject.org/git" name="yocto"/>
   <remote fetch="https://source.codeaurora.org/external/imxsupport" name="imx-support"/>
 
+  <remote fetch="https://github.com/NXPNFCLinux" name="nfc"/>
   <remote fetch="https://github.com/TechNexion" name="tn-bsp"/>
 
   <project remote="yocto" name="poky" path="sources/poky" revision="4d7162798ec19c726877e85509e4c7a99eb6576d" upstream="honister"/>
@@ -42,6 +43,7 @@
     <linkfile src="README" dest="README-TechNexion-BSP"/>
   </project>
 
+  <project remote="nfc" revision="5e0e59f5b86f9cb63f5d369dbb514d644d3e76de" name="meta-nxp-nfc" path="sources/meta-nxp-nfc"/>
   <project remote="imx-support" revision="4bbe714267b730df020438fe83ae2c7c91708045" name="meta-nxp-demo-experience" path="sources/meta-nxp-demo-experience" />
 
 </manifest>
