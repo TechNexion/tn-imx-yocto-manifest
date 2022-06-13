@@ -14,6 +14,8 @@
   <remote fetch="https://git.yoctoproject.org/git" name="yocto"/>
   <remote fetch="https://source.codeaurora.org/external/imxsupport" name="imx-support"/>
 
+  <remote fetch="https://github.com/TechNexion" name="tn-bsp"/>
+
   <project remote="yocto" name="poky" path="sources/poky" revision="4d7162798ec19c726877e85509e4c7a99eb6576d" upstream="honister"/>
 
   <project remote="oe" name="meta-openembedded" path="sources/meta-openembedded" revision="4647e3ea3708d30eeb0149f6d5626c9576bff520" upstream="honister"/>
@@ -34,9 +36,10 @@
   <project remote="Timesys" name="meta-timesys" path="sources/meta-timesys" revision="93bf122d77e77aac1a917865538df84f148a8fcc" upstream="gatesgarth"/>
   <project remote="yocto" name="meta-virtualization" path="sources/meta-virtualization" revision="ed52ba982179087ecc84f7dc3b0a16cfe25f2f8e" upstream="honister"/>
 
-  <project remote="CAF" name="meta-imx" path="sources/meta-imx" revision="refs/tags/rel_imx_5.15.5_1.0.1" upstream="honister-5.15.5-1.0.0">
-     <linkfile dest="imx-setup-release.sh" src="tools/imx-setup-release.sh"/>
-     <linkfile dest="README-IMXBSP" src="README"/>
+  <project remote="CAF" name="meta-imx" path="sources/meta-imx" revision="refs/tags/rel_imx_5.15.5_1.0.1" upstream="honister-5.15.5-1.0.0"/>
+  <project remote="tn-bsp" name="meta-tn-imx-bsp" path="sources/meta-tn-imx-bsp" revision="honister_5.15.5-1.0.0-next">
+    <linkfile src="tools/tn-setup-release.sh" dest="tn-setup-release.sh"/>
+    <linkfile src="README" dest="README-TechNexion-BSP"/>
   </project>
 
   <project remote="imx-support" revision="4bbe714267b730df020438fe83ae2c7c91708045" name="meta-nxp-demo-experience" path="sources/meta-nxp-demo-experience" />
