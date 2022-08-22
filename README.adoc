@@ -19,7 +19,7 @@ $: cd edm_yocto
 
 Start to fetch source code:
 [source,console]
-$: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b hardknott_5.10.y-stable -m imx-5.10.72-2.2.0-2022Q1.xml
+$: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b hardknott_5.10.y-stable -m imx-5.10.72-2.2.0-2022Q2.xml
 $: repo sync -j8
 
 == Create build environment
@@ -98,11 +98,18 @@ For more information, please check the file under `“sources/meta-tn-imx-bsp/co
 |edm-imx6
 |Compatible with TechNexion EDM-IMX6 (i.MX6 Solo/Duallite/Quad/QuadPlus)
 |
+|wandboard-imx6
+|Compatible with TechNexion WANDBOARD-IMX6 (i.MX6 Solo/Duallite/Quad/QuadPlus)
+|
 |pico-imx6
 |Compatible with TechNexion PICO-IMX6 (i.MX6 Solo/Duallite/Quad)
 |
 |pico-imx6ul
 |Compatible with TechNexion PICO-IMX6UL/PICO-IMX6ULL (i.MX6 UltraLite/ULL)
+|
+|tek-imx6
+|Compatible with TechNexion TEK3-IMX6/TEP-1010-IMX6/TEP-1560-IMX6/TWP-1010-IMX6/TWP-1560-IMX6 (i.MX6 Solo/DL/Dual/Quad/Quad Plus)
+
 |DISTRO
 
 (i.MX 8 should use xwayland only.
@@ -123,12 +130,12 @@ wayland is the default distro for all i.MX families)
 (i.MX6 Solo/DL/Quad/UL/ULL)(i.MX7 Dual).
 
 |
-|fairy
+|fairy, tc0700
 |Compatible with TechNexion EDM-IMX6
 (i.MX6 Solo/DL/Quad/Quad Plus).
 
 |
-|pi
+|pi-8m
 |Compatible with TechNexion PICO-IMX8MQ/PICO-IMX8MM
 (i.MX8M Quad)(i.MX8M Mini).
 
@@ -201,6 +208,7 @@ Please refer to section "Prepare WIFI/BT firmware" to ensure you already put fir
 |-b
 |<build dir>
 |Assign the name of build directory
+
 |===
 
 == Build Yocto for TechNexion target platform
@@ -276,6 +284,19 @@ For EDM-IMX6 with QCA WLAN:
 $: DISPLAY=lvds7 WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=edm-imx6 BASEBOARD=fairy source tn-setup-release.sh -b build-wayland-edm-imx6
 $: bitbake imx-image-full
 
+*TC-0700/TC0710 baseboard, wayland image for 7 inch LVDS panel:*
+[source,console]
+For EDM-IMX6 with QCA WLAN:
+$: DISPLAY=lvds7 WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=edm-imx6 BASEBOARD=tc0700 source tn-setup-release.sh -b build-wayland-edm-imx6
+$: bitbake imx-image-full
+
+=== For WANDBOARD-IMX6
+*WANDBOARD baseboard, wayland image for HDMI output:*
+[source,console]
+For WANDBOARD-IMX6 with QCA WLAN:
+$: DISPLAY=hdmi WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=wandboard-imx6 source tn-setup-release.sh -b build-wayland-wandboard-imx6
+$: bitbake imx-image-full
+
 === For PICO-IMX6
 *NYMPH baseboard, wayland image for HDMI output:*
 [source,console]
@@ -289,3 +310,97 @@ $: bitbake imx-image-full
 For PICO-IMX6UL/ULL with QCA WLAN:
 $: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=pico-imx6ul BASEBOARD=pi source tn-setup-release.sh -b build-wayland-pico-imx6ul
 $: bitbake imx-image-full
+
+=== For TEK3-IMX6
+*TEK3-IMX6 BOX PC, wayland image for HDMI output:*
+[source,console]
+For TEK3-IMX6 with PCIE WLAN:
+$: WIFI_FIRMWARE=y WIFI_MODULE=ath-pci DISTRO=fsl-imx-wayland MACHINE=tek-imx6 source tn-setup-release.sh -b build-wayland-tek-imx6
+$: bitbake imx-image-full
+
+=== For TEP-1010-IMX6/TEP-1560-IMX6/TWP-1010-IMX6/TWP-1560-IMX6
+*TEP-1010-IMX6/TWP-1010-IMX6 HMI, wayland image:*
+[source,console]
+For TEP-1010-IMX6/TWP-1010-IMX6 with PCIE WLAN:
+$: DISPLAY=lvds10 WIFI_FIRMWARE=y WIFI_MODULE=ath-pci DISTRO=fsl-imx-wayland MACHINE=tek-imx6 source tn-setup-release.sh -b build-wayland-tek-imx6
+$: bitbake imx-image-full
+
+*TEP-1560-IMX6/TWP-1560-IMX6 HMI, wayland image:*
+[source,console]
+For TEP-1560-IMX6/TWP-1560-IMX6 with PCIE WLAN:
+$: DISPLAY=lvds15 WIFI_FIRMWARE=y WIFI_MODULE=ath-pci DISTRO=fsl-imx-wayland MACHINE=tek-imx6 source tn-setup-release.sh -b build-wayland-tek-imx6
+$: bitbake imx-image-full
+
+== Chromium Browser
+Add Chromium package in `conf/local.conf`:
+
+* For XWayland or Wayland, add Chromium into your image
+```
+CORE_IMAGE_EXTRA_INSTALL += "chromium-ozone-wayland rng-tools"
+```
+
+== QTWebkit
+There are four Qt 5 browsers available. QtWebEngine browsers can be found in:
+```
+ /usr/share/qt5/examples/webenginewidgets/StyleSheetbrowser
+ /usr/share/qt5/examples/webenginewidgets/Simplebrowser
+ /usr/share/qt5/examples/webenginewidgets/Cookiebrowser
+ /usr/share/qt5/examples/webengine/quicknanobrowser
+```
+All three browsers can be run by going to the directory above and running the executable found there. Touchscreen can be
+enabled by adding the parameters `-plugin evdevtouch:/dev/input/event0` to the executable.
+
+`./quicknanobrowser -plugin evdevtouch:/dev/input/event0`
+
+QtWebengine will only work on SoC with GPU graphics hardware on i.MX 6, i.MX 7 and i.MX 8.
+To include Qtwebengine in the image put the following in local.conf or in the image recipe.
+```
+IMAGE_INSTALL_append = "packagegroup-qt5-webengine"
+```
+
+== Qt 5
+Note that Qt has both a commercial and open source license options.  Make the decision about which license
+to use before starting work on custom Qt applications.  Once custom Qt applications are started with an open source
+Qt license the work can not be used with a commercial Qt license.  Work with a legal representative to understand
+the differences between each license.
+
+Note Qt is not supported on i.MX 6UltraLite and i.MX 7Dual. It works on X11 backend only but is not a supported feature.
+
+== NXP eIQ machine learning
+The meta-ml layer is the integration of NXP eIQ machine learning, which was formerly released as a separate meta-imx-machinelearning layer and is now integrated into the standard BSP image (imx-image-full). 
+Note that many of the features
+require Qt 5. In case of using other configuration than imx-image-full, put the following in local.conf:
+```
+IMAGE_INSTALL_append = "packagegroup-imx-ml"
+```
+
+== Systemd
+Systemd support is enabled as default but it can be disabled by commenting out the systemd settings in
+imx/meta-sdk/conf/distro/include/fsl-imx-preferred-env.inc.
+
+== Image Deployment
+When build completes, the generated release image is under “${BUILD-TYPE}/tmp/deploy/images/${MACHINE}”:
+
+To decompress the .bz2:
+[source,console]
+$: bzip2 -fdk imx-image-full-XXX.rootfs.wic.bz2 "imx-image-full-XXX.rootfs.wic"
+
+or
+
+Use `bmaptool` to flash imx-image-full-XXX.rootfs.wic.bz2 directly.
+
+
+=== For i.mx6/i.mx6ul/i.mx7:
+
+Please refer to the link below to flash the image into eMMC on the target board:
+
+ftp://ftp.technexion.net/development_resources/development_tools/installer[ftp://ftp.technexion.net/development_resources/development_tools/installer]
+```
+pico-imx6-imx6ul-imx7_otg-installer_xxx.zip
+{platform}_generic-installer_xxx.zip
+```
+=== For i.MX6UL/i.MX6ULL/i.MX6DL/i.MX6Q/i.MX7D/i.MX8MM/i.MX8MQ/i.MX8MP image deploy by "UUU"
+
+Please refer to the link as below to get more detail informations
+
+https://developer.technexion.com/docs/using-uuu-to-flash-emmc[https://developer.technexion.com/docs/using-uuu-to-flash-emmc]
