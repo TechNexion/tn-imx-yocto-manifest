@@ -15,7 +15,7 @@ $: mkdir edm_yocto
 $: cd edm_yocto
 
 
-=====  For Yocto Zeus 3.3:
+=====  For Yocto Hardnott 3.3:
 
 Start to fetch source code:
 [source,console]
