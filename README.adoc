@@ -331,6 +331,15 @@ For TEP-1560-IMX6/TWP-1560-IMX6 with PCIE WLAN:
 $: DISPLAY=lvds15 WIFI_FIRMWARE=y WIFI_MODULE=ath-pci DISTRO=fsl-imx-wayland MACHINE=tek-imx6 source tn-setup-release.sh -b build-wayland-tek-imx6
 $: bitbake imx-image-full
 
+=== For NXP IMX8MP EVK with TechNexion TEVI and Vizionlink camera support
+[source,console]
+For IMX8MP LPDDR4 EVK:
+$: DISTRO=fsl-imx-xwayland MACHINE=imx8mp-lpddr4-evk source tn-setup-release.sh -b build-imx8mp-lpddr4-evk-xwayland
+For IMX8MP DDR4 EVK:
+$: DISTRO=fsl-imx-xwayland MACHINE=imx8mp-ddr4-evk source tn-setup-release.sh -b build-imx8mp-ddr4-evk-xwayland
+$: bitbake imx-image-full
+
+
 == Chromium Browser
 Add Chromium package in `conf/local.conf`:
 
