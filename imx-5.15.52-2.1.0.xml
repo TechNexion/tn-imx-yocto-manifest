@@ -27,7 +27,7 @@
   <project name="meta-freescale-distro" path="sources/meta-freescale-distro" remote="community" revision="fc15f5003043da23212596be7366ae2547c308ad" upstream="kirkstone"/>
 
   <project name="meta-imx" path="sources/meta-imx" remote="nxp-imx" revision="refs/tags/rel_imx_5.15.52_2.1.0" upstream="kirkstone-5.15.52-2.1.0"/>
-  <project name="meta-tn-imx-bsp" path="sources/meta-tn-imx-bsp" remote="tn-bsp" revision="kirkstone_5.15.52-2.1.0-next">
+  <project name="meta-tn-imx-bsp" path="sources/meta-tn-imx-bsp" remote="tn-bsp" revision="kirkstone_5.15.52-2.1.0-stable">
     <linkfile src="tools/tn-setup-release.sh" dest="tn-setup-release.sh"/>
     <linkfile src="README" dest="README-TechNexion-BSP"/>
   </project>
