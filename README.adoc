@@ -431,7 +431,7 @@ Use `bmaptool` to flash imx-image-full-XXX.rootfs.wic.bz2 directly.
 === For i.mx6/i.mx6ul/i.mx7:
 
 Please refer to the link below to flash the image into eMMC on the target board: +
-https://ftp.technexion.com/development_resources/development_tools/installer[https://ftp.technexion.com/development_resources/development_tools/installer]
+https://ftp.technexion.com/development_resources/development_tools/installer/[https://ftp.technexion.com/development_resources/development_tools/installer/]
 ```
 pico-imx6-imx6ul-imx7_otg-installer_xxx.zip
 {platform}_generic-installer_xxx.zip
