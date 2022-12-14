@@ -3,24 +3,29 @@
 *This BSP is a TechNexion release providing support NXP i.mx series processors*
 
 [source,console]
-$ mkdir ~/bin
-$ curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
-$ chmod a+x ~/bin/repo
+$: mkdir ~/bin
+$: curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+$: chmod a+x ~/bin/repo
 
 Download the BSP source:
 
 [source,console]
-$ PATH=${PATH}:~/bin
-$ mkdir edm_yocto
-$ cd edm_yocto
+$: PATH=${PATH}:~/bin
+$: mkdir edm_yocto
+$: cd edm_yocto
 
 
 ====  For Yocto Kirkstone 4.0:
 
 Start to fetch source code:
 [source,console]
+<<<<<<< HEAD
 $ repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b kirkstone_5.15.y-stable -m imx-5.15.52-2.1.0.xml
 $ repo sync -j8
+=======
+$: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b kirkstone_5.15.y-next -m imx-5.15.52-2.1.0.xml
+$: repo sync -j8
+>>>>>>> a3c313c (README.adoc: modify format of console and fix ftp link issue)
 
 == Create build environment
 
@@ -30,7 +35,7 @@ $ repo sync -j8
 
 ==== Install required packages:
 [source,console]
-$ sudo apt-get install gawk wget git git-core diffstat unzip texinfo gcc-multilib build-essential \
+$: sudo apt-get install gawk wget git git-core diffstat unzip texinfo gcc-multilib build-essential \
 chrpath socat cpio python python3 python3-pip python3-pexpect \
 python3-git python3-jinja2 libegl1-mesa pylint3 rsync bc bison \
 xz-utils debianutils iputils-ping libsdl1.2-dev xterm \
@@ -253,42 +258,42 @@ Please refer to section "<<_prepare_wifi_fw>>".
 === For EDM-G-IMX8MP
 *Xwayland image:*
 [source,console]
-$ WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=edm-g-imx8mp source tn-setup-release.sh -b build-xwayland-edm-g-imx8mp
-$ bitbake imx-image-full
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=edm-g-imx8mp source tn-setup-release.sh -b build-xwayland-edm-g-imx8mp
+$: bitbake imx-image-full
 
 *Ubuntu with Gnome desktop:*
 [source,console]
-$ WIFI_FIRMWARE=all DISTRO=imx-desktop-xwayland MACHINE=edm-g-imx8mp source tn-setup-release.sh -b build-desktop-edm-g-imx8mp
-$ bitbake imx-image-desktop
+$: WIFI_FIRMWARE=all DISTRO=imx-desktop-xwayland MACHINE=edm-g-imx8mp source tn-setup-release.sh -b build-desktop-edm-g-imx8mp
+$: bitbake imx-image-desktop
 
 === For EDM-G-IMX8MM
 *Xwayland image:*
 [source,console]
-$ WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=edm-g-imx8mm source tn-setup-release.sh -b build-xwayland-edm-g-imx8mm
-$ bitbake imx-image-full
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=edm-g-imx8mm source tn-setup-release.sh -b build-xwayland-edm-g-imx8mm
+$: bitbake imx-image-full
 
 *Ubuntu with Gnome desktop:*
 [source,console]
-$ WIFI_FIRMWARE=all DISTRO=imx-desktop-xwayland MACHINE=edm-g-imx8mm source tn-setup-release.sh -b build-desktop-edm-g-imx8mm
-$ bitbake imx-image-desktop
+$: WIFI_FIRMWARE=all DISTRO=imx-desktop-xwayland MACHINE=edm-g-imx8mm source tn-setup-release.sh -b build-desktop-edm-g-imx8mm
+$: bitbake imx-image-desktop
 
 === For PICO-IMX8MM
 *Xwayland image:*
 [source,console]
-$ WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=pico-imx8mm source tn-setup-release.sh -b build-xwayland-pico-imx8mm
-$ bitbake imx-image-full
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=pico-imx8mm source tn-setup-release.sh -b build-xwayland-pico-imx8mm
+$: bitbake imx-image-full
 
 === For PICO-IMX8MQ
 *Xwayland image:*
 [source,console]
-$ WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=pico-imx8mq source tn-setup-release.sh -b build-xwayland-pico-imx8mq
-$ bitbake imx-image-full
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=pico-imx8mq source tn-setup-release.sh -b build-xwayland-pico-imx8mq
+$: bitbake imx-image-full
 
 === For AXON-IMX8MP
 *Xwayland image:*
 [source,console]
-$ WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=axon-imx8mp source tn-setup-release.sh -b build-xwayland-axon-imx8mp
-$ bitbake imx-image-full
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=axon-imx8mp source tn-setup-release.sh -b build-xwayland-axon-imx8mp
+$: bitbake imx-image-full
 
 **DISTRO: DISTRO can be replaced to "fsl-imx-wayland"**
 
@@ -296,70 +301,70 @@ $ bitbake imx-image-full
 *PI baseboard, wayland image for 7 inch/5 inch TTL-LCD panel:*
 [source,console]
 For PICO-IMX7 with QCA WLAN:
-$ WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=pico-imx7 BASEBOARD=pi source tn-setup-release.sh -b build-wayland-pico-imx7
-$ bitbake imx-image-full
+$: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=pico-imx7 BASEBOARD=pi source tn-setup-release.sh -b build-wayland-pico-imx7
+$: bitbake imx-image-full
 
 === For TEP1-IMX7
 *PI baseboard, wayland image for 7 inch/5 inch TTL-LCD panel:*
 [source,console]
 For TEP1-IMX7 with ATHEROS-PCI WLAN:
-$ WIFI_FIRMWARE=y WIFI_MODULE=ath-pci DISTRO=fsl-imx-wayland MACHINE=tep1-imx7 source tn-setup-release.sh -b build-wayland-pico-imx7
-$ bitbake imx-image-full
+$: WIFI_FIRMWARE=y WIFI_MODULE=ath-pci DISTRO=fsl-imx-wayland MACHINE=tep1-imx7 source tn-setup-release.sh -b build-wayland-pico-imx7
+$: bitbake imx-image-full
 
 === For EDM-IMX6
 *FAIRY baseboard, wayland image for 7 inch LVDS panel:*
 [source,console]
 For EDM-IMX6 with QCA WLAN:
-$ DISPLAY=lvds7 WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=edm-imx6 BASEBOARD=fairy source tn-setup-release.sh -b build-wayland-edm-imx6
-$ bitbake imx-image-full
+$: DISPLAY=lvds7 WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=edm-imx6 BASEBOARD=fairy source tn-setup-release.sh -b build-wayland-edm-imx6
+$: bitbake imx-image-full
 
 *TC-0700/TC0710 baseboard, wayland image for 7 inch LVDS panel:*
 [source,console]
 For EDM-IMX6 with QCA WLAN:
-$ DISPLAY=lvds7 WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=edm-imx6 BASEBOARD=tc0700 source tn-setup-release.sh -b build-wayland-edm-imx6
-$ bitbake imx-image-full
+$: DISPLAY=lvds7 WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=edm-imx6 BASEBOARD=tc0700 source tn-setup-release.sh -b build-wayland-edm-imx6
+$: bitbake imx-image-full
 
 === For WANDBOARD-IMX6
 *WANDBOARD baseboard, wayland image for HDMI output:*
 [source,console]
 For WANDBOARD-IMX6 with QCA WLAN:
-$ DISPLAY=hdmi WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=wandboard-imx6 source tn-setup-release.sh -b build-wayland-wandboard-imx6
-$ bitbake imx-image-full
+$: DISPLAY=hdmi WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=wandboard-imx6 source tn-setup-release.sh -b build-wayland-wandboard-imx6
+$: bitbake imx-image-full
 
 === For PICO-IMX6
 *NYMPH baseboard, wayland image for HDMI output:*
 [source,console]
 For PICO-IMX6 with QCA WLAN:
-$ WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=pico-imx6 BASEBOARD=nymph source tn-setup-release.sh -b build-wayland-pico-imx6
-$ bitbake imx-image-full
+$: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=pico-imx6 BASEBOARD=nymph source tn-setup-release.sh -b build-wayland-pico-imx6
+$: bitbake imx-image-full
 
 === For PICO-IMX6UL/PICO-IMX6ULL
 *PI baseboard, wayland image for 5" and 7" TFT-LCD output:*
 [source,console]
 For PICO-IMX6UL/ULL with QCA WLAN:
-$ WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=pico-imx6ul BASEBOARD=pi source tn-setup-release.sh -b build-wayland-pico-imx6ul
-$ bitbake imx-image-full
+$: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=pico-imx6ul BASEBOARD=pi source tn-setup-release.sh -b build-wayland-pico-imx6ul
+$: bitbake imx-image-full
 
 === For TEP-1010-IMX6/TEP-1560-IMX6/TWP-1010-IMX6/TWP-1560-IMX6
 *TEP-1010-IMX6/TWP-1010-IMX6 HMI, wayland image:*
 [source,console]
 For TEP-1010-IMX6/TWP-1010-IMX6 with PCIE WLAN:
-$ DISPLAY=lvds10 WIFI_FIRMWARE=y WIFI_MODULE=ath-pci DISTRO=fsl-imx-wayland MACHINE=tek-imx6 source tn-setup-release.sh -b build-wayland-tek-imx6
-$ bitbake imx-image-full
+$: DISPLAY=lvds10 WIFI_FIRMWARE=y WIFI_MODULE=ath-pci DISTRO=fsl-imx-wayland MACHINE=tek-imx6 source tn-setup-release.sh -b build-wayland-tek-imx6
+$: bitbake imx-image-full
 
 *TEP-1560-IMX6/TWP-1560-IMX6 HMI, wayland image:*
 [source,console]
 For TEP-1560-IMX6/TWP-1560-IMX6 with PCIE WLAN:
-$ DISPLAY=lvds15 WIFI_FIRMWARE=y WIFI_MODULE=ath-pci DISTRO=fsl-imx-wayland MACHINE=tek-imx6 source tn-setup-release.sh -b build-wayland-tek-imx6
-$ bitbake imx-image-full
+$: DISPLAY=lvds15 WIFI_FIRMWARE=y WIFI_MODULE=ath-pci DISTRO=fsl-imx-wayland MACHINE=tek-imx6 source tn-setup-release.sh -b build-wayland-tek-imx6
+$: bitbake imx-image-full
 
 === For NXP IMX8MP EVK with TechNexion TEVI and Vizionlink camera support
 [source,console]
 For IMX8MP LPDDR4 EVK:
-$ DISTRO=fsl-imx-xwayland MACHINE=imx8mp-lpddr4-evk source tn-setup-release.sh -b build-imx8mp-lpddr4-evk-xwayland
+$: DISTRO=fsl-imx-xwayland MACHINE=imx8mp-lpddr4-evk source tn-setup-release.sh -b build-imx8mp-lpddr4-evk-xwayland
 For IMX8MP DDR4 EVK:
-$ DISTRO=fsl-imx-xwayland MACHINE=imx8mp-ddr4-evk source tn-setup-release.sh -b build-imx8mp-ddr4-evk-xwayland
-$ bitbake imx-image-full
+$: DISTRO=fsl-imx-xwayland MACHINE=imx8mp-ddr4-evk source tn-setup-release.sh -b build-imx8mp-ddr4-evk-xwayland
+$: bitbake imx-image-full
 
 
 == Chromium Browser
@@ -421,7 +426,7 @@ When build completes, the generated release image is under "${BUILD-TYPE}/tmp/de
 
 To decompress the .bz2:
 [source,console]
-$ bzip2 -fdk imx-image-full-XXX.rootfs.wic.bz2 "imx-image-full-XXX.rootfs.wic"
+$: bzip2 -fdk imx-image-full-XXX.rootfs.wic.bz2 "imx-image-full-XXX.rootfs.wic"
 
 or
 
@@ -431,7 +436,7 @@ Use `bmaptool` to flash imx-image-full-XXX.rootfs.wic.bz2 directly.
 === For i.mx6/i.mx6ul/i.mx7:
 
 Please refer to the link below to flash the image into eMMC on the target board: +
-ftp://ftp.technexion.net/development_resources/development_tools/installer[ftp://ftp.technexion.net/development_resources/development_tools/installer]
+https://ftp.technexion.com/development_resources/development_tools/installer[https://ftp.technexion.com/development_resources/development_tools/installer]
 ```
 pico-imx6-imx6ul-imx7_otg-installer_xxx.zip
 {platform}_generic-installer_xxx.zip
