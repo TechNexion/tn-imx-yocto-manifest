@@ -19,13 +19,8 @@ $: cd edm_yocto
 
 Start to fetch source code:
 [source,console]
-<<<<<<< HEAD
 $ repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b kirkstone_5.15.y-stable -m imx-5.15.52-2.1.0.xml
 $ repo sync -j8
-=======
-$: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b kirkstone_5.15.y-next -m imx-5.15.52-2.1.0.xml
-$: repo sync -j8
->>>>>>> a3c313c (README.adoc: modify format of console and fix ftp link issue)
 
 == Create build environment
 
