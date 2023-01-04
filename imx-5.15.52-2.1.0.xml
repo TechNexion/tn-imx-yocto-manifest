@@ -32,6 +32,8 @@
     <linkfile src="README" dest="README-TechNexion-BSP"/>
   </project>
 
+  <project name="meta-nxp-desktop" path="sources/meta-nxp-desktop" remote="nxp-imx" revision="c0773433abea39a6d622c1116d21cf1f24571231" upstream="lf-5.15.52-2.1.0-kirkstone"/>
+
   <project name="meta-nxp-nfc" path="sources/meta-nxp-nfc" remote="nfc" revision="5e0e59f5b86f9cb63f5d369dbb514d644d3e76de"/>
   <project name="meta-nxp-demo-experience" path="sources/meta-nxp-demo-experience" remote="imx-support" revision="c3bd9b4789d87fc259d1fb2c2ffa27b39f1310b5" upstream="kirkstone"/>
   <project name="meta-openembedded" path="sources/meta-openembedded" remote="oe" revision="8f2dc1023482863e2630d1b94052c41ce748b38f" upstream="kirkstone"/>
