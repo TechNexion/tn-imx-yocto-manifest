@@ -5,7 +5,8 @@ NOTE: *This BSP is a TechNexion release providing support NXP i.mx series proces
 == Introduction
 This article provides step-by-step instructions for building a Ubntu Gnome image with TechNexion's Yocto BSP, which supports the i.MX series of processors.
 
----
+{nbsp} +
+
 == System Requirements
 Building an image from source with Yocto requires a host with the following:
 
@@ -18,7 +19,8 @@ Building an image from source with Yocto requires a host with the following:
 - Network
 ** The host must be connected to a network and have access to the Internet so that all source code and tools may be downloaded.
 
----
+{nbsp} +
+
 == Set up build environment on host PC
 === Install required packages
 - Update the host package list
@@ -59,7 +61,8 @@ $: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b kirks
 [source,console]
 $: repo sync -j8
 
----
+{nbsp} +
+
 == Create build environment
 
 [#_prepare_wifi_fw]
@@ -90,8 +93,6 @@ $: repo sync -j8
 `WIFI_FIRMWARE`:: is to choose to add WLAN firmware files in target rootfs or not.
 
 `-b`:: specify the build directory.
-
-`<target-image>`:: is to choose the target image.
 
 .Build configurations for supported hardware
 |===
@@ -137,8 +138,8 @@ $: repo sync -j8
 |pico-imx6ul
 |Compatible with TechNexion +
 `PICO-IMX6UL/PICO-IMX6ULL (i.MX6 UltraLite/ULL)`
-|DISTRO
 
+|DISTRO +
 *NOTE*: +
 1. *i.MX 8 should use xwayland only*. +
 2. wayland is the default distro for all i.MX families. +
@@ -150,6 +151,10 @@ $: repo sync -j8
 |fsl-imx-xwayland
 |*NOTE*: +
 *Wayland graphics and X11. X11 applications using EGL are not supported*
+
+|
+|imx-desktop-xwayland
+|*NOTE*: *_#Only for Ubuntu desktop#_*
 
 |BASEBOARD
 
@@ -263,23 +268,28 @@ Please refer to section "<<_prepare_wifi_fw>>" to ensure you already put firmwar
 |<build dir>
 |Assign the name of build directory
 
-|<target-image>
-|imx-image-full
-|Yocto full image
-|
-|imx-image-desktop
-|Ubuntu Gnome desktop full image +
-**NOTE**: +
-**Only support 64bit platform**
 |===
 
----
-== Build Yocto/Ubuntu for TechNexion target platform
+{nbsp} +
+
+== Build OS image for TechNexion target platform
 IMPORTANT: *#Please don't add argument 'WIFI_FIRMWARE=y' if you don't put firmware files in "sources/meta-tn-imx-bsp/recipes-kernel/linux-firmware/files".#* +
 *It would result in build failure.*
 
 - Please refer to section "<<_prepare_wifi_fw>>".
 
+.Common target image
+|===
+|Available options|Description
+
+|imx-image-full
+|Yocto full image
+
+|imx-image-desktop
+|Ubuntu Gnome desktop full image +
+*NOTE*: *_#Only support 64bit platform#_*
+
+|===
 
 === For EDM-G-IMX8MP
 - *Yocto Xwayland image*
@@ -421,7 +431,8 @@ _For TEP-1560-IMX6/TWP-1560-IMX6 with PCIE WLAN_
 $: DISPLAY=lvds15 WIFI_FIRMWARE=y WIFI_MODULE=ath-pci DISTRO=fsl-imx-wayland MACHINE=tek-imx6 source tn-setup-release.sh -b build-wayland-tek-imx6
 $: bitbake imx-image-full
 
----
+{nbsp} +
+
 == Additional Features
 === Chromium Browser
 - Add Chromium package in `conf/local.conf`: +
@@ -473,7 +484,8 @@ IMAGE_INSTALL_append = "packagegroup-imx-ml"
 But it can be disabled by commenting out the systemd settings in
 *imx/meta-sdk/conf/distro/include/fsl-imx-preferred-env.inc*.
 
----
+{nbsp} +
+
 == Image Deployment
 - When build completes, the generated release image is under directory **<build_dir>/tmp/deploy/images/[MACHINE]** +
 Ex. PICO-IMX8MQ
@@ -506,7 +518,8 @@ pico-imx6-imx6ul-imx7_otg-installer_xxx.zip
 Please refer to the link as below to get more detail informations +
 https://developer.technexion.com/docs/using-uuu-to-flash-emmc[https://developer.technexion.com/docs/using-uuu-to-flash-emmc]
 
----
+{nbsp} +
+
 == Login target
 === Yocto
 - Default user
