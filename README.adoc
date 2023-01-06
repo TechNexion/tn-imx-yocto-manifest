@@ -52,7 +52,6 @@ $: mkdir edm_yocto
 $: cd edm_yocto
 
 - Initialize the repositories based on the release you wish to build:
-Ubuntu 22.04 Gnome base on Kirkstone 4.0
 [source,console]
 $: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b kirkstone_5.15.y-next -m imx-5.15.52-2.1.0.xml
 
