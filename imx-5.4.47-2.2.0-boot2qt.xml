@@ -65,10 +65,10 @@
            path="sources/meta-tn-imx-bsp"/>
 
   <!-- yocto related (meta-imx) -->
-  <remote name="CAF"
-          fetch="https://source.codeaurora.org/external/imx"/>
+  <remote name="nxp-imx"
+          fetch="https://github.com/nxp-imx"/>
   <project name="meta-imx"
-           remote="CAF"
+           remote="nxp-imx"
            revision="refs/tags/rel_imx_5.4.47_2.2.0"
            upstream="zeus-5.4.47-2.2.0"
            path="sources/meta-imx"/>
