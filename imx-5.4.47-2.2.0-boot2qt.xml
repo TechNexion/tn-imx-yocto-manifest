@@ -69,7 +69,7 @@
           fetch="https://github.com/nxp-imx"/>
   <project name="meta-imx"
            remote="nxp-imx"
-           revision="refs/tags/rel_imx_5.4.47_2.2.0"
+           revision="refs/tags/rel_imx_5.4.47_2.2.0_gh"
            upstream="zeus-5.4.47-2.2.0"
            path="sources/meta-imx"/>
 
