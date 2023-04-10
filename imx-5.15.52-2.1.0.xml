@@ -41,4 +41,6 @@
   <project name="meta-timesys" path="sources/meta-timesys" remote="Timesys" revision="d1ad27bfacc937048e7f9084b17f4d7c917d2004" upstream="master"/>
   <project name="meta-virtualization" path="sources/meta-virtualization" remote="yocto" revision="cca772a457a75b2661371932ff79c392da3118db" upstream="master"/>
   <project name="poky" path="sources/poky" remote="yocto" revision="602922d492351ee747d2ff00f8ed5aab284a706b" upstream="kirkstone"/>
+
+  <project name="meta-tn-vizionsdk" path="sources/meta-tn-vizionsdk" remote="tn-bsp" revision="kirkstone_5.15.y"/>
 </manifest>
