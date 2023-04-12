@@ -37,7 +37,7 @@ language-pack-en coreutils texi2html file docbook-utils \
 python-pysqlite2 help2man desktop-file-utils \
 libgl1-mesa-dev libglu1-mesa-dev mercurial autoconf automake \
 groff curl lzop asciidoc u-boot-tools libreoffice-writer \
-sshpass ssh-askpass zip xz-utils kpartx vim screen
+sshpass ssh-askpass zip xz-utils zstd liblz4-tool kpartx vim screen
 
 === Install the repo tool
 - There are many respositories required. Google's `repo` tool is used to manage this.
@@ -55,15 +55,11 @@ $: cd edm_yocto
 
 - Initialize the repositories based on the release you wish to build:
 [source,console]
-$: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b kirkstone_5.15.y-next -m imx-5.15.52-2.1.0.xml
+$: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b kirkstone_5.15.y-stable -m imx-5.15.71-2.2.0.xml
 
 - Start to fetch source code
 [source,console]
 $: repo sync -j8
-
-{nbsp} +
-
-== Create build environment
 
 [#_prepare_wifi_fw]
 === Prepare WIFI/BT firmware
@@ -71,28 +67,25 @@ $: repo sync -j8
 - Add firmware package in Yocto/Ubuntu build, please add argument "*WIFI_FIRMWARE=y*" in build instruction.
 - Please refer to following explanation.
 
+{nbsp} +
+
 === Configurations for setup script
 
-[horizontal]
-`MACHINE`:: is the target of build.
+`MACHINE` is the target of build. It usually corresponds to the name of SOM or SBC.
 
-- It usually corresponds to the name of SOM or SBC.
 - For more information, please check the file under `“sources/meta-tn-imx-bsp/conf/machine”`.
 
-`DISTRO`:: is the new way to configure for any backends.
+`DISTRO` is the new way to configure for any backends.
 
-`DISPLAY`:: is the disply type.
+`DISPLAY` is the disply type. This option only works on i.mx6 (i.mx6 Solo/Dual Lite/Dual/Quad) SOMs and doesn’t work for i.mx6ul, i.mx6sx and i.mx7.
 
-- This option only works on i.mx6 (i.mx6 Solo/Dual Lite/Dual/Quad) SOMs
-- Doesn’t work for i.mx6ul, i.mx6sx and i.mx7.
+`BASEBOARD` is the baseboard type.
 
-`BASEBOARD`:: is the baseboard type.
+`WIFI_MODULE` is to choose what kind of WLAN is on board.
 
-`WIFI_MODULE`:: is to choose what kind of WLAN is on board.
+`WIFI_FIRMWARE` is to choose to add WLAN firmware files in target rootfs or not.
 
-`WIFI_FIRMWARE`:: is to choose to add WLAN firmware files in target rootfs or not.
-
-`-b`:: specify the build directory.
+`-b` specify the build directory.
 
 .Build configurations for supported hardware
 |===
@@ -131,6 +124,14 @@ $: repo sync -j8
 |Compatible with TechNexion +
 `TEP-0500-IMX7/TEP-0700-IMX7`
 |
+|edm-imx6
+|Compatible with TechNexion +
+`EDM-IMX6 (i.MX6 Solo/Duallite/Quad/QuadPlus)`
+|
+|wandboard-imx6
+|Compatible with TechNexion +
+`WANDBOARD-IMX6 (i.MX6 Solo/Duallite/Quad/QuadPlus)`
+|
 |pico-imx6
 |Compatible with TechNexion +
 `PICO-IMX6 (i.MX6 Solo/Duallite/Quad)`
@@ -165,12 +166,12 @@ $: repo sync -j8
 `PICO-IMX7 (i.MX7 Dual)`
 
 |
-|fairy
+|fairy, tc0700
 |Compatible with TechNexion +
 `EDM-IMX6 (i.MX6 Solo/DL/Quad/Quad Plus)`
 
 |
-|pi
+|pi-8m
 |Compatible with TechNexion +
 `PICO-IMX8MQ (i.MX8M Quad)` +
 `PICO-IMX8MM (i.MX8M Mini)`
@@ -181,20 +182,19 @@ $: repo sync -j8
 `PICO-IMX8MQ (i.MX8M Quad)` +
 `PICO-IMX8MM (i.MX8M Mini)` +
 `EDM-G-IMX8MP (i.MX8M Plus)` +
-`EDM-G-IMX8MM (i.MX8M Mini)` +
-`EDM-G-IMX8MN (i.MX8M Nano)`
+`EDM-G-IMX8MM (i.MX8M Mini)`
 
 |
 |wb
 |Compatible with TechNexion +
 `EDM-G-IMX8MP (i.MX8M Plus)` +
-`EDM-G-IMX8MM (i.MX8M Mini)` +
-`EDM-G-IMX8MN (i.MX8M Nano)`
+`EDM-G-IMX8MM (i.MX8M Mini)`
 
 |WIFI_MODULE
 
 (It specifies the 'wifi_module' variable in uEnv.txt)
-|'qca' +
+|'nxp' +
+'qca' +
 'brcm' +
 'ath-pci'
 |Choose what kind of WLAN is on board.
@@ -206,7 +206,7 @@ $: repo sync -j8
 |'*y*' option depends on 'WIFI_MODULE'. +
 If you specify 'WIFI_MODULE' as 'qca'. Then, it only add 'qca' firmware package in yocto build.
 
-'*all*' option will add both 'qca', 'brcm' and 'ath-pci' firmware package in yocto build.
+'*all*' option will add 'nxp', 'qca', 'brcm' and 'ath-pci' firmware package in yocto build.
 
 Please refer to section "<<_prepare_wifi_fw>>" to ensure you already put firmware files in the right place.
 
@@ -273,14 +273,15 @@ Please refer to section "<<_prepare_wifi_fw>>" to ensure you already put firmwar
 {nbsp} +
 
 == Build OS image for TechNexion target platform
-IMPORTANT: *#Please don't add argument 'WIFI_FIRMWARE=y' if you don't put firmware files in "sources/meta-tn-imx-bsp/recipes-kernel/linux-firmware/files".#* +
-*It would result in build failure.*
-
-- Please refer to section "<<_prepare_wifi_fw>>".
+IMPORTANT: *Please don't add argument 'WIFI_FIRMWARE=y' if you don't put firmware files in "sources/meta-tn-imx-bsp/recipes-kernel/linux-firmware/files". It would result in build failure.* +
+Please refer to section "<<_prepare_wifi_fw>>".
 
 .Common target image
 |===
 |Available options|Description
+
+|imx-image-core
+|Yocto core image
 
 |imx-image-full
 |Yocto full image
@@ -314,7 +315,7 @@ $: WIFI_FIRMWARE=all DISTRO=imx-desktop-xwayland MACHINE=edm-g-imx8mm source tn-
 $: bitbake imx-image-desktop
 
 === For PICO-IMX8MM
-- *Yocto wayland image*
+- *Yocto Xwayland image*
 [source,console]
 $: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=pico-imx8mm source tn-setup-release.sh -b build-xwayland-pico-imx8mm
 $: bitbake imx-image-full
@@ -416,19 +417,6 @@ $: bitbake imx-image-full
 _For PICO-IMX6UL/ULL with QCA WLAN_
 [source,console]
 $: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=pico-imx6ul BASEBOARD=pi source tn-setup-release.sh -b build-wayland-pico-imx6ul
-$: bitbake imx-image-full
-
-=== For TEP-1010-IMX6/TEP-1560-IMX6/TWP-1010-IMX6/TWP-1560-IMX6
-- *TEP-1010-IMX6/TWP-1010-IMX6 HMI, Yocto wayland image:* +
-_For TEP-1010-IMX6/TWP-1010-IMX6 with PCIE WLAN_
-[source,console]
-$: DISPLAY=lvds10 WIFI_FIRMWARE=y WIFI_MODULE=ath-pci DISTRO=fsl-imx-wayland MACHINE=tek-imx6 source tn-setup-release.sh -b build-wayland-tek-imx6
-$: bitbake imx-image-full
-
-- *TEP-1560-IMX6/TWP-1560-IMX6 HMI, Yocto wayland image:* +
-_For TEP-1560-IMX6/TWP-1560-IMX6 with PCIE WLAN_
-[source,console]
-$: DISPLAY=lvds15 WIFI_FIRMWARE=y WIFI_MODULE=ath-pci DISTRO=fsl-imx-wayland MACHINE=tek-imx6 source tn-setup-release.sh -b build-wayland-tek-imx6
 $: bitbake imx-image-full
 
 {nbsp} +
