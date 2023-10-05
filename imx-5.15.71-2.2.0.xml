@@ -42,5 +42,5 @@
   <project name="meta-virtualization" path="sources/meta-virtualization" remote="yocto" revision="9482648daf0bb42ff3475e7892542cf99f3b8d48" upstream="master"/>
   <project name="poky" path="sources/poky" remote="yocto" revision="24a3f7b3648185e33133f5d96b184a6cb6524f3d" upstream="kirkstone"/>
 
-  <project name="meta-tn-vizionsdk" path="sources/meta-tn-vizionsdk" remote="tn-bsp" revision="kirkstone_5.15.y"/>
+  <project name="meta-tn-vizionsdk" path="sources/meta-tn-vizionsdk" remote="tn-bsp" revision="73ab152cf1b354a9b6cff49ffd6f198c13490837"/>
 </manifest>
