@@ -16,7 +16,7 @@ $: PATH=${PATH}:~/bin
 $: mkdir edm_yocto
 $: cd edm_yocto
 For Yocto Sumo 2.5:
-$: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b sumo_4.14.y_GA-stable -m imx-4.14.98-2.0.1_patch.xml
+$: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b sumo_4.14.y_GA-stable -m imx-4.14.98-2.3.5.xml
 $: repo sync -j8
 
 == Create build environment
