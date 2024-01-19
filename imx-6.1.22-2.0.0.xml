@@ -40,6 +40,7 @@
     <linkfile src="README" dest="README-TechNexion-BSP"/>
   </project>
 
+  <project name="meta-tn-wifi" path="sources/meta-tn-wifi" remote="tn-bsp" revision="mickledore_6.1.y"/>
   <project name="meta-nxp-desktop" remote="nxp-imx" path="sources/meta-nxp-desktop" revision="refs/tags/rel_lf_6.1.22_2.0.0_ldp" upstream="lf-6.1.22-2.0.0-mickledore"/>
   <project name="meta-nxp-nfc" path="sources/meta-nxp-nfc" remote="nfc" revision="5e0e59f5b86f9cb63f5d369dbb514d644d3e76de"/>
   <project name="meta-nxp-demo-experience" path="sources/meta-nxp-demo-experience" remote="imx-support" revision="ec9d5592dc6369622dc027ad456cadb844451226" upstream="mickledore-6.1.22-2.0.0"/>
