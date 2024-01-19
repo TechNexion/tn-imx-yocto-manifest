@@ -14,6 +14,7 @@
   <remote name="imx-support" fetch="https://github.com/nxp-imx-support"/>
 
   <remote name="tn-bsp"      fetch="https://github.com/TechNexion"/>
+  <remote name="nfc"         fetch="https://github.com/NXPNFCLinux"/>
 
   <project name="meta-arm" path="sources/meta-arm" remote="yocto" revision="0b5724266a8e559cac1724350c1ff2f9e6580326" upstream="mickledore"/>
   <project name="meta-security" path="sources/meta-security" remote="yocto" revision="d7db0a3bd1a8639df7570483f003ce00cbe274a2" upstream="mickledore"/>
@@ -38,6 +39,8 @@
     <linkfile src="tools/tn-setup-release.sh" dest="tn-setup-release.sh"/>
     <linkfile src="README" dest="README-TechNexion-BSP"/>
   </project>
+
+  <project name="meta-nxp-nfc" path="sources/meta-nxp-nfc" remote="nfc" revision="5e0e59f5b86f9cb63f5d369dbb514d644d3e76de"/>
   <project name="meta-nxp-demo-experience" path="sources/meta-nxp-demo-experience" remote="imx-support" revision="ec9d5592dc6369622dc027ad456cadb844451226" upstream="mickledore-6.1.22-2.0.0"/>
 
 </manifest>
