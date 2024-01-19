@@ -13,6 +13,8 @@
   <remote name="nxp-imx"     fetch="https://github.com/nxp-imx"/>
   <remote name="imx-support" fetch="https://github.com/nxp-imx-support"/>
 
+  <remote name="tn-bsp"      fetch="https://github.com/TechNexion"/>
+
   <project name="meta-arm" path="sources/meta-arm" remote="yocto" revision="0b5724266a8e559cac1724350c1ff2f9e6580326" upstream="mickledore"/>
   <project name="meta-security" path="sources/meta-security" remote="yocto" revision="d7db0a3bd1a8639df7570483f003ce00cbe274a2" upstream="mickledore"/>
   <project name="meta-virtualization" path="sources/meta-virtualization" remote="yocto" revision="2bb4071ad372d4b5a092c872c0d42b261f757681" upstream="mickledore"/>
@@ -31,9 +33,10 @@
   <project name="meta-qt6" path="sources/meta-qt6" remote="qt" revision="1406d0a85525a71fe5d7892d7f915404290a78ad" upstream="6.5"/>
   <project name="meta-timesys" path="sources/meta-timesys" remote="timesys" revision="33a45eb06bead2509f1bf5bf46a5bbc85d66583b" upstream="langdale"/>
 
-  <project name="meta-imx" remote="nxp-imx" path="sources/meta-imx" revision="refs/tags/rel_imx_6.1.22_2.0.0" upstream="mickledore-6.1.22-2.0.0" >
-     <linkfile src="tools/imx-setup-release.sh" dest="imx-setup-release.sh"/>
-     <linkfile src="README" dest="README-IMXBSP"/>
+  <project name="meta-imx" remote="nxp-imx" path="sources/meta-imx" revision="refs/tags/rel_imx_6.1.22_2.0.0" upstream="mickledore-6.1.22-2.0.0"/>
+  <project name="meta-tn-imx-bsp" remote="tn-bsp" path="sources/meta-tn-imx-bsp" revision="mickledore_6.1.22-2.0.0-next">
+    <linkfile src="tools/tn-setup-release.sh" dest="tn-setup-release.sh"/>
+    <linkfile src="README" dest="README-TechNexion-BSP"/>
   </project>
   <project name="meta-nxp-demo-experience" path="sources/meta-nxp-demo-experience" remote="imx-support" revision="ec9d5592dc6369622dc027ad456cadb844451226" upstream="mickledore-6.1.22-2.0.0"/>
 
