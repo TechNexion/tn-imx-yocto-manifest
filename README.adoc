@@ -112,9 +112,9 @@ $: repo sync -j8
 |Compatible with TechNexion +
 `AXON-IMX8MP (i.MX8M Plus)`
 |
-|tek3-imx8mp
+|tek-imx8mp
 |Compatible with TechNexion +
-`TEK3-IMX8MP (i.MX8M Plus)`
+`TEK-IMX8MP (i.MX8M Plus)`
 |
 |pico-imx7
 |Compatible with TechNexion +
@@ -345,6 +345,17 @@ $: bitbake imx-image-full
 - *Ubuntu Gnome desktop*
 [source,console]
 $: WIFI_FIRMWARE=y DISTRO=imx-desktop-xwayland MACHINE=axon-imx8mp source tn-setup-release.sh -b build-xwayland-axon-imx8mp
+$: bitbake imx-image-desktop
+
+=== For TEK-IMX8MP
+- *Yocto Xwayland image*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=tek-imx8mp source tn-setup-release.sh -b build-xwayland-tek-imx8mp
+$: bitbake imx-image-full
+
+- *Ubuntu Gnome desktop*
+[source,console]
+$: WIFI_FIRMWARE=all DISTRO=imx-desktop-xwayland MACHINE=tek-imx8mp source tn-setup-release.sh -b build-desktop-tek-imx8mp
 $: bitbake imx-image-desktop
 
 === For NXP IMX8MP EVK with TechNexion TEVI and Vizionlink camera support
