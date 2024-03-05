@@ -16,6 +16,7 @@
   <remote name="imx-support" fetch="https://github.com/nxp-imx-support"/>
 
   <remote name="tn-bsp"      fetch="https://github.com/TechNexion"/>
+  <remote name="nfc"         fetch="https://github.com/NXPNFCLinux"/>
 
   <project name="poky" remote="yp" path="sources/poky" revision="a57506c46d92bf0767060102d2139be06d46f575" upstream="mickledore"/>
   <project name="meta-openembedded" remote="oe" path="sources/meta-openembedded" revision="922f41b39f364e5b6be596b4b51e0fb37ffe1971" upstream="mickledore" />
@@ -41,5 +42,6 @@
     <linkfile src="README" dest="README-TechNexion-BSP"/>
   </project>
   <project name="meta-nxp-demo-experience" remote="imx-support" path="sources/meta-nxp-demo-experience" revision="mickledore-6.1.55-2.2.0" />
+  <project name="meta-nxp-nfc" path="sources/meta-nxp-nfc" remote="nfc" revision="5e0e59f5b86f9cb63f5d369dbb514d644d3e76de"/>
 
 </manifest>
