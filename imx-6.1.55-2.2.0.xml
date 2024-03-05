@@ -44,5 +44,6 @@
   <project name="meta-nxp-demo-experience" remote="imx-support" path="sources/meta-nxp-demo-experience" revision="mickledore-6.1.55-2.2.0" />
   <project name="meta-nxp-nfc" path="sources/meta-nxp-nfc" remote="nfc" revision="5e0e59f5b86f9cb63f5d369dbb514d644d3e76de"/>
   <project name="meta-tn-wifi" path="sources/meta-tn-wifi" remote="tn-bsp" revision="mickledore_6.1.y"/>
+  <project name="meta-tn-vizionsdk" path="sources/meta-tn-vizionsdk" remote="tn-bsp" revision="mickledore_6.1.y"/>
 
 </manifest>
