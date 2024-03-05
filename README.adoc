@@ -55,7 +55,7 @@ $: cd edm_yocto
 
 - Initialize the repositories based on the release you wish to build:
 [source,console]
-$: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b mickledore_6.1.y-next -m imx-6.1.22-2.0.0.xml
+$: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b mickledore_6.1.y-next -m imx-6.1.55-2.2.0.xml
 
 - Start to fetch source code
 [source,console]
