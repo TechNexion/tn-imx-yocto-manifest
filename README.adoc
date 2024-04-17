@@ -270,11 +270,11 @@ For PICO-IMX7 with QCA WLAN:
 $: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=pico-imx7 BASEBOARD=pi source tn-setup-release.sh -b build-wayland-pico-imx7
 $: bitbake imx-image-full
 
-=== For TEP1-IMX7
-*PI baseboard, wayland image for 7 inch/5 inch TTL-LCD panel:*
+=== For TEP-0500-IMX7/TEP-0700-IMX7
+*TEP-0500-IMX7/TEP-0700-IMX7, wayland image for 7 inch/5 inch TTL-LCD panel:*
 [source,console]
-For TEP1-IMX7 with ATHEROS-PCI WLAN:
-$: WIFI_FIRMWARE=y WIFI_MODULE=ath-pci DISTRO=fsl-imx-wayland MACHINE=tep1-imx7 source tn-setup-release.sh -b build-wayland-pico-imx7
+For TEP-0500-IMX7/TEP-0700-IMX7 with ATHEROS-PCI WLAN:
+$: WIFI_FIRMWARE=y WIFI_MODULE=ath-pci DISTRO=fsl-imx-wayland MACHINE=tep1-imx7 source tn-setup-release.sh -b build-wayland-tep1-imx7
 $: bitbake imx-image-full
 
 === For EDM-IMX6
@@ -376,7 +376,7 @@ the differences between each license.
 Note Qt is not supported on i.MX 6UltraLite and i.MX 7Dual. It works on X11 backend only but is not a supported feature.
 
 == NXP eIQ machine learning
-The meta-ml layer is the integration of NXP eIQ machine learning, which was formerly released as a separate meta-imx-machinelearning layer and is now integrated into the standard BSP image (imx-image-full). 
+The meta-ml layer is the integration of NXP eIQ machine learning, which was formerly released as a separate meta-imx-machinelearning layer and is now integrated into the standard BSP image (imx-image-full).
 Note that many of the features
 require Qt 5. In case of using other configuration than imx-image-full, put the following in local.conf:
 ```
