@@ -378,11 +378,11 @@ _For PICO-IMX7 with QCA WLAN_
 $: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=pico-imx7 BASEBOARD=pi source tn-setup-release.sh -b build-wayland-pico-imx7
 $: bitbake imx-image-full
 
-=== For TEP1-IMX7
-- *PI baseboard, Yocto wayland image for 7 inch/5 inch TTL-LCD panel:* +
-_For TEP1-IMX7 with ATHEROS-PCI WLAN_
+=== For TEP-0500-IMX7/TEP-0700-IMX7
+- *TEP-0500-IMX7/TEP-0700-IMX7, Yocto wayland image for 7 inch/5 inch TTL-LCD panel:* +
+_For TEP-0500-IMX7/TEP-0700-IMX7 with ATHEROS-PCI WLAN_
 [source,console]
-$: WIFI_FIRMWARE=y WIFI_MODULE=ath-pci DISTRO=fsl-imx-wayland MACHINE=tep1-imx7 source tn-setup-release.sh -b build-wayland-pico-imx7
+$: WIFI_FIRMWARE=y WIFI_MODULE=ath-pci DISTRO=fsl-imx-wayland MACHINE=tep1-imx7 source tn-setup-release.sh -b build-wayland-tep1-imx7
 $: bitbake imx-image-full
 
 === For EDM-IMX6
