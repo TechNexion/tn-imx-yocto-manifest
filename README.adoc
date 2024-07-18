@@ -96,9 +96,9 @@ $: repo sync -j$(nproc)
 |Compatible with TechNexion +
 `AXON-IMX93 (i.MX93)`
 |
-|edm-e-imx93
+|edm-imx93
 |Compatible with TechNexion +
-`EDM-E-IMX93 (i.MX93)`
+`EDM-IMX93 (i.MX93)`
 |
 |imx93-11x11-lpddr4x-evk
 |Compatible with TechNexion +
@@ -323,15 +323,15 @@ $: bitbake imx-image-full
 $: WIFI_FIRMWARE=y DISTRO=imx-desktop-xwayland MACHINE=axon-imx93 source tn-setup-release.sh -b build-xwayland-axon-imx93
 $: bitbake imx-image-desktop
 
-=== For EDM-E-IMX93
+=== For EDM-IMX93
 - *Yocto Xwayland image*
 [source,console]
-$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=edm-e-imx93 source tn-setup-release.sh -b build-xwayland-edm-e-imx93
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=edm-imx93 source tn-setup-release.sh -b build-xwayland-edm-imx93
 $: bitbake imx-image-full
 
 - *Ubuntu Gnome desktop*
 [source,console]
-$: WIFI_FIRMWARE=y DISTRO=imx-desktop-xwayland MACHINE=edm-e-imx93 source tn-setup-release.sh -b build-xwayland-edm-e-imx93
+$: WIFI_FIRMWARE=y DISTRO=imx-desktop-xwayland MACHINE=edm-imx93 source tn-setup-release.sh -b build-xwayland-edm-imx93
 $: bitbake imx-image-desktop
 
 ==== For IMX93 11x11 LPDDR4X EVK +
