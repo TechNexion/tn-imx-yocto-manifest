@@ -37,7 +37,7 @@
   <project name="meta-virtualization" remote="yp" path="sources/meta-virtualization" revision="38e6b3e2fe0219c773f4637a09221ca5d15bf6fc" upstream="mickledore" />
 
   <project name="meta-imx" remote="nxp-imx" path="sources/meta-imx" revision="refs/tags/rel_imx_6.1.55_2.2.0" upstream="mickledore-6.1.55-2.2.0" />
-  <project name="meta-tn-imx-bsp" remote="tn-bsp" path="sources/meta-tn-imx-bsp" revision="38bb0d7f455e7cf07f03be91270803a74ebc4ec1" upstream="mickledore_6.1.55-2.2.0-stable">
+  <project name="meta-tn-imx-bsp" remote="tn-bsp" path="sources/meta-tn-imx-bsp" revision="806f0a552e2aee34daa5e1ba739fbdd3e6e03fb3" upstream="mickledore_6.1.55-2.2.0-stable">
     <linkfile src="tools/tn-setup-release.sh" dest="tn-setup-release.sh"/>
     <linkfile src="README" dest="README-TechNexion-BSP"/>
   </project>
