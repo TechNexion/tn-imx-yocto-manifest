@@ -28,7 +28,7 @@
 
   <project name="meta-imx" path="sources/meta-imx" remote="nxp-imx" revision="refs/tags/rel_imx_5.15.71_2.2.2" upstream="kirkstone-5.15.71-2.2.2"/>
   <project name="meta-tn-wifi" path="sources/meta-tn-wifi" remote="tn-bsp" revision="a100850636b285c9b3e4ba18aebbbd45d3b71b6a"/>
-  <project name="meta-tn-imx-bsp" path="sources/meta-tn-imx-bsp" remote="tn-bsp" revision="1ae9d78e6dabeabf9cb914274a79347a608c141b" upstream="kirkstone_5.15.71-2.2.0-stable">
+  <project name="meta-tn-imx-bsp" path="sources/meta-tn-imx-bsp" remote="tn-bsp" revision="bcd70f9d572d0eeed7141c3009aab69ebce85ad3" upstream="kirkstone_5.15.71-2.2.0-stable">
     <linkfile src="tools/tn-setup-release.sh" dest="tn-setup-release.sh"/>
     <linkfile src="README" dest="README-TechNexion-BSP"/>
   </project>
