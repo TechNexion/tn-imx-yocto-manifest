@@ -59,7 +59,7 @@ $: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b scart
 
 - Start to fetch source code
 [source,console]
-$: repo sync -j8
+$: repo sync -j$(nproc)
 
 [#_prepare_wifi_fw]
 === Prepare WIFI/BT firmware
@@ -92,6 +92,18 @@ $: repo sync -j8
 |Parameter |Available options|Description
 
 |MACHINE
+|axon-imx93
+|Compatible with TechNexion +
+`AXON-IMX93 (i.MX93)`
+|
+|edm-imx93
+|Compatible with TechNexion +
+`EDM-IMX93 (i.MX93)`
+|
+|imx93-11x11-lpddr4x-evk
+|Compatible with TechNexion +
+`IMX93-11X11-LPDDR4X-EVK (i.MX93)`
+|
 |edm-g-imx8mm
 |Compatible with TechNexion +
 `EDM-G-IMX8MM (i.MX8M Mini)`
@@ -116,6 +128,18 @@ $: repo sync -j8
 |Compatible with TechNexion +
 `TEK-IMX8MP (i.MX8M Plus)`
 |
+|tep-imx8mp
+|Compatible with TechNexion +
+`TEP-IMX8MP (i.MX8M Plus)`
+|
+|imx8mp-lpddr4-evk
+|Compatible with TechNexion +
+`IMX8MP-LPDDR4-EVK (i.MX8M Plus)`
+|
+|imx8mp-ddr4-evk
+|Compatible with TechNexion +
+`IMX8MP-DDR4-EVK (i.MX8M Plus)`
+|
 |pico-imx7
 |Compatible with TechNexion +
 `PICO-IMX7 (i.MX7 Dual)`
@@ -127,10 +151,6 @@ $: repo sync -j8
 |edm-imx6
 |Compatible with TechNexion +
 `EDM-IMX6 (i.MX6 Solo/Duallite/Quad/QuadPlus)`
-|
-|wandboard-imx6
-|Compatible with TechNexion +
-`WANDBOARD-IMX6 (i.MX6 Solo/Duallite/Quad/QuadPlus)`
 |
 |pico-imx6
 |Compatible with TechNexion +
@@ -292,6 +312,39 @@ Please refer to section "<<_prepare_wifi_fw>>".
 
 |===
 
+=== For AXON-IMX93
+- *Yocto Xwayland image*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=axon-imx93 source tn-setup-release.sh -b build-xwayland-axon-imx93
+$: bitbake imx-image-full
+
+- *Ubuntu Gnome desktop*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=imx-desktop-xwayland MACHINE=axon-imx93 source tn-setup-release.sh -b build-xwayland-axon-imx93
+$: bitbake imx-image-desktop
+
+=== For EDM-IMX93
+- *Yocto Xwayland image*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=edm-imx93 source tn-setup-release.sh -b build-xwayland-edm-imx93
+$: bitbake imx-image-full
+
+- *Ubuntu Gnome desktop*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=imx-desktop-xwayland MACHINE=edm-imx93 source tn-setup-release.sh -b build-xwayland-edm-imx93
+$: bitbake imx-image-desktop
+
+==== For IMX93 11x11 LPDDR4X EVK +
+- *Yocto Xwayland image*
+[source,console]
+$: DISTRO=fsl-imx-xwayland MACHINE=imx93-11x11-lpddr4x-evk source tn-setup-release.sh -b build-imx93-11x11-lpddr4x-evk-xwayland
+$: bitbake imx-image-full
+
+- *Ubuntu Gnome desktop*
+[source,console]
+$: DISTRO=imx-desktop-xwayland MACHINE=imx93-11x11-lpddr4x-evk source tn-setup-release.sh -b build-imx93-11x11-lpddr4x-evk-xwayland
+$: bitbake imx-image-desktop
+
 === For EDM-G-IMX8MP
 - *Yocto Xwayland image*
 [source,console]
@@ -358,6 +411,17 @@ $: bitbake imx-image-full
 $: WIFI_FIRMWARE=all DISTRO=imx-desktop-xwayland MACHINE=tek-imx8mp source tn-setup-release.sh -b build-desktop-tek-imx8mp
 $: bitbake imx-image-desktop
 
+=== For TEP-IMX8MP
+- *Yocto Xwayland image*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=tep-imx8mp source tn-setup-release.sh -b build-xwayland-tep-imx8mp
+$: bitbake imx-image-full
+
+- *Ubuntu Gnome desktop*
+[source,console]
+$: WIFI_FIRMWARE=all DISTRO=imx-desktop-xwayland MACHINE=tep-imx8mp source tn-setup-release.sh -b build-desktop-tep-imx8mp
+$: bitbake imx-image-desktop
+
 === For NXP IMX8MP EVK with TechNexion TEVI and Vizionlink camera support
 ==== IMX8MP LPDDR4 EVK +
 - *Yocto Xwayland image*
@@ -407,13 +471,6 @@ $: bitbake imx-image-full
 _For EDM-IMX6 with QCA WLAN_
 [source,console]
 $: DISPLAY=lvds7 WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=edm-imx6 BASEBOARD=tc0700 source tn-setup-release.sh -b build-wayland-edm-imx6
-$: bitbake imx-image-full
-
-=== For WANDBOARD-IMX6
-- *WANDBOARD baseboard, Yocto wayland image for HDMI output:* +
-_For WANDBOARD-IMX6 with QCA WLAN_
-[source,console]
-$: DISPLAY=hdmi WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=wandboard-imx6 source tn-setup-release.sh -b build-wayland-wandboard-imx6
 $: bitbake imx-image-full
 
 === For PICO-IMX6
