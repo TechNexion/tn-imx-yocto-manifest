@@ -15,6 +15,8 @@
   <remote name="imx"         fetch="https://github.com/nxp-imx"/>
   <remote name="imx-support" fetch="https://github.com/nxp-imx-support"/>
 
+  <remote name="tn-bsp"      fetch="https://github.com/TechNexion"/>
+
   <project name="poky" remote="yp" path="sources/poky" revision="02eacd385eca7aa9cf25aaaa61427aa9c126e0bc" upstream="scarthgap"/>
   <project name="meta-openembedded" remote="oe" path="sources/meta-openembedded" revision="a72010b414ee3d73888ac9cb4e310e8f05e13aea" upstream="scarthgap"/>
   <project name="meta-clang" remote="kraj" path="sources/meta-clang" revision="66414c17ae60e489bef9a97031323e92c247fbe1" upstream="scarthgap"/>
@@ -34,9 +36,10 @@
   <project name="meta-timesys" remote="timesys" path="sources/meta-timesys" revision="b96d8de949939ad08094f71ed6ed4f88eaf41d5e" upstream="master"/>
   <project name="meta-virtualization" remote="yp" path="sources/meta-virtualization" revision="1a547c0aa0d75c4143cbb66de6e653d51cdc8bda" upstream="scarthgap"/>
 
-  <project name="meta-imx" remote="imx" path="sources/meta-imx" revision="refs/tags/rel_imx_6.6.23_2.0.0">
-     <linkfile src="tools/imx-setup-release.sh" dest="imx-setup-release.sh"/>
-     <linkfile src="README" dest="README-IMXBSP"/>
+  <project name="meta-imx" remote="imx" path="sources/meta-imx" revision="refs/tags/rel_imx_6.6.23_2.0.0"/>
+  <project name="meta-tn-imx-bsp" remote="tn-bsp" path="sources/meta-tn-imx-bsp" revision="scarthgap_6.6.23-2.0.0-next">
+     <linkfile src="tools/tn-setup-release.sh" dest="tn-setup-release.sh"/>
+     <linkfile src="README" dest="README-TechNexion-BSP"/>
   </project>
   <project name="meta-matter" remote="imx" path="sources/meta-matter" revision="imx_matter_2024_q1-post" />
   <project name="meta-nxp-demo-experience" remote="imx-support" path="sources/meta-nxp-demo-experience" revision="scarthgap-6.6.23-2.0.0" />
