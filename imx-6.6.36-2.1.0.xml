@@ -15,6 +15,8 @@
   <remote name="imx"         fetch="https://github.com/nxp-imx"/>
   <remote name="imx-support" fetch="https://github.com/nxp-imx-support"/>
 
+  <remote name="tn-bsp"      fetch="https://github.com/TechNexion"/>
+
   <project name="poky" remote="yp" path="sources/poky" revision="f43f393ef0246b7bee6eed8bcf8271cf2b8cdf40" upstream="scarthgap"/>
   <project name="meta-openembedded" remote="oe" path="sources/meta-openembedded" revision="80e01188fa822d87d301ee71973c462d7a865493" upstream="scarthgap"/>
   <project name="meta-clang" remote="kraj" path="sources/meta-clang" revision="fe561f41aef0cff9e6f96730ab59f28dca2eb682" upstream="scarthgap"/>
@@ -34,9 +36,10 @@
   <project name="meta-timesys" remote="timesys" path="sources/meta-timesys" revision="4dc3f4bdfde4a86904b6e1a3d58df4696e7a63fa" upstream="scarthgap"/>
   <project name="meta-virtualization" remote="yp" path="sources/meta-virtualization" revision="6a80f140e387621f62964209a2e07d3bcfb125ce" upstream="scarthgap"/>
 
-  <project name="meta-imx" remote="imx" path="sources/meta-imx" revision="refs/tags/rel_imx_6.6.36_2.1.0" upstream="scarthgap-6.6.36-2.1.0">
-     <linkfile src="tools/imx-setup-release.sh" dest="imx-setup-release.sh"/>
-     <linkfile src="README" dest="README-IMXBSP"/>
+  <project name="meta-imx" remote="imx" path="sources/meta-imx" revision="refs/tags/rel_imx_6.6.36_2.1.0" upstream="scarthgap-6.6.36-2.1.0"/>
+  <project name="meta-tn-imx-bsp" remote="tn-bsp" path="sources/meta-tn-imx-bsp" revision="scarthgap_6.6.36-2.1.0-next">
+     <linkfile src="tools/tn-setup-release.sh" dest="tn-setup-release.sh"/>
+     <linkfile src="README" dest="README-TechNexion-BSP"/>
   </project>
   <project name="meta-nxp-connectivity" remote="imx" path="sources/meta-nxp-connectivity" revision="refs/tags/rel_imx_6.6.36-2.1.0" upstream="imx_matter_2024_q2-post" />
   <project name="meta-nxp-demo-experience" remote="imx-support" path="sources/meta-nxp-demo-experience" revision="8fd7154c05b716e9635279047f65785399432d88" upstream="scarthgap-6.6.36-2.1.0" />
