@@ -16,6 +16,7 @@
   <remote name="imx-support" fetch="https://github.com/nxp-imx-support"/>
 
   <remote name="tn-bsp"      fetch="https://github.com/TechNexion"/>
+  <remote name="nfc"         fetch="https://github.com/NXPNFCLinux"/>
 
   <project name="poky" remote="yp" path="sources/poky" revision="f43f393ef0246b7bee6eed8bcf8271cf2b8cdf40" upstream="scarthgap"/>
   <project name="meta-openembedded" remote="oe" path="sources/meta-openembedded" revision="80e01188fa822d87d301ee71973c462d7a865493" upstream="scarthgap"/>
@@ -43,5 +44,6 @@
   </project>
   <project name="meta-nxp-connectivity" remote="imx" path="sources/meta-nxp-connectivity" revision="refs/tags/rel_imx_6.6.36-2.1.0" upstream="imx_matter_2024_q2-post" />
   <project name="meta-nxp-demo-experience" remote="imx-support" path="sources/meta-nxp-demo-experience" revision="8fd7154c05b716e9635279047f65785399432d88" upstream="scarthgap-6.6.36-2.1.0" />
+  <project name="meta-nxp-nfc" path="sources/meta-nxp-nfc" remote="nfc" revision="5e0e59f5b86f9cb63f5d369dbb514d644d3e76de"/>
 
 </manifest>
