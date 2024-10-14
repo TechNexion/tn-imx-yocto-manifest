@@ -38,14 +38,14 @@
   <project name="meta-virtualization" remote="yp" path="sources/meta-virtualization" revision="6a80f140e387621f62964209a2e07d3bcfb125ce" upstream="scarthgap"/>
 
   <project name="meta-imx" remote="imx" path="sources/meta-imx" revision="refs/tags/rel_imx_6.6.36_2.1.0" upstream="scarthgap-6.6.36-2.1.0"/>
-  <project name="meta-tn-imx-bsp" remote="tn-bsp" path="sources/meta-tn-imx-bsp" revision="scarthgap_6.6.36-2.1.0-next">
+  <project name="meta-tn-imx-bsp" remote="tn-bsp" path="sources/meta-tn-imx-bsp" revision="ea95c69b46e3ecc09fc862a83600f4ae3497a0e5">
      <linkfile src="tools/tn-setup-release.sh" dest="tn-setup-release.sh"/>
      <linkfile src="README" dest="README-TechNexion-BSP"/>
   </project>
   <project name="meta-nxp-connectivity" remote="imx" path="sources/meta-nxp-connectivity" revision="refs/tags/rel_imx_6.6.36-2.1.0" upstream="imx_matter_2024_q2-post" />
   <project name="meta-nxp-demo-experience" remote="imx-support" path="sources/meta-nxp-demo-experience" revision="8fd7154c05b716e9635279047f65785399432d88" upstream="scarthgap-6.6.36-2.1.0" />
   <project name="meta-nxp-nfc" path="sources/meta-nxp-nfc" remote="nfc" revision="5e0e59f5b86f9cb63f5d369dbb514d644d3e76de"/>
-  <project name="meta-tn-wifi" path="sources/meta-tn-wifi" remote="tn-bsp" revision="scarthgap_6.6.y"/>
-  <project name="meta-tn-vizionsdk" path="sources/meta-tn-vizionsdk" remote="tn-bsp" revision="scarthgap_6.6.y"/>
+  <project name="meta-tn-wifi" path="sources/meta-tn-wifi" remote="tn-bsp" revision="f4135dbb80e345882eaec7f943f4a34a43f6e6e6"/>
+  <project name="meta-tn-vizionsdk" path="sources/meta-tn-vizionsdk" remote="tn-bsp" revision="7af0493fa2705a7f51a4142143aaa30e4529de93"/>
 
 </manifest>
