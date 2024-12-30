@@ -64,7 +64,7 @@ $: repo sync -j$(nproc)
 [#_prepare_wifi_fw]
 === Prepare WIFI/BT firmware
 
-- Add firmware package in Yocto/Ubuntu build, please add argument "*WIFI_FIRMWARE=y*" in build instruction.
+- Add firmware package in Yocto build, please add argument "*WIFI_FIRMWARE=y*" in build instruction.
 - Please refer to following explanation.
 
 {nbsp} +
@@ -96,6 +96,18 @@ $: repo sync -j$(nproc)
 |Compatible with TechNexion +
 `AXON-IMX93 (i.MX93)`
 |
+|edm-imx93
+|Compatible with TechNexion +
+`EDM-IMX93 (i.MX93)`
+|
+|imx93-11x11-lpddr4x-evk
+|Compatible with NXP +
+`IMX93-11X11-LPDDR4X-EVK (i.MX93)`
+|
+|imx95-19x19-lpddr5-evk
+|Compatible with NXP +
+`IMX95-LPDDR45-EVK (i.MX95)`
+|
 |edm-g-imx8mm
 |Compatible with TechNexion +
 `EDM-G-IMX8MM (i.MX8M Mini)`
@@ -103,6 +115,38 @@ $: repo sync -j$(nproc)
 |edm-g-imx8mp
 |Compatible with TechNexion +
 `EDM-G-IMX8MP (i.MX8M Plus)`
+|
+|pico-imx8mm
+|Compatible with TechNexion +
+`PICO-IMX8MM (i.MX8M Mini)`
+|
+|axon-imx8mp
+|Compatible with TechNexion +
+`AXON-IMX8MP (i.MX8M Plus)`
+|
+|imx8mp-lpddr4-evk
+|Compatible with NXP +
+`IMX8MP-LPDDR4-EVK (i.MX8M Plus)`
+|
+|imx8mp-ddr4-evk
+|Compatible with NXP +
+`IMX8MP-DDR4-EVK (i.MX8M Plus)`
+|
+|pico-imx7
+|Compatible with TechNexion +
+`PICO-IMX7 (i.MX7 Dual)`
+|
+|edm-imx6
+|Compatible with TechNexion +
+`EDM-IMX6 (i.MX6 Solo/Duallite/Quad/QuadPlus)`
+|
+|pico-imx6
+|Compatible with TechNexion +
+`PICO-IMX6 (i.MX6 Solo/Duallite/Quad)`
+|
+|pico-imx6ul
+|Compatible with TechNexion +
+`PICO-IMX6UL/PICO-IMX6ULL (i.MX6 UltraLite/ULL)`
 
 |DISTRO +
 *NOTE*: +
@@ -116,10 +160,6 @@ $: repo sync -j$(nproc)
 |fsl-imx-xwayland
 |*NOTE*: +
 *Wayland graphics and X11. X11 applications using EGL are not supported*
-
-|
-|imx-desktop-xwayland
-|*NOTE*: *_#Only for Ubuntu desktop#_*
 
 |BASEBOARD
 
@@ -137,13 +177,11 @@ $: repo sync -j$(nproc)
 |
 |pi-8m
 |Compatible with TechNexion +
-`PICO-IMX8MQ (i.MX8M Quad)` +
 `PICO-IMX8MM (i.MX8M Mini)`
 
 |
 |wizard
 |Compatible with TechNexion +
-`PICO-IMX8MQ (i.MX8M Quad)` +
 `PICO-IMX8MM (i.MX8M Mini)` +
 `EDM-G-IMX8MP (i.MX8M Plus)` +
 `EDM-G-IMX8MM (i.MX8M Mini)`
@@ -250,10 +288,6 @@ Please refer to section "<<_prepare_wifi_fw>>".
 |imx-image-full
 |Yocto full image
 
-|imx-image-desktop
-|Ubuntu Gnome desktop full image +
-*NOTE*: *_#Only support 64bit platform#_*
-
 |===
 
 === For AXON-IMX93
@@ -262,16 +296,93 @@ Please refer to section "<<_prepare_wifi_fw>>".
 $: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=axon-imx93 source tn-setup-release.sh -b build-xwayland-axon-imx93
 $: bitbake imx-image-full
 
+=== For EDM-IMX93
+- *Yocto Xwayland image*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=edm-imx93 source tn-setup-release.sh -b build-xwayland-edm-imx93
+$: bitbake imx-image-full
+
 === For EDM-G-IMX8MP
 - *Yocto Xwayland image*
 [source,console]
 $: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=edm-g-imx8mp source tn-setup-release.sh -b build-xwayland-edm-g-imx8mp
 $: bitbake imx-image-full
 
+=== For AXON-IMX8MP
+- *Yocto Xwayland image*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=axon-imx8mp source tn-setup-release.sh -b build-xwayland-axon-imx8mp
+$: bitbake imx-image-full
+
 === For EDM-G-IMX8MM
 - *Yocto Xwayland image*
 [source,console]
 $: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=edm-g-imx8mm source tn-setup-release.sh -b build-xwayland-edm-g-imx8mm
+$: bitbake imx-image-full
+
+=== For PICO-IMX8MM
+- *Yocto Xwayland image*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=pico-imx8mm source tn-setup-release.sh -b build-xwayland-pico-imx8mm
+$: bitbake imx-image-full
+
+=== For NXP EVK with TechNexion TEVS and VLS camera support
+==== IMX8MP LPDDR4 EVK +
+- *Yocto Xwayland image*
+[source,console]
+$: DISTRO=fsl-imx-xwayland MACHINE=imx8mp-lpddr4-evk source tn-setup-release.sh -b build-xwayland-imx8mp-lpddr4-evk
+$: bitbake imx-image-full
+
+==== IMX8MP DDR4 EVK +
+- *Yocto Xwayland image*
+[source,console]
+$: DISTRO=fsl-imx-xwayland MACHINE=imx8mp-ddr4-evk source tn-setup-release.sh -b build-xwayland-imx8mp-ddr4-evk
+$: bitbake imx-image-full
+
+==== IMX93 11x11 LPDDR4X EVK +
+- *Yocto Xwayland image*
+[source,console]
+$: DISTRO=fsl-imx-xwayland MACHINE=imx93-11x11-lpddr4x-evk source tn-setup-release.sh -b build-xwayland-imx93-11x11-lpddr4x-evk
+$: bitbake imx-image-full
+
+==== IMX95 19x19 LPDDR5 EVK +
+- *Yocto Xwayland image*
+[source,console]
+$: DISTRO=fsl-imx-xwayland MACHINE=imx95-19x19-lpddr5-evk source tn-setup-release.sh -b build-xwayland-imx95-19x19-lpddr5-evk
+$: bitbake imx-image-full
+
+=== For PICO-IMX7
+- *PI baseboard, Yocto wayland image for 7 inch/5 inch TTL-LCD panel* +
+_For PICO-IMX7 with QCA WLAN_
+[source,console]
+$: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=pico-imx7 BASEBOARD=pi source tn-setup-release.sh -b build-wayland-pico-imx7
+$: bitbake imx-image-full
+
+=== For EDM-IMX6
+- *FAIRY baseboard, Yocto wayland image for 7 inch LVDS panel:* +
+_For EDM-IMX6 with QCA WLAN_
+[source,console]
+$: DISPLAY=lvds7 WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=edm-imx6 BASEBOARD=fairy source tn-setup-release.sh -b build-wayland-edm-imx6
+$: bitbake imx-image-full
+
+- *TC-0700/TC0710 baseboard, Yocto wayland image for 7 inch LVDS panel:* +
+_For EDM-IMX6 with QCA WLAN_
+[source,console]
+$: DISPLAY=lvds7 WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=edm-imx6 BASEBOARD=tc0700 source tn-setup-release.sh -b build-wayland-edm-imx6
+$: bitbake imx-image-full
+
+=== For PICO-IMX6
+- *NYMPH baseboard, Yocto wayland image for HDMI output:* +
+_For PICO-IMX6 with QCA WLAN_
+[source,console]
+$: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=pico-imx6 BASEBOARD=nymph source tn-setup-release.sh -b build-wayland-pico-imx6
+$: bitbake imx-image-full
+
+=== For PICO-IMX6UL/PICO-IMX6ULL
+- *PI baseboard, Yocto wayland image for 5" and 7" TFT-LCD output:* +
+_For PICO-IMX6UL/ULL with QCA WLAN_
+[source,console]
+$: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=pico-imx6ul BASEBOARD=pi source tn-setup-release.sh -b build-wayland-pico-imx6ul
 $: bitbake imx-image-full
 
 {nbsp} +
@@ -331,9 +442,9 @@ But it can be disabled by commenting out the systemd settings in
 
 == Image Deployment
 - When build completes, the generated release image is under directory **<build_dir>/tmp/deploy/images/[MACHINE]** +
-Ex. PICO-IMX8MQ
+Ex. PICO-IMX8MM
 [source,console]
-build-desktop-pico-imx8mq/tmp/deploy/images/pico-imx8mq
+build-desktop-pico-imx8mm/tmp/deploy/images/pico-imx8mm
 
 - To decompress the .bz2:
 [source,console]
@@ -341,14 +452,14 @@ $: bzip2 -fdk imx-image-full-XXX.rootfs.wic.bz2 imx-image-full-XXX.rootfs.wic
 
 - To deploy the image to your board, please follow the instructions for loading software into the flash or microSD card of your development kit.
 ** Use `bmaptool` to flash imx-image-full-XXX.rootfs.wic.bz2 directly. +
-Ex. flash image of PICO-IMX8MQ to /dev/sdj
+Ex. flash image of PICO-IMX8MM to /dev/sdj
 [source,console]
-$: bmaptool copy --bmap imx-image-full-pico-imx8mq.rootfs.wic.map imx-image-full-pico-imx8mq.rootfs.wic.bz2
+$: bmaptool copy --bmap imx-image-full-pico-imx8mm.rootfs.wic.bmap imx-image-full-pico-imx8mm.rootfs.wic.bz2 /dev/sdj
 
 ** Use `bmaptool` with `--nobmap` to flash imx-image-full-XXX.rootfs.wic.bz2 directly. +
 NOTE: **This will take a long time to flash image.**
 [source,console]
-bmaptool copy --nobmap imx-image-full-pico-imx8mq.rootfs.wic.bz2
+bmaptool copy --nobmap imx-image-full-pico-imx8mm.rootfs.wic.bz2 /dev/sdj
 
 - **For i.mx6/i.mx6ul/i.mx7** +
 Please refer to the link below to flash the image into eMMC on the target board: +
@@ -369,9 +480,5 @@ https://developer.technexion.com/docs/using-uuu-to-flash-emmc[https://developer.
 ** account: root
 ** password:
 
-=== Ubuntu
-- Default user
-** account: ubuntu
-** password: ubuntu
 - If you want to change the account or password, modify APTGET_ADD_USERS in <build_dir>/conf/local.conf. +
 NOTE: **The password must be generated by openssl v1.x**
