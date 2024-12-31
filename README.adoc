@@ -148,18 +148,21 @@ $: repo sync -j$(nproc)
 |Compatible with TechNexion +
 `PICO-IMX6UL/PICO-IMX6ULL (i.MX6 UltraLite/ULL)`
 
-|DISTRO +
+|DISTRO
+
 *NOTE*: +
-1. *i.MX 8 should use xwayland only*. +
-2. wayland is the default distro for all i.MX families. +
-3. *NXP is no longer support x11 and framebuffer*
+1. *The X11 and Framebuffer distros are only supported for i.MX 6 and i.MX 7. i.MX 8 should use xwayland only.* +
+2. XWayland is the default distro for all i.MX families.
+|fsl-imx-xwayland
+|Wayland graphics and X11. X11 applications using EGL are not supported
+
+|
 |fsl-imx-wayland
 |Wayland weston graphics
 
 |
-|fsl-imx-xwayland
-|*NOTE*: +
-*Wayland graphics and X11. X11 applications using EGL are not supported*
+|fsl-imx-fb
+|Framebuffer (not supported for mx8)
 
 |BASEBOARD
 
@@ -283,10 +286,13 @@ Please refer to section "<<_prepare_wifi_fw>>".
 |Available options|Description
 
 |imx-image-core
-|Yocto core image
+|core image with basic graphics and no multimedia
+
+|imx-image-multimedia
+|image with multimedia and graphics
 
 |imx-image-full
-|Yocto full image
+|image with multimedia and machine learning and Qt
 
 |===
 
