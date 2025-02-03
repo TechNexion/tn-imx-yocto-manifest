@@ -56,7 +56,7 @@ For more information, please check the file under `“sources/meta-tn-imx-bsp/co
 
 `“BASEBOARD”` is the baseboard type.
 
-`“WIFI_MODULE”` is to choose what kind of WLAN is on board. (qca/brcm/ath-pci)
+`“WIFI_MODULE”` is to choose what kind of WLAN is on board. (qca/ath-pci)
 
 `“WIFI_FIRMWARE”` is to choose to add WLAN firmware files in target rootfs or not. (y/all)
 
@@ -154,14 +154,14 @@ XWayland is the default distro for all i.MX families)
 |WIFI_MODULE
 
 (It specifies the 'wifi_module' variable in uEnv.txt)
-|'qca', 'brcm', 'ath-pci'
+|'qca', 'ath-pci'
 |Choose what kind of WLAN is on board.
 
 
 |WIFI_FIRMWARE
 |'y' or 'all'
 |'y' option depends on 'WIFI_MODULE'. If you specify 'WIFI_MODULE' as 'qca'. Then, it only add 'qca' firmware package in yocto build.
-'all' option will add both 'qca', 'brcm' and 'ath-pci' firmware package in yocto build.
+'all' option will add both 'qca' and 'ath-pci' firmware package in yocto build.
 Please refer to section "Prepare WIFI/BT firmware" to ensure you already put firmware files in the right place.
 
 |DISPLAY
