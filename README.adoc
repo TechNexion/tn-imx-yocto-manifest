@@ -215,7 +215,6 @@ $: repo sync -j$(nproc)
 (It specifies the 'wifi_module' variable in uEnv.txt)
 |'nxp' +
 'qca' +
-'brcm' +
 'ath-pci'
 |Choose what kind of WLAN is on board.
 
@@ -226,7 +225,7 @@ $: repo sync -j$(nproc)
 |'*y*' option depends on 'WIFI_MODULE'. +
 If you specify 'WIFI_MODULE' as 'qca'. Then, it only add 'qca' firmware package in yocto build.
 
-'*all*' option will add 'nxp', 'qca', 'brcm' and 'ath-pci' firmware package in yocto build.
+'*all*' option will add 'nxp', 'qca' and 'ath-pci' firmware package in yocto build.
 
 Please refer to section "<<_prepare_wifi_fw>>" to ensure you already put firmware files in the right place.
 
