@@ -38,7 +38,7 @@
   <project name="meta-virtualization" remote="yp" path="sources/meta-virtualization" revision="6f3c1d8f90947408a6587be222fec575a1ca5195" upstream="scarthgap"/>
 
   <project name="meta-imx" remote="imx" path="sources/meta-imx" revision="refs/tags/rel_imx_6.6.52_2.2.0" upstream="scarthgap-6.6.52-2.2.0"/>
-  <project name="meta-tn-imx-bsp" remote="tn-bsp" path="sources/meta-tn-imx-bsp" revision="610a8a78db47dc1f100f8a3e5228ad990de61fd4">
+  <project name="meta-tn-imx-bsp" remote="tn-bsp" path="sources/meta-tn-imx-bsp" revision="ccd754deb078fec66b99cb040c44ad1faa2db132">
      <linkfile src="tools/tn-setup-release.sh" dest="tn-setup-release.sh"/>
      <linkfile src="README" dest="README-TechNexion-BSP"/>
   </project>
