@@ -496,14 +496,14 @@ bmaptool copy --nobmap imx-image-full-pico-imx8mq.rootfs.wic.bz2
 
 - **For i.mx6/i.mx6ul/i.mx7** +
 Please refer to the link below to flash the image into eMMC on the target board: +
-https://ftp.technexion.com/development_resources/development_tools/installer/[https://ftp.technexion.com/development_resources/development_tools/installer/]
+https://download.technexion.com/development_resources/development_tools/installer/[https://download.technexion.com/development_resources/development_tools/installer/]
 [source,console]
 pico-imx6-imx6ul-imx7_otg-installer_xxx.zip
 <platform>_generic-installer_xxx.zip
 
 - **For i.MX6UL/i.MX6ULL/i.MX6DL/i.MX6Q/i.MX7D/i.MX8MM/i.MX8MQ/i.MX8MP image deploy by "UUU"** +
 Please refer to the link as below to get more detail informations +
-https://developer.technexion.com/docs/using-uuu-to-flash-emmc[https://developer.technexion.com/docs/using-uuu-to-flash-emmc]
+https://developer.technexion.com/docs/embedded-software/linux/usage-guides/loading-software/using-uuu-to-flash-emmc[https://developer.technexion.com/docs/embedded-software/linux/usage-guides/loading-software/using-uuu-to-flash-emmc]
 
 {nbsp} +
 
