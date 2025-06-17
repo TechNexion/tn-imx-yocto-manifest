@@ -412,4 +412,4 @@ pico-imx6-imx6ul-imx7_otg-installer_xxx.zip
 
 Please refer to the link as below to get more detail informations
 
-https://developer.technexion.com/docs/using-uuu-to-flash-emmc[https://developer.technexion.com/docs/using-uuu-to-flash-emmc]
+https://developer.technexion.com/docs/embedded-software/linux/usage-guides/loading-software/using-uuu-to-flash-emmc[https://developer.technexion.com/docs/embedded-software/linux/usage-guides/loading-software/using-uuu-to-flash-emmc]
