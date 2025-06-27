@@ -43,5 +43,6 @@
   </project>
   <project name="meta-nxp-connectivity" remote="imx" path="sources/meta-nxp-connectivity" revision="refs/tags/rel_imx_6.12.20_2.0.0" upstream="imx_matter_2025_q1-post" />
   <project name="meta-nxp-demo-experience" remote="imx-support" path="sources/meta-nxp-demo-experience" revision="refs/tags/rel_imx_6.12.20_2.0.0" upstream="walnascar-6.12.20-2.0.0" />
+  <project name="meta-tn-wifi"             remote="tn-bsp"      path="sources/meta-tn-wifi"             revision="fdf0dc39e33ec33e11b6389d5ceaefdf96256121"/>
 
 </manifest>
