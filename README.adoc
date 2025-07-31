@@ -1,11 +1,11 @@
-= TechNexion Yocto 5.2 Styhead 6.12.y GA BSP
+= TechNexion Yocto 5.2 Walnascar 6.12.y GA BSP
 
 NOTE: *This BSP is a TechNexion release providing support NXP i.mx series processors*
 
 == Introduction
-This article provides step-by-step instructions for building a Ubntu Gnome image with TechNexion's Yocto BSP, which supports the i.MX series of processors.
+This article provides step-by-step instructions for building a Ubuntu image with TechNexion's Yocto BSP, which supports the i.MX series of processors.
 
-{nbsp} +
+
 
 == System Requirements
 Building an image from source with Yocto requires a host with the following:
@@ -15,11 +15,11 @@ Building an image from source with Yocto requires a host with the following:
 - RAM: 8/16GB RAM (more is better)
 - Storage: 200 GB
 - SWAP space: 16GB
-** If less memory is used, then some additional swap space may be needed. Inadequate memory may result slow builds and random build errors.
+** If less memory is used, then some additional swap space may be needed. Inadequate memory may result in slow builds and/or random build errors.
 - Network
 ** The host must be connected to a network and have access to the Internet so that all source code and tools may be downloaded.
 
-{nbsp} +
+
 
 == Set up build environment on host PC
 === Install required packages
@@ -40,7 +40,7 @@ groff curl lzop asciidoc u-boot-tools libreoffice-writer \
 sshpass ssh-askpass zip xz-utils zstd liblz4-tool kpartx vim screen
 
 === Install the repo tool
-- There are many respositories required. Google's `repo` tool is used to manage this.
+- There are many repositories required. Google's `repo` tool is used to manage this.
 [source,console]
 $: mkdir ~/bin
 $: curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
@@ -48,7 +48,7 @@ $: chmod a+x ~/bin/repo
 $: PATH=${PATH}:~/bin
 
 === Download the BSP source
-- Create the work directory
+- Create a build directory
 [source,console]
 $: mkdir edm_yocto
 $: cd edm_yocto
@@ -67,7 +67,7 @@ $: repo sync -j$(nproc)
 - Add firmware package in Yocto build, please add argument "*WIFI_FIRMWARE=y*" in build instruction.
 - Please refer to following explanation.
 
-{nbsp} +
+
 
 === Configurations for setup script
 
@@ -77,11 +77,11 @@ $: repo sync -j$(nproc)
 
 `DISTRO` is the new way to configure for any backends.
 
-`DISPLAY` is the disply type. This option only works on i.mx6 (i.mx6 Solo/Dual Lite/Dual/Quad) SOMs and doesn’t work for i.mx6ul, i.mx6sx and i.mx7.
+`DISPLAY` is the display type. This option only works on i.mx6 (i.mx6 Solo/Dual Lite/Dual/Quad) SOMs and doesn’t work for i.mx6ul, i.mx6sx and i.mx7.
 
 `BASEBOARD` is the baseboard type.
 
-`WIFI_MODULE` is to choose what kind of WLAN is on board.
+`WIFI_MODULE` This parameter specifies the type of WLAN module on board.
 
 `WIFI_FIRMWARE` is to choose to add WLAN firmware files in target rootfs or not.
 
@@ -100,13 +100,21 @@ $: repo sync -j$(nproc)
 |Compatible with TechNexion +
 `EDM-IMX93 (i.MX93)`
 |
+|axon-imx91
+|Compatible with TechNexion +
+`AXON-IMX91 (i.MX91)`
+|
+|edm-imx91
+|Compatible with TechNexion +
+`EDM-IMX91 (i.MX91)`
+|
 |imx93-11x11-lpddr4x-evk
 |Compatible with NXP +
 `IMX93-11X11-LPDDR4X-EVK (i.MX93)`
 |
 |imx95-19x19-lpddr5-evk
 |Compatible with NXP +
-`IMX95-LPDDR45-EVK (i.MX95)`
+`IMX95-LPDDR5-EVK (i.MX95)`
 |
 |edm-g-imx8mm
 |Compatible with TechNexion +
@@ -151,7 +159,7 @@ $: repo sync -j$(nproc)
 |DISTRO
 
 *NOTE*: +
-1. *The X11 and Framebuffer distros are only supported for i.MX 6 and i.MX 7. i.MX 8 should use xwayland only.* +
+1. *X11 and Framebuffer are supported only on i.MX6 and i.MX7. i.MX8 and later require XWayland.* +
 2. XWayland is the default distro for all i.MX families.
 |fsl-imx-xwayland
 |Wayland graphics and X11. X11 applications using EGL are not supported
@@ -162,7 +170,7 @@ $: repo sync -j$(nproc)
 
 |
 |fsl-imx-fb
-|Framebuffer (not supported for mx8)
+|Framebuffer (not supported for i.MX8)
 
 |BASEBOARD
 
@@ -207,17 +215,17 @@ $: repo sync -j$(nproc)
 |WIFI_FIRMWARE
 |'y' +
 'all'
-|'*y*' option depends on 'WIFI_MODULE'. +
-If you specify 'WIFI_MODULE' as 'qca'. Then, it only add 'qca' firmware package in yocto build.
+|'*y*' option is dependent on the 'WIFI_MODULE' setting. +
+If you specify 'WIFI_MODULE' as 'qca', then only the 'qca' firmware package will be added to the Yocto build.
 
-'*all*' option will add 'nxp', 'qca' and 'ath-pci' firmware package in yocto build.
+'*all*' option will add the 'nxp', 'qca', and 'ath-pci' firmware packages to the Yocto build.
 
 Please refer to section "<<_prepare_wifi_fw>>" to ensure you already put firmware files in the right place.
 
 |DISPLAY
 
 *NOTE*: +
-1. Parameter "DISPLAY" only works on i.mx6/i.mx8m +
+1. The "DISPLAY" parameter only works on i.MX6/i.MX8M +
 2. It specifies the 'displayinfo' variable in uEnv.txt
 |lvds7
 |(i.mx6) +
@@ -274,10 +282,10 @@ Please refer to section "<<_prepare_wifi_fw>>" to ensure you already put firmwar
 
 |===
 
-{nbsp} +
+
 
 == Build OS image for TechNexion target platform
-IMPORTANT: *Please don't add argument 'WIFI_FIRMWARE=y' if you don't put firmware files in "sources/meta-tn-imx-bsp/recipes-kernel/linux-firmware/files". It would result in build failure.* +
+IMPORTANT: *Do not add the argument 'WIFI_FIRMWARE=y' if you have not placed the firmware files in "sources/meta-tn-imx-bsp/recipes-kernel/linux-firmware/files". It would result in build failure.* +
 Please refer to section "<<_prepare_wifi_fw>>".
 
 .Common target image
@@ -305,6 +313,18 @@ $: bitbake imx-image-full
 - *Yocto Xwayland image*
 [source,console]
 $: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=edm-imx93 source tn-setup-release.sh -b build-xwayland-edm-imx93
+$: bitbake imx-image-full
+
+=== For AXON-IMX91
+- *Yocto Xwayland image*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=axon-imx91 source tn-setup-release.sh -b build-xwayland-axon-imx91
+$: bitbake imx-image-full
+
+=== For EDM-IMX91
+- *Yocto Xwayland image*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=edm-imx91 source tn-setup-release.sh -b build-xwayland-edm-imx91
 $: bitbake imx-image-full
 
 === For EDM-G-IMX8MP
@@ -390,7 +410,7 @@ _For PICO-IMX6UL/ULL with QCA WLAN_
 $: WIFI_FIRMWARE=y WIFI_MODULE=qca DISTRO=fsl-imx-wayland MACHINE=pico-imx6ul BASEBOARD=pi source tn-setup-release.sh -b build-wayland-pico-imx6ul
 $: bitbake imx-image-full
 
-{nbsp} +
+
 
 == Additional Features
 === Chromium Browser
@@ -434,7 +454,7 @@ the differences between each license.
 - The meta-ml layer is the integration of NXP eIQ machine learning, which was formerly released as a separate meta-imx-machinelearning layer and is now integrated into the standard BSP image (imx-image-full). +
 Note that many of the features require Qt 5.
 
-- In case of using other configuration than imx-image-full, put the following in local.conf:
+- If using a configuration other than imx-image-full, put the following in local.conf:
 [source,console]
 IMAGE_INSTALL_append = "packagegroup-imx-ml"
 
@@ -443,15 +463,15 @@ IMAGE_INSTALL_append = "packagegroup-imx-ml"
 But it can be disabled by commenting out the systemd settings in
 *imx/meta-sdk/conf/distro/include/fsl-imx-preferred-env.inc*.
 
-{nbsp} +
+
 
 == Image Deployment
-- When build completes, the generated release image is under directory **<build_dir>/tmp/deploy/images/[MACHINE]** +
+- When the build completes, the generated release image is under directory **<build_dir>/tmp/deploy/images/[MACHINE]** +
 Ex. PICO-IMX8MM
 [source,console]
 build-desktop-pico-imx8mm/tmp/deploy/images/pico-imx8mm
 
-- To decompress the .bz2:
+- To decompress the .bz2
 [source,console]
 $: bzip2 -fdk imx-image-full-XXX.rootfs.wic.bz2 imx-image-full-XXX.rootfs.wic
 
@@ -468,16 +488,16 @@ bmaptool copy --nobmap imx-image-full-pico-imx8mm.rootfs.wic.bz2 /dev/sdj
 
 - **For i.mx6/i.mx6ul/i.mx7** +
 Please refer to the link below to flash the image into eMMC on the target board: +
-https://ftp.technexion.com/development_resources/development_tools/installer/[https://ftp.technexion.com/development_resources/development_tools/installer/]
+https://download.technexion.com/development_resources/development_tools/installer/[https://download.technexion.com/development_resources/development_tools/installer/]
 [source,console]
 pico-imx6-imx6ul-imx7_otg-installer_xxx.zip
 <platform>_generic-installer_xxx.zip
 
 - **For i.MX6UL/i.MX6ULL/i.MX6DL/i.MX6Q/i.MX7D/i.MX8MM/i.MX8MQ/i.MX8MP image deploy by "UUU"** +
 Please refer to the link as below to get more detail informations +
-https://developer.technexion.com/docs/using-uuu-to-flash-emmc[https://developer.technexion.com/docs/using-uuu-to-flash-emmc]
+https://developer.technexion.com/docs/embedded-software/linux/usage-guides/loading-software/using-uuu-to-flash-emmc[https://developer.technexion.com/docs/embedded-software/linux/usage-guides/loading-software/using-uuu-to-flash-emmc]
 
-{nbsp} +
+
 
 == Login target
 === Yocto
@@ -485,5 +505,5 @@ https://developer.technexion.com/docs/using-uuu-to-flash-emmc[https://developer.
 ** account: root
 ** password:
 
-- If you want to change the account or password, modify APTGET_ADD_USERS in <build_dir>/conf/local.conf. +
+- To change the default account or password, modify the APTGET_ADD_USERS variable in <build_dir>/conf/local.conf. +
 NOTE: **The password must be generated by openssl v1.x**
