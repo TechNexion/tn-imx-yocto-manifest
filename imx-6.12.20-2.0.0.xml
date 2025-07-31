@@ -37,13 +37,13 @@
   <project name="meta-virtualization" remote="yp" path="sources/meta-virtualization" revision="4fedb61ebf60745a367d857af255006bd3509a39" upstream="walnascar" />
 
   <project name="meta-imx" remote="imx" path="sources/meta-imx" revision="refs/tags/rel_imx_6.12.20_2.0.0" upstream="walnascar-6.12.20.2.0.0"/>
-  <project name="meta-tn-imx-bsp"         remote="tn-bsp"    path="sources/meta-tn-imx-bsp"         revision="0d77c70a9e53d02103b7109da91c1ab0b86e0636">
+  <project name="meta-tn-imx-bsp"         remote="tn-bsp"    path="sources/meta-tn-imx-bsp"         revision="walnascar_6.12.20-2.0.0-next">
      <linkfile src="tools/tn-setup-release.sh" dest="tn-setup-release.sh"/>
      <linkfile src="README" dest="README-TechNexion-BSP"/>
   </project>
   <project name="meta-nxp-connectivity" remote="imx" path="sources/meta-nxp-connectivity" revision="refs/tags/rel_imx_6.12.20_2.0.0" upstream="imx_matter_2025_q1-post" />
   <project name="meta-nxp-demo-experience" remote="imx-support" path="sources/meta-nxp-demo-experience" revision="refs/tags/rel_imx_6.12.20_2.0.0" upstream="walnascar-6.12.20-2.0.0" />
-  <project name="meta-tn-wifi"             remote="tn-bsp"      path="sources/meta-tn-wifi"             revision="fdf0dc39e33ec33e11b6389d5ceaefdf96256121"/>
-  <project name="meta-tn-vizionsdk"        remote="tn-bsp"      path="sources/meta-tn-vizionsdk"        revision="f88cb0cf3010f9880e6e176da2769dc11bef1968"/>
+  <project name="meta-tn-wifi"             remote="tn-bsp"      path="sources/meta-tn-wifi"             revision="walnascar_6.12.y"/>
+  <project name="meta-tn-vizionsdk"        remote="tn-bsp"      path="sources/meta-tn-vizionsdk"        revision="walnascar_6.12.y"/>
 
 </manifest>
