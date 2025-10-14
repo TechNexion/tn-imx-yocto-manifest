@@ -15,6 +15,7 @@
   <remote name="imx"         fetch="https://github.com/nxp-imx"/>
   <remote name="imx-support" fetch="https://github.com/nxp-imx-support"/>
 
+  <remote name="swu"         fetch="https://github.com/sbabic"/>
   <remote name="tn-bsp"      fetch="https://github.com/TechNexion"/>
 
   <project name="poky" remote="yp" path="sources/poky" revision="b642d6a4a93a23d5b99886844ff7b224aa7e13bf" upstream="walnascar" />
@@ -34,6 +35,7 @@
   <project name="meta-security" remote="yp" path="sources/meta-security" revision="784ca4b6584101e971b2d5d76ec7b716ad1301b5" upstream="walnascar" />
   <project name="meta-timesys" remote="timesys" path="sources/meta-timesys"  revision="3c362eeeb68523a88c2301e29ab1fd4802284e50" upstream="master" />
   <project name="meta-virtualization" remote="yp" path="sources/meta-virtualization" revision="898239e810acbb7db93299f20deec8afe434f11b" upstream="walnascar" />
+  <project name="meta-swupdate" remote="swu" path="sources/meta-swupdate" revision="47cb53b31f044048bd095f544111004259540870" upstream="walnascar" />
 
   <project name="meta-imx" remote="imx" path="sources/meta-imx" revision="refs/tags/rel_imx_6.12.34_2.1.0" upstream="walnascar-6.12.34.2.1.0"/>
   <project name="meta-tn-imx-bsp" remote="tn-bsp" path="sources/meta-tn-imx-bsp" revision="walnascar_6.12.34-2.1.0-next">
