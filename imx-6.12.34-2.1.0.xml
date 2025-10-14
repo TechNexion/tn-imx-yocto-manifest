@@ -15,6 +15,8 @@
   <remote name="imx"         fetch="https://github.com/nxp-imx"/>
   <remote name="imx-support" fetch="https://github.com/nxp-imx-support"/>
 
+  <remote name="tn-bsp"      fetch="https://github.com/TechNexion"/>
+
   <project name="poky" remote="yp" path="sources/poky" revision="b642d6a4a93a23d5b99886844ff7b224aa7e13bf" upstream="walnascar" />
   <project name="meta-openembedded" remote="oe" path="sources/meta-openembedded" revision="dca497d728792e3cb655c78455c2d649af312ce8" upstream="walnascar" />
   <project name="meta-clang" remote="kraj" path="sources/meta-clang" revision="003cba92e982bdd565a6889f28799f8bba14957e" upstream="walnascar" />
@@ -33,9 +35,10 @@
   <project name="meta-timesys" remote="timesys" path="sources/meta-timesys"  revision="3c362eeeb68523a88c2301e29ab1fd4802284e50" upstream="master" />
   <project name="meta-virtualization" remote="yp" path="sources/meta-virtualization" revision="898239e810acbb7db93299f20deec8afe434f11b" upstream="walnascar" />
 
-  <project name="meta-imx" remote="imx" path="sources/meta-imx" revision="refs/tags/rel_imx_6.12.34_2.1.0" upstream="walnascar-6.12.34.2.1.0">
-     <linkfile src="tools/imx-setup-release.sh" dest="imx-setup-release.sh" />
-     <linkfile src="README.md" dest="README.md" />
+  <project name="meta-imx" remote="imx" path="sources/meta-imx" revision="refs/tags/rel_imx_6.12.34_2.1.0" upstream="walnascar-6.12.34.2.1.0"/>
+  <project name="meta-tn-imx-bsp" remote="tn-bsp" path="sources/meta-tn-imx-bsp" revision="walnascar_6.12.34-2.1.0-next">
+     <linkfile src="tools/tn-setup-release.sh" dest="tn-setup-release.sh"/>
+     <linkfile src="README" dest="README-TechNexion-BSP"/>
   </project>
   <project name="meta-nxp-connectivity" remote="imx" path="sources/meta-nxp-connectivity" revision="refs/tags/rel_imx_6.12.34_2.1.0" upstream="imx_matter_2025_q1-post" />
   <project name="meta-nxp-demo-experience" remote="imx-support" path="sources/meta-nxp-demo-experience" revision="refs/tags/rel_imx_6.12.34_2.1.0" upstream="walnascar-6.12.34-2.1.0" />
