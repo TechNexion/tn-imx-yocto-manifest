@@ -38,13 +38,13 @@
   <project name="meta-swupdate" remote="swu" path="sources/meta-swupdate" revision="47cb53b31f044048bd095f544111004259540870" upstream="walnascar" />
 
   <project name="meta-imx" remote="imx" path="sources/meta-imx" revision="refs/tags/rel_imx_6.12.34_2.1.0" upstream="walnascar-6.12.34.2.1.0"/>
-  <project name="meta-tn-imx-bsp" remote="tn-bsp" path="sources/meta-tn-imx-bsp" revision="walnascar_6.12.34-2.1.0-next">
+  <project name="meta-tn-imx-bsp" remote="tn-bsp" path="sources/meta-tn-imx-bsp" revision="b9d4230a67145863fdb3a2ec34b6fe21435e2a80">
      <linkfile src="tools/tn-setup-release.sh" dest="tn-setup-release.sh"/>
      <linkfile src="README" dest="README-TechNexion-BSP"/>
   </project>
   <project name="meta-nxp-connectivity" remote="imx" path="sources/meta-nxp-connectivity" revision="refs/tags/rel_imx_6.12.34_2.1.0" upstream="imx_matter_2025_q1-post" />
   <project name="meta-nxp-demo-experience" remote="imx-support" path="sources/meta-nxp-demo-experience" revision="refs/tags/rel_imx_6.12.34_2.1.0" upstream="walnascar-6.12.34-2.1.0" />
-  <project name="meta-tn-wifi" remote="tn-bsp" path="sources/meta-tn-wifi" revision="walnascar_6.12.y"/>
-  <project name="meta-tn-vizionsdk" remote="tn-bsp" path="sources/meta-tn-vizionsdk" revision="walnascar_6.12.y"/>
+  <project name="meta-tn-wifi" remote="tn-bsp" path="sources/meta-tn-wifi" revision="06afd17d310bd92da436e56b67951d8f5816e931"/>
+  <project name="meta-tn-vizionsdk" remote="tn-bsp" path="sources/meta-tn-vizionsdk" revision="59debed885d1081833b588b9b45f2434d8d17ce0"/>
 
 </manifest>
