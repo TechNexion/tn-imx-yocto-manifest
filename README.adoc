@@ -92,6 +92,10 @@ $: repo sync -j$(nproc)
 |Parameter |Available options|Description
 
 |MACHINE
+|edm-imx95
+|Compatible with TechNexion +
+`EDM-IMX95 (i.MX95)`
+|
 |axon-imx93
 |Compatible with TechNexion +
 `AXON-IMX93 (i.MX93)`
@@ -306,6 +310,22 @@ Please refer to section "<<_prepare_wifi_fw>>".
 |image with multimedia and machine learning and Qt
 
 |===
+
+=== For EDM-IMX95
+- *Yocto Xwayland image with DDR 4GB*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=edm-imx95-4gb source tn-setup-release.sh -b build-xwayland-edm-imx95-4gb
+$: bitbake imx-image-full
+
+- *Yocto Xwayland image with DDR 8GB*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=edm-imx95-8gb source tn-setup-release.sh -b build-xwayland-edm-imx95-8gb
+$: bitbake imx-image-full
+
+- *Yocto Xwayland image with DDR 16GB*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=edm-imx95-16gb source tn-setup-release.sh -b build-xwayland-edm-imx95-16gb
+$: bitbake imx-image-full
 
 === For AXON-IMX93
 - *Yocto Xwayland image*
