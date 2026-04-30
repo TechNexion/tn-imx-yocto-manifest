@@ -312,7 +312,7 @@ Please refer to section "<<_prepare_wifi_fw>>".
 |===
 
 === For EDM-IMX95
-- *Yocto Xwayland image
+- Yocto Xwayland image
 [source,console]
 $: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=edm-imx95 source tn-setup-release.sh -b build-xwayland-edm-imx95
 $: bitbake imx-image-full
