@@ -116,6 +116,10 @@ $: repo sync -j$(nproc)
 |Compatible with TechNexion +
 `EDM-IMX91 (i.MX91)`
 |
+|pico-imx91
+|Compatible with TechNexion +
+`PICO-IMX91 (i.MX91)`
+|
 |imx93-11x11-lpddr4x-evk
 |Compatible with NXP +
 `IMX93-11X11-LPDDR4X-EVK (i.MX93)`
@@ -345,6 +349,12 @@ $: bitbake imx-image-full
 - *Yocto Xwayland image*
 [source,console]
 $: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=edm-imx91 source tn-setup-release.sh -b build-xwayland-edm-imx91
+$: bitbake imx-image-full
+
+=== For PICO-IMX91
+- *Yocto Xwayland image*
+[source,console]
+$: WIFI_FIRMWARE=y DISTRO=fsl-imx-xwayland MACHINE=pico-imx91 source tn-setup-release.sh -b build-xwayland-pico-imx91
 $: bitbake imx-image-full
 
 === For EDM-G-IMX8MP
