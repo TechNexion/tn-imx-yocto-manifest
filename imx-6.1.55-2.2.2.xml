@@ -37,14 +37,14 @@
   <project name="meta-virtualization" remote="yp" path="sources/meta-virtualization" revision="38e6b3e2fe0219c773f4637a09221ca5d15bf6fc" upstream="mickledore" />
 
   <project name="meta-imx" remote="nxp-imx" path="sources/meta-imx" revision="refs/tags/rel_imx_6.1.55_2.2.2" upstream="mickledore-6.1.55-2.2.2" />
-  <project name="meta-tn-imx-bsp" remote="tn-bsp" path="sources/meta-tn-imx-bsp" revision="mickledore_6.1.55-2.2.0-next">
+  <project name="meta-tn-imx-bsp" remote="tn-bsp" path="sources/meta-tn-imx-bsp" revision="c117161ece792ac3b85929c96e70424240629f65" upstream="mickledore_6.1.55-2.2.0-stable">
     <linkfile src="tools/tn-setup-release.sh" dest="tn-setup-release.sh"/>
     <linkfile src="README" dest="README-TechNexion-BSP"/>
   </project>
   <project name="meta-nxp-demo-experience" remote="imx-support" path="sources/meta-nxp-demo-experience" revision="b8c0a9af3e3ca5400b9aff6436fbb654d3108cb4" upstream="mickledore-6.1.55-2.2.0" />
   <project name="meta-nxp-nfc" path="sources/meta-nxp-nfc" remote="nfc" revision="5e0e59f5b86f9cb63f5d369dbb514d644d3e76de"/>
-  <project name="meta-tn-wifi" path="sources/meta-tn-wifi" remote="tn-bsp" revision="mickledore_6.1.y"/>
-  <project name="meta-tn-vizionsdk" path="sources/meta-tn-vizionsdk" remote="tn-bsp" revision="mickledore_6.1.y"/>
+  <project name="meta-tn-wifi" path="sources/meta-tn-wifi" remote="tn-bsp" revision="b0eb276d16087de8c9ada52a3601e5d8d277286f" upstream="mickledore_6.1.y"/>
+  <project name="meta-tn-vizionsdk" path="sources/meta-tn-vizionsdk" remote="tn-bsp" revision="405a0787c6bfb1a813647029c5618b8b9c99e838" upstream="mickledore_6.1.y"/>
   <project name="meta-nxp-desktop" remote="nxp-imx" path="sources/meta-nxp-desktop" revision="refs/tags/rel_lf_6.1.55_2.2.0_ldp" upstream="lf-6.1.55-2.2.0-mickledore" />
 
 </manifest>
