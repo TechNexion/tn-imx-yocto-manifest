@@ -41,7 +41,7 @@
   <project name="meta-swupdate" remote="swu" path="sources/meta-swupdate" revision="b1fbd1dd09ed178d981a81f27459984080cab55c" upstream="wrynose" />
 
   <project name="meta-imx" remote="imx" path="sources/meta-imx" revision="5bde00498b041167629890563478eb89c7ca10b8" upstream="wrynose-6.18.20-2.0.0" />
-  <project name="meta-tn-imx-bsp" remote="tn-bsp" path="sources/meta-tn-imx-bsp" revision="5ed81959da6ec478ccad08c0318188f511de793b" upstream="wrynose_6.18.20-2.0.0-stable">
+  <project name="meta-tn-imx-bsp" remote="tn-bsp" path="sources/meta-tn-imx-bsp" revision="a57a128cc91a4584c4c5b0b93cc95329ca43628e" upstream="wrynose_6.18.20-2.0.0-stable">
      <linkfile src="tools/tn-setup-release.sh" dest="tn-setup-release.sh"/>
      <linkfile src="README" dest="README-TechNexion-BSP"/>
   </project>
