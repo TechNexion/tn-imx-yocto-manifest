@@ -55,7 +55,7 @@ $: cd edm_yocto
 
 - Initialize the repositories based on the release you wish to build:
 [source,console]
-$: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b wrynose_6.18.y-next -m imx-6.18.20-2.0.0.xml
+$: repo init -u https://github.com/TechNexion/tn-imx-yocto-manifest.git -b wrynose_6.18.y-next -m imx-6.18.37-2.1.0.xml
 
 - Start to fetch source code
 [source,console]
@@ -94,7 +94,11 @@ $: repo sync -j$(nproc)
 |MACHINE
 |edm-imx95
 |Compatible with TechNexion +
-`EDM-IMX95 (i.MX95)`
+`EDM-IMX95 (i.MX95) LPDDR5`
+|
+|edm-imx95-r
+|Compatible with TechNexion +
+`EDM-IMX95-R (i.MX95) LPDDR4`
 |
 |axon-imx93
 |Compatible with TechNexion +
