@@ -15,6 +15,7 @@
   <remote name="imx"         fetch="https://github.com/nxp-imx"/>
   <remote name="imx-support" fetch="https://github.com/nxp-imx-support"/>
 
+  <remote name="swu"         fetch="https://github.com/sbabic"/>
   <remote name="tn-bsp"      fetch="https://github.com/TechNexion"/>
 
   <project name="bitbake" remote="oe" path="sources/bitbake" revision="acfe02fa38b5da9e6a36c6cedcf91d4fcbefbfbd" upstream="refs/tags/yocto-6.0.2"/>
@@ -37,6 +38,7 @@
   <project name="meta-security" remote="yp" path="sources/meta-security" revision="c0d1d6200e7a84c39fb940cb1f22aad4b0b3d808" upstream="wrynose" />
   <project name="meta-timesys" remote="timesys" path="sources/meta-timesys" revision="bf4ff1bb4c85bb7a1c65bc6f2cc6188ff5b76ef2" upstream="master"/>
   <project name="meta-virtualization" remote="yp" path="sources/meta-virtualization" revision="30f1a9d7e5ef1b41c64ff4c3c40951133d548ed8" upstream="master"/>
+  <project name="meta-swupdate" remote="swu" path="sources/meta-swupdate" revision="c0658455606b3a37d85d7cf03703d8b8d2ead667" upstream="wrynose" />
 
 
   <project name="meta-imx" remote="imx" path="sources/meta-imx" revision="refs/tags/rel_imx_6.18.37_2.1.0" upstream="wrynose-6.18.37-2.1.0" />
